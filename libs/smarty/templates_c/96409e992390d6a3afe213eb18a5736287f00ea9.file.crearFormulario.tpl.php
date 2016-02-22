@@ -1,4 +1,32 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-20 17:11:16
+         compiled from "vistas\crearFormulario.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:572156c79b761312d9-11621522%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '96409e992390d6a3afe213eb18a5736287f00ea9' => 
+    array (
+      0 => 'vistas\\crearFormulario.tpl',
+      1 => 1455984666,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '572156c79b761312d9-11621522',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.20',
+  'unifunc' => 'content_56c79b763567e2_83344899',
+  'variables' => 
+  array (
+    'titulo' => 0,
+    'atributos' => 0,
+    'valor' => 0,
+    'mensage' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_56c79b763567e2_83344899')) {function content_56c79b763567e2_83344899($_smarty_tpl) {?><!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -7,7 +35,8 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{$titulo}</title>
+        <title><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
+</title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
  <script src="js/jquery.js" type="text/javascript"></script>  
     </head>
@@ -138,7 +167,8 @@ function capitalize(s)//convierte minusculas a Mayusculas
         
         </script>     
 <body>
-   {include file="cabeza.tpl"}
+   <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     <div class="container-fluid" style="position: absolute;top: 120px;">
        
       <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
@@ -161,19 +191,28 @@ function capitalize(s)//convierte minusculas a Mayusculas
                 <tr>
                   <td>Nombre y tipo Campo :</td>
                </tr>
-{if isset($atributos)}
-    {foreach from=$atributos item=valor}
+<?php if (isset($_smarty_tpl->tpl_vars['atributos']->value)) {?>
+    <?php  $_smarty_tpl->tpl_vars['valor'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['valor']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['atributos']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['valor']->key => $_smarty_tpl->tpl_vars['valor']->value) {
+$_smarty_tpl->tpl_vars['valor']->_loop = true;
+?>
                <tr class="agregar">
-                   <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="{$valor->getNombre()}" hidden="">{$valor->getNombre()}
-                      &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="{$valor->getTipo()}" hidden="">{$valor->getTipo()}</a></td>                 
+                   <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getNombre();?>
+" hidden=""><?php echo $_smarty_tpl->tpl_vars['valor']->value->getNombre();?>
+
+                      &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
+" hidden=""><?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
+</a></td>                 
                    </tr>
-                   {/foreach}
-                   {else}
-                       {$mensage}
-{/if}
+                   <?php } ?>
+                   <?php } else { ?>
+                       <?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
+
+<?php }?>
            </table> 
       </form>             
        </div> 
          
 </body>
-</html>
+</html><?php }} ?>

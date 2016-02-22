@@ -39,7 +39,7 @@
  };
  $.datepicker.setDefaults($.datepicker.regional['es']);
 $(function () {
-$("#datepicker").datepicker(
+$(".datepicker").datepicker(
         {
 firstDay: 1,
 onSelect: function (date) {
@@ -54,7 +54,7 @@ onSelect: function (date) {
     {include file="cabeza.tpl"}
     <div class="container-fluid" style="position: absolute;top: 120px;">
         {if isset($mensage)}{$mensage}{/if}
-        <form>
+        <form style="width: 500px;" method="POST">
             
             <fieldset><legend>{if isset($nombreform)}{$nombreform|upper}{/if}</legend></fieldset>
             {if isset($atributos)}
@@ -62,12 +62,12 @@ onSelect: function (date) {
               <div class="form-group">
     <label for="nombre" class="col-lg-2 control-label">{$atributo->getNombre()|upper}</label>
     <div class="col-lg-10">
-        {if $atributo->getTipo()=="int" || $atributo->getTipo()=="double" || $atributo->getTipo()=="text"}
+        {if $atributo->getTipo()=="int" || $atributo->getTipo()=="double" || $atributo->getTipo()=="text"|| $atributo->getTipo()=="float"}
       <input type="text" class="form-control" name="{$atributo->getNombre()}" id="" required="">
       {elseif $atributo->getTipo()=="date"}
           <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker" required="">
           {else}
-           <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
+           <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
         {/if}
     </div>
   </div>

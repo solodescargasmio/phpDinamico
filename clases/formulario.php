@@ -16,7 +16,8 @@ class formulario {
     private $id_form;
     private $nombre;
     private $version;
-    function __construct() {
+    private $fecha_crea;
+            function __construct() {
         
     }
     public function getId_form() {
@@ -42,31 +43,44 @@ class formulario {
     public function setVersion($version) {
         $this->version = $version;
     }
+    
+    public function getFecha_crea() {
+        return $this->fecha_crea;
+    }
 
+    public function setFecha_crea($fecha_crea) {
+        $this->fecha_crea = $fecha_crea;
+    }
+
+    
     function insertarFormulario() {
+        $fecha=date('Y-m-d');
         $nombre=$this->getNombre();
         $version=  $this->getVersion();
         $conexion=  conectar::realizarConexion();
-        $smtp=$conexion->prepare("INSERT INTO form (nombre,version) VALUES(?,?)");
-        $smtp->bind_param("ss",$nombre,$version);
+        $smtp=$conexion->prepare("INSERT INTO form (nombre,version,fecha_crea) VALUES(?,?,?)");
+        $smtp->bind_param("sss",$nombre,$version,$fecha);
         $smtp->execute();
         $res=false;
         if($conexion->affected_rows>0){
             $res=true;
         }
-        $resultado=$conexion->query("SELECT id FROM form WHERE nombre='".$nombre."'");
-     while ($fila=$resultado->fetch_object()) {
-         $dato=$fila->id;             
+        if($res){
+         $resultado=$conexion->query("SELECT id_form FROM form WHERE nombre='".$nombre."' AND version='".$version."' AND fecha_crea='".$fecha."'");       
+          while ($fila=$resultado->fetch_object()) {
+         $dato=$fila->id_form;
+           
 }
-        return $dato;
+         return $dato;
+         
+        }
  }
 
   public function traerFormularios() { 
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT * FROM form");   
+      $resultado=$conexion->query("SELECT DISTINCT * FROM form group by nombre");   
  while ($fila=$resultado->fetch_object()) {
          $form=new formulario();
-         $form->setId_form($fila->id);
          $form->setNombre($fila->nombre);
          $form->setVersion($fila->version);
             $formularios[]=$form;          
@@ -75,17 +89,26 @@ class formulario {
  }
  
   public function traerFormularioId() {
-      $nombre=  $this->getNombre();
+      $nombre= $this->getNombre();
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT * FROM form WHERE nombre='$nombre'");   
+      $resultado=$conexion->query("SELECT * FROM form WHERE nombre='".$nombre."' AND fecha_crea=(SELECT MAX(fecha_crea) FROM form)");   
  while ($fila=$resultado->fetch_object()) {
          $form=new formulario();
-         $form->setId_form($fila->id);
+         $form->setId_form($fila->id_form);
          $form->setNombre($fila->nombre);
          $form->setVersion($fila->version);
-         $form;          
+         $form->setFecha_crea($fila->fecha_crea);
+               
 }
         return $form;
+ }
+ public function traerId($nombre){
+  $conexion=  conectar::realizarConexion();
+         $resultado=$conexion->query("SELECT id_form FROM form WHERE nombre='".$nombre."' AND fecha_crea =(SELECT MAX(fecha_crea) FROM form)");       
+          while ($fila=$resultado->fetch_object()) {
+         $dato=$fila->id_form;
+        }
+        return $dato;
  }
  
  

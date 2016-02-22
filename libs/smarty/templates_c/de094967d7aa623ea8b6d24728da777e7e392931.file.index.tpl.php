@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-19 23:30:40
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-22 16:05:34
          compiled from "vistas\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2243556c797900f4245-47633952%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'de094967d7aa623ea8b6d24728da777e7e392931' => 
     array (
       0 => 'vistas\\index.tpl',
-      1 => 1455920817,
+      1 => 1456153525,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.20',
+  'unifunc' => 'content_56c79790225518_56066372',
   'variables' => 
   array (
     'titulo' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.20',
-  'unifunc' => 'content_56c79790225518_56066372',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56c79790225518_56066372')) {function content_56c79790225518_56066372($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
@@ -49,9 +49,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
     <div class="container-fluid" style="position: absolute;top: 120px;">
-         <h1>Bonjur measie. Aime cer si</h1>
-        <a href="agregarAtributos.php">Agregar nuevo atributo</a>||
-        <a href="crearFormulario.php">Crear Formulario</a>
+         <h1>Creo que la parte de crear los form de forma dinamica<br>Estaria casi solucionado</h1>
+        
         
     </div>
 </body>

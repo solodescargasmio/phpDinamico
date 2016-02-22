@@ -38,7 +38,7 @@
           {if $formularios}
           {foreach from=$formularios item=value}
                <li class="dropdown">
-               <a tabindex="-1" href="formularios.php?id={$value->getId_form()}& nombre={$value->getNombre()}">{$value->getNombre()|upper}</a>
+               <a tabindex="-1" href="formularios.php?nombre={$value->getNombre()}">{$value->getNombre()|upper}</a>
          </li>
           {/foreach}
          {/if}

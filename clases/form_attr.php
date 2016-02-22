@@ -38,20 +38,20 @@ function insertarFormulario() {
         $id_form=$this->getId_form();
         $id_atributo=$this->getId_atributo();
         $conexion=  conectar::realizarConexion();
-        $smtp=$conexion->prepare("INSERT INTO form_attr (id_form,id_atributo) VALUES(?,?)");
+        $smtp=$conexion->prepare("INSERT INTO form_attr (id_form,id_attributo) VALUES (?,?);");
         $smtp->bind_param("ii",$id_form,$id_atributo);
         $smtp->execute();
         $res=false;
         if($conexion->affected_rows>0){
             $res=true;
-}
+                      }
 return $res;
         }
         
         public function traerFtatt() { 
             $id_form=$this->getId_form();
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT * FROM form_attr WHERE id_form=$id_form");
+      $resultado=$conexion->query("SELECT * FROM form_attr WHERE nom_form='".$id_form."'");
  while ($fila=$resultado->fetch_object()) {
          $form_att=new form_attr();
          $form_att->setId_atributo($fila->id_atributo);
@@ -61,10 +61,9 @@ return $res;
  }
  
  
-  public function existenAtributos() {
-           $id_form=$this->getId_form();
+  public function existenAtributos($id_form) {
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT count(*) FROM form_attr WHERE id_form=$id_form");
+      $resultado=$conexion->query("SELECT count(*) FROM form_attr WHERE id_form='".$id_form."'");
    while ($fila=$resultado->fetch_object()) {
             foreach ($fila as $value) {
               $valor=$value;   
@@ -74,4 +73,5 @@ return $res;
         
         return $valor; 
       }
+      
 }

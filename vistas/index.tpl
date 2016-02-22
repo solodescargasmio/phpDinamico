@@ -22,9 +22,8 @@
 <body>
     {include file="cabeza.tpl"}
     <div class="container-fluid" style="position: absolute;top: 120px;">
-         <h1>Bonjur measie. Aime cer si</h1>
-        <a href="agregarAtributos.php">Agregar nuevo atributo</a>||
-        <a href="crearFormulario.php">Crear Formulario</a>
+         <h1>Creo que la parte de crear los form de forma dinamica<br>Estaria casi solucionado</h1>
+         <h3>Falta guardar los datos que los usuarios irian guardando</h3>
         
     </div>
 </body>

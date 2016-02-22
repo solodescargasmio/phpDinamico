@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-19 23:30:40
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-20 02:35:58
          compiled from "vistas\cabeza.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1091256c797902625a7-76210626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '71161a5a317e197260dadd7216af4f389faab762' => 
     array (
       0 => 'vistas\\cabeza.tpl',
-      1 => 1455920817,
+      1 => 1455932153,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.20',
+  'unifunc' => 'content_56c797902dc6c4_04552139',
   'variables' => 
   array (
     'apellido' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'value' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.20',
-  'unifunc' => 'content_56c797902dc6c4_04552139',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56c797902dc6c4_04552139')) {function content_56c797902dc6c4_04552139($_smarty_tpl) {?><link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <script src="js/bootstrap.min.js" type="text/javascript"></script>
@@ -74,8 +74,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_var
 $_smarty_tpl->tpl_vars['value']->_loop = true;
 ?>
                <li class="dropdown">
-               <a tabindex="-1" href="formularios.php?id=<?php echo $_smarty_tpl->tpl_vars['value']->value->getId_form();?>
-& nombre=<?php echo $_smarty_tpl->tpl_vars['value']->value->getNombre();?>
+               <a tabindex="-1" href="formularios.php?nombre=<?php echo $_smarty_tpl->tpl_vars['value']->value->getNombre();?>
 "><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['value']->value->getNombre(), 'UTF-8');?>
 </a>
          </li>
