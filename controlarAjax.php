@@ -34,4 +34,7 @@ $form=$formula->traerFormularioId();
         echo'<input type="button" id="'.$value->getNombre().'" value="-" style="color: red;" name="eliminar" ident="'.$value->getNombre().'" onclick="eliminarElementoDom()"></div></div>';
      
         }
-        }
+        }else
+            if($_POST['cedula']){
+                
+            }
