@@ -11,9 +11,11 @@ require_once ('./clases/form_attr.php');
 require_once ('./clases/template.php');
 require_once ('./clases/session.php');
 require_once ('./clases/tabla.php');
+require_once ('./clases/estudio_medico.php');
 require_once ('./clases/dependencia.php');
 require_once ('./clases/datosPrecargados.php');
-function principal(){  
+function principal(){ 
+    Session::init();
      error_reporting(0);
     $mensage="";
     $tpl=new Template();
@@ -39,6 +41,7 @@ function principal(){
 }
 
 function formularios(){
+    Session::init();
      error_reporting(0);
        $mensage="";
     $tpl=new Template();
@@ -50,10 +53,30 @@ function formularios(){
         $idf=$form->traerId($nombre);
         $fr_atr=new form_attr();
         $dat=$fr_atr->existenAtributos($idf);
-//        if($_POST){
-//            var_dump($_POST);
-//                        exit();
-//        }
+        if($_POST['nomformulario']){
+            $nomf=$_POST['nomformulario'];
+            $id_usuario=$_POST['id_usuario'];
+         if(strcmp($nomf, "paciente")==0){
+             Session::set("cedula",$id_usuario);
+         }
+          $estudio=new estudio_medico();
+             $estudio->setId_usuario($id_usuario);
+             $estudio->setId_form($idf);
+             $id_estudio=$estudio->ingresarEstudio();
+             $estudio->setId_estudio($id_estudio);
+             if($estudio->ingresarEstudioForm()){
+               $datos=$_POST;
+         foreach ($datos as $key => $value) {
+            if(strcmp($key, "nomformulario")!=0){
+             $id_attributo=$atr->devolverId($key);
+             $estudio->setId_attributo($id_attributo);
+             $estudio->setValor($value);
+             $estudio->completarDatos();
+            }
+         }   
+             }
+        
+        }
 //        
         if($dat>0){
         $resultado=$atr->traerAtributosForm($idf);
@@ -87,6 +110,7 @@ function formularios(){
 }
 
 function ingresarAtributo() {
+    Session::init();
     error_reporting(0);
     $mensage="";
     $tpl=new Template();
@@ -138,6 +162,7 @@ function ingresarAtributo() {
 
 
     function crearFormulario() {
+        Session::init();
         error_reporting(0);
             $mensage="";
     $tpl=new Template();
@@ -188,6 +213,7 @@ foreach ($dato as $key => $value){
 }
 
 function nuevaVersion(){
+    Session::init();
       error_reporting(0);
             $mensage="";
     $tpl=new Template();
@@ -239,6 +265,7 @@ foreach ($dato as $key => $value){
 }
 
 function dependenciasForm(){
+    Session::init();
          error_reporting(0);
             $mensage="";
     $tpl=new Template();

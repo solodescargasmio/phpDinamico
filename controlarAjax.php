@@ -7,6 +7,7 @@
  */
 require_once ('./clases/formulario.php');
 require_once ('./clases/atributo.php');
+require_once ('./clases/estudio_medico.php');
 error_reporting(0);
 if($_POST['nom_formulario']){
 $nomb=$_POST['nom_formulario'];
@@ -35,6 +36,13 @@ $form=$formula->traerFormularioId();
      
         }
         }else
-            if($_POST['cedula']){
-                
+            if($_POST['user']){
+                $id_usuario=$_POST['user'];
+                $estudio=new estudio_medico();
+                $estudio=$estudio->traerEstudioId($id_usuario);
+            if(isset($estudio)){
+ echo '<h4><font style="color:red;">Ya existe el paciente en base de datos<br> Verifique la cedula </font></h4>';     
+        }  else{
+ echo '<h4><font style="color:green;">Correcto </font></h4>';                
+        }     
             }

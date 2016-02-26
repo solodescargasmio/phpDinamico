@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-25 16:11:03
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-25 18:17:13
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1456413060,
+      1 => 1456420630,
       2 => 'file',
     ),
   ),
@@ -50,6 +50,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/dateFechamio.js"></script>
+
 <script>
              $.datepicker.regional['es'] = {
          closeText: 'Cerrar',
@@ -83,6 +84,27 @@ $_valid = $_smarty_tpl->decodeProperties(array (
            var form=document.getElementById("nomformulario").value;
            if(form=="paciente"){
           $('input[name=id_usuario]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
+       
+               $(function(){
+	//Aqui se coge el elemento y con la propiedad .on que requiere dos  parametros : change (cuando el valor de ese id cambie, que es cuando se elige otra opcion en la desplegable)y ejecutar la siguiente funcion cuando se haga change
+	$("#id_usuario").on('blur', function(){
+            var id=$(this).val();
+     datatypo='user='+id;//genero un array con indice
+             $.ajax({
+         url: 'controlarAjax.php',//llamo a la pagina q hace el control
+         type:'POST',//metodo por el cual paso el dato
+         data:datatypo,
+             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
+                  $("#respuestauser").fadeIn(1000).html(data); //imprimo el mensaje en el div      
+                
+    }
+     }); 
+      
+    });  
+           //  datatypo='user='+user;//genero un array con indice
+      
+    });        
+        
         }
            
             if($('input[name=altura]').length > 0){  //compruebo que el elemento existe       
@@ -110,7 +132,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     });
     
     });
-   
+
     function fecha_es(){
        var fechaActual = new Date();
        var diaActual = fechaActual.getDate();
@@ -178,6 +200,7 @@ return edad;
     <div class="container-fluid" style="position: absolute;top: 120px;">
         <?php if (isset($_smarty_tpl->tpl_vars['mensage']->value)) {?><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
 <?php }?>
+        <div id="respuestauser"></div>
         <form style="width: 500px;" method="POST">
             
             <fieldset><legend><?php if (isset($_smarty_tpl->tpl_vars['nombreform']->value)) {?><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['nombreform']->value, 'UTF-8');?>
@@ -195,7 +218,7 @@ $_smarty_tpl->tpl_vars['atributo']->_loop = true;
 </label>
     <div class="col-lg-10">
            
-        <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="int"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="double"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="text"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="float") {?>
+        <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="double"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="text"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="float") {?>
             <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTabla()=="1") {?>
             <select name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 ">
@@ -221,12 +244,16 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
             <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="date") {?>
           <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="datepicker" required="">
-          <?php } else { ?>
-           <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
+          <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="int") {?>
+              <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+">
+        <?php } else { ?>
+            <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
 " class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 ">
-        <?php }?>
+          <?php }?>
     </div>
   </div>
             <?php } ?>

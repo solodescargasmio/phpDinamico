@@ -18,6 +18,7 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/dateFechamio.js"></script>
+
 <script>
              $.datepicker.regional['es'] = {
          closeText: 'Cerrar',
@@ -51,6 +52,27 @@
            var form=document.getElementById("nomformulario").value;
            if(form=="paciente"){
           $('input[name=id_usuario]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
+       
+               $(function(){
+	//Aqui se coge el elemento y con la propiedad .on que requiere dos  parametros : change (cuando el valor de ese id cambie, que es cuando se elige otra opcion en la desplegable)y ejecutar la siguiente funcion cuando se haga change
+	$("#id_usuario").on('blur', function(){
+            var id=$(this).val();
+     datatypo='user='+id;//genero un array con indice
+             $.ajax({
+         url: 'controlarAjax.php',//llamo a la pagina q hace el control
+         type:'POST',//metodo por el cual paso el dato
+         data:datatypo,
+             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
+                  $("#respuestauser").fadeIn(1000).html(data); //imprimo el mensaje en el div      
+                
+    }
+     }); 
+      
+    });  
+           //  datatypo='user='+user;//genero un array con indice
+      
+    });        
+        
         }
            
             if($('input[name=altura]').length > 0){  //compruebo que el elemento existe       
@@ -78,7 +100,7 @@
     });
     
     });
-   
+
     function fecha_es(){
        var fechaActual = new Date();
        var diaActual = fechaActual.getDate();
@@ -144,6 +166,7 @@ return edad;
     {include file="cabeza.tpl"}
     <div class="container-fluid" style="position: absolute;top: 120px;">
         {if isset($mensage)}{$mensage}{/if}
+        <div id="respuestauser"></div>
         <form style="width: 500px;" method="POST">
             
             <fieldset><legend>{if isset($nombreform)}{$nombreform|upper}{/if}</legend></fieldset>
@@ -154,7 +177,7 @@ return edad;
     <label for="nombre" class="col-lg-2 control-label">{$atributo->getNombre()|upper}</label>
     <div class="col-lg-10">
            
-        {if $atributo->getTipo()=="int" || $atributo->getTipo()=="double" || $atributo->getTipo()=="text"|| $atributo->getTipo()=="float"}
+        {if $atributo->getTipo()=="double" || $atributo->getTipo()=="text"|| $atributo->getTipo()=="float"}
             {if $atributo->getTabla()=="1"}
             <select name="{$atributo->getNombre()}">
             
@@ -170,9 +193,11 @@ return edad;
             {/if} 
             {elseif $atributo->getTipo()=="date"}
           <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker" required="">
-          {else}
-           <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
-        {/if}
+          {elseif  $atributo->getTipo()=="int"}
+              <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
+        {else}
+            <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
+          {/if}
     </div>
   </div>
             {/foreach}
