@@ -17,10 +17,19 @@ class atributo {
     private $nombre="";
     private $tipo="";
     private $calculado=0;
+    private $tabla=0;
   
    public function __construct() {
     }
+    public function getTabla() {
+        return $this->tabla;
+    }
 
+    public function setTabla($tabla) {
+        $this->tabla = $tabla;
+    }
+
+        
     public function getId_attributo() {
         return $this->id_attributo;
     }
@@ -57,9 +66,10 @@ public function ingresarAtributo(){
      $nombre=$this->getNombre();
      $tipo=$this->getTipo();
      $calculado=$this->getCalculado();
+     $tabla=  $this->getTabla();
      $conexion=conectar::realizarConexion();
-      $smtp=$conexion->prepare("INSERT INTO atributo (nombre, tipo, calculado) VALUES (?,?,?)" );
-       $smtp->bind_param("ssi",$nombre,$tipo,$calculado);
+      $smtp=$conexion->prepare("INSERT INTO atributo (nombre, tipo, calculado,tabla) VALUES (?,?,?,?)" );
+       $smtp->bind_param("ssii",$nombre,$tipo,$calculado,$tabla);
        $smtp->execute();
        $res=false;
        if($conexion->affected_rows>0){
@@ -89,11 +99,13 @@ public function ingresarAtributo(){
  
  public function traerAtributosForm($id) {
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT atributo.nombre,atributo.tipo FROM atributo,form_attr WHERE atributo.id_attributo=form_attr.id_attributo AND form_attr.id_form=".$id);   
+      $resultado=$conexion->query("SELECT atributo.id_attributo,atributo.nombre,atributo.tipo,atributo.tabla FROM atributo,form_attr WHERE atributo.id_attributo=form_attr.id_attributo AND form_attr.id_form=".$id);   
           while ($fila=$resultado->fetch_object()) {
          $atr=new atributo();
+         $atr->setId_attributo($fila->id_attributo);
          $atr->setNombre($fila->nombre);
          $atr->setTipo($fila->tipo);
+         $atr->setTabla($fila->tabla);
             $atributos[]=$atr;          
 }
         return $atributos;

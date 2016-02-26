@@ -63,14 +63,13 @@ return $res;
  
   public function existenAtributos($id_form) {
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT count(*) FROM form_attr WHERE id_form='".$id_form."'");
+      $resultado=$conexion->query("SELECT count(*) FROM form_attr WHERE id_form=".$id_form);
    while ($fila=$resultado->fetch_object()) {
             foreach ($fila as $value) {
               $valor=$value;   
             }
                     
-}
-        
+} 
         return $valor; 
       }
       

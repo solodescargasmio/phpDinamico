@@ -104,13 +104,13 @@ class formulario {
  }
  public function traerId($nombre){
   $conexion=  conectar::realizarConexion();
-         $resultado=$conexion->query("SELECT id_form FROM form WHERE nombre='".$nombre."' AND fecha_crea =(SELECT MAX(fecha_crea) FROM form)");       
+         $resultado=$conexion->query("SELECT id_form FROM form WHERE nombre='".$nombre."' AND fecha_crea =(SELECT MAX(fecha_crea) FROM form WHERE nombre='".$nombre."')");       
           while ($fila=$resultado->fetch_object()) {
          $dato=$fila->id_form;
         }
         return $dato;
  }
  
- 
- 
+   
+
 }

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-20 20:16:00
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-25 00:47:14
          compiled from "vistas\ingresarAtributo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:562656c8bb70d1cef1-56969332%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04114bdc2a0c065212cc6b95a734caa17ca6071f' => 
     array (
       0 => 'vistas\\ingresarAtributo.tpl',
-      1 => 1455920817,
+      1 => 1456357632,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.20',
+  'unifunc' => 'content_56c8bb70e11134_82975266',
   'variables' => 
   array (
     'mensage' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.20',
-  'unifunc' => 'content_56c8bb70e11134_82975266',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56c8bb70e11134_82975266')) {function content_56c8bb70e11134_82975266($_smarty_tpl) {?><!DOCTYPE html>
 <!--
@@ -40,6 +40,30 @@ and open the template in the editor.
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/dateFechamio.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myform2").hide();
+             $("#mostrar").hide();
+             $("#ocultar").show();
+             
+                $("#ocultar").click(function(){
+                $("#myform1").hide();
+                $("#mostrar").show();
+                $("#myform2").show();
+                $("#ocultar").hide();
+            
+    });
+             
+            $("#mostrar").click(function(){
+                $("#myform2").hide();
+                $("#ocultar").show();
+                $("#myform1").show();
+                $("#mostrar").hide();     
+    });
+      
+           
+    });
+    </script>
     </head>
     <body>
         <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
@@ -47,7 +71,10 @@ and open the template in the editor.
     <div class="container-fluid" style="position: absolute;top: 120px;">
         <?php if (isset($_smarty_tpl->tpl_vars['mensage']->value)) {?><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
 <?php }?>
-        <form id="my-dynamic-form" method="post" enctype="multipart/form-data" class="form-horizontal">                            
+            <a href="#" onclick="mostrarDiv()" id="att"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Atributo Simple</button></a>
+   <a href="#" onclick="mostrarDiv()" id="att1"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Atributo Compuesto </button></a>
+   
+        <form id="myform1" method="post" enctype="multipart/form-data" class="form-horizontal">                            
           <fieldset>  <label  class="col-sm-4 control-label">Atributo</label></fieldset>
     
       <div class="form-group">     
@@ -71,6 +98,26 @@ and open the template in the editor.
                 </div>   
       <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>
+    
+        <form id="myform2" method="post" enctype="multipart/form-data" class="form-horizontal">                            
+          <fieldset>  <label  class="col-sm-4 control-label">Tabla Selector</label></fieldset>
+    
+      <div class="form-group">     
+       <label  class="col-sm-4 control-label">Nombre de la tabla</label>
+                    <div class="col-sm-8">
+  <input type="" name="nombre" id="nombre" placeholder="Ej: sexo (Sin espacios o caracteres raros)" class="success" size ="50">
+                   </div> 
+                </div> 
+      
+      <div class="form-group">     
+       <label  class="col-sm-4 control-label">Agregar opciones de atributo</label>
+                    <div class="col-sm-8">
+                        <textarea name="selectortexto" placeholder="ej: masculino,   femenino"></textarea>
+                   </div> 
+                </div>   
+      <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
+            </form>
+        
       </div>
     </body>
 </html><?php }} ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-20 02:35:58
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-23 18:36:00
          compiled from "vistas\cabeza.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1091256c797902625a7-76210626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '71161a5a317e197260dadd7216af4f389faab762' => 
     array (
       0 => 'vistas\\cabeza.tpl',
-      1 => 1455932153,
+      1 => 1456248888,
       2 => 'file',
     ),
   ),
@@ -96,6 +96,7 @@ $_smarty_tpl->tpl_vars['value']->_loop = true;
               <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
               <li><a tabindex="-1" href="nuevaVersion.php">Nueva Version Formulario</a></li>
               <li><a tabindex="-1" href="atrapar.php">Ingresar Atributos</a></li>
+              <li><a tabindex="-1" href="depende.php">Dependencias Formularios</a></li>
             </ul>  
         </li>
         <li class="dropdown">

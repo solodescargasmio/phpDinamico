@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-22 16:05:34
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-23 18:35:59
          compiled from "vistas\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2243556c797900f4245-47633952%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'de094967d7aa623ea8b6d24728da777e7e392931' => 
     array (
       0 => 'vistas\\index.tpl',
-      1 => 1456153525,
+      1 => 1456245798,
       2 => 'file',
     ),
   ),
@@ -50,7 +50,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <div class="container-fluid" style="position: absolute;top: 120px;">
          <h1>Creo que la parte de crear los form de forma dinamica<br>Estaria casi solucionado</h1>
-        
+         <h3>Falta guardar los datos que los usuarios irian guardando</h3>
         
     </div>
 </body>

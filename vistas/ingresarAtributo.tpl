@@ -15,12 +15,39 @@ and open the template in the editor.
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/dateFechamio.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myform2").hide();
+             $("#mostrar").hide();
+             $("#ocultar").show();
+             
+                $("#ocultar").click(function(){
+                $("#myform1").hide();
+                $("#mostrar").show();
+                $("#myform2").show();
+                $("#ocultar").hide();
+            
+    });
+             
+            $("#mostrar").click(function(){
+                $("#myform2").hide();
+                $("#ocultar").show();
+                $("#myform1").show();
+                $("#mostrar").hide();     
+    });
+      
+           
+    });
+    </script>
     </head>
     <body>
         {include file="cabeza.tpl"}
     <div class="container-fluid" style="position: absolute;top: 120px;">
         {if isset($mensage)}{$mensage}{/if}
-        <form id="my-dynamic-form" method="post" enctype="multipart/form-data" class="form-horizontal">                            
+            <a href="#" onclick="mostrarDiv()" id="att"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Atributo Simple</button></a>
+   <a href="#" onclick="mostrarDiv()" id="att1"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Atributo Compuesto </button></a>
+   
+        <form id="myform1" method="post" enctype="multipart/form-data" class="form-horizontal">                            
           <fieldset>  <label  class="col-sm-4 control-label">Atributo</label></fieldset>
     
       <div class="form-group">     
@@ -44,6 +71,26 @@ and open the template in the editor.
                 </div>   
       <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>
+    
+        <form id="myform2" method="post" enctype="multipart/form-data" class="form-horizontal">                            
+          <fieldset>  <label  class="col-sm-4 control-label">Tabla Selector</label></fieldset>
+    
+      <div class="form-group">     
+       <label  class="col-sm-4 control-label">Nombre de la tabla</label>
+                    <div class="col-sm-8">
+  <input type="" name="nombre" id="nombre" placeholder="Ej: sexo (Sin espacios o caracteres raros)" class="success" size ="50">
+                   </div> 
+                </div> 
+      
+      <div class="form-group">     
+       <label  class="col-sm-4 control-label">Agregar opciones de atributo</label>
+                    <div class="col-sm-8">
+                        <textarea name="selectortexto" placeholder="ej: masculino,   femenino"></textarea>
+                   </div> 
+                </div>   
+      <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
+            </form>
+        
       </div>
     </body>
 </html>
