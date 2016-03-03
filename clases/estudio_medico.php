@@ -12,6 +12,7 @@
  * @author Yo
  */require_once ('./conexion/conectar.php');
 require_once ('atributo.php');
+require_once ('formulario.php');
 class estudio_medico {
     private $id_estudio;
     private $id_usuario;
@@ -187,12 +188,11 @@ public function ingresarEstudioForm(){
         return $dato;
  } 
  
- public function traerFormEchos($id_usuario) {
+ public function traerFormEchos($id_usuario){
      $conexion=conectar::realizarConexion();
       $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.id_usuario=".$id_usuario);   
- while ($fila=$resultado->fetch_object()) {
-        
-         $estudios[]=$fila->id_form;;
+ while ($fila=$resultado->fetch_object()) {   
+         $estudios[]=$fila->id_form;
           }
         return $estudios;
  }
@@ -221,19 +221,7 @@ public function ingresarEstudioForm(){
           }
         return $estudios;
  }
- 
- public function ok($id_usuario,$id_form) {
-     $ok=false;
-     $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.id_usuario=".$id_usuario);   
- while ($fila=$resultado->fetch_object()) {
-        if($fila->id_form==$id_form){
-         $ok=true;   
-        }
-          }
-        return $ok;
- }
- 
+
  public function actualizaciones($clave,$valor){
      $id_est=  $this->getId_estudio();
      $id_form=  $this->getId_form();
@@ -249,9 +237,20 @@ public function ingresarEstudioForm(){
      
  }
  
- public function actualizar($datos){
-     $ok=false;
-    
- }
  
+ public function ok($id_usuario,$id_form){
+     $form=new formulario();
+     $nombre=$form->traerNombre($id_form);
+     $ok=false;
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_paciente.id_usuario=".$id_usuario." AND estudio_atributo.id_estudio=estudio_paciente.id_estudio");   
+ while ($fila=$resultado->fetch_object()) { 
+     $nomb=$form->traerNombre($fila->id_form);
+if(strcmp($nomb,$nombre)==0){   
+         $ok=true;   
+        }
+    }
+        return $ok;
+ }
+
 }

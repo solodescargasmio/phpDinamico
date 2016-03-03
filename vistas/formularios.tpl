@@ -107,7 +107,7 @@
         }else{  
         var altura=document.getElementById("altura").value;
         var imc=calcular_imc(peso,altura);
-        document.getElementById("imc").value=imc;
+        document.getElementById("imc").value=imc.toFixed(2);
         }
     });
     
@@ -257,7 +257,7 @@ return edad;
         {if $estudio->getNom_attributo()=="fecha_nacimiento" || $estudio->getNom_attributo()=="id_usuario" || $estudio->getNom_attributo()=="fecha_estudio" || $estudio->getNom_attributo()=="edad"}
             <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" readonly="">
         {else} 
-         <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}">
+         <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" id="{$estudio->getNom_attributo()}">
         {/if}
         </div>
   </div>

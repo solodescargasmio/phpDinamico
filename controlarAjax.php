@@ -55,15 +55,13 @@ $form=$formula->traerFormularioId();
                 $estudios=$estudio->traerFormEchos($id_usuario);
                 $tam=count($resul);
           echo '<table class="table table-condensed" border="1"><tr class="success">';
-                 if($estudios!=null){
           foreach ($resul as $key => $value) {
-         echo '<td>'.strtoupper($value->getNombre()).'</td>';
-         
+         echo '<td>'.strtoupper($value->getNombre()).'</td>';     
          }        
-     }  echo '</tr>';
+  echo '</tr>';
                 echo '<tr>';
        if($estudios!=null){
-          foreach ($resul as $key => $value) {
+          foreach ($resul as $key => $value){
              if($estudio->ok($id_usuario, $value->getId_form())){
              echo '<td><img src="./imagenes/si.png"/></td>';
              }else{  

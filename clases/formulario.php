@@ -121,5 +121,4 @@ class formulario {
         return $dato;
  }
    
-
 }

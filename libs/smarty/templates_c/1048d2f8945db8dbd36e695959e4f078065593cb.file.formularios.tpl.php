@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-03 17:17:22
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-03 17:59:44
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1457021840,
+      1 => 1457024376,
       2 => 'file',
     ),
   ),
@@ -143,7 +143,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         }else{  
         var altura=document.getElementById("altura").value;
         var imc=calcular_imc(peso,altura);
-        document.getElementById("imc").value=imc;
+        document.getElementById("imc").value=imc.toFixed(2);
         }
     });
     
@@ -331,6 +331,7 @@ $_smarty_tpl->tpl_vars['estudio']->_loop = true;
         <?php } else { ?> 
          <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getValor();?>
 " name="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
 ">
         <?php }?>
         </div>
