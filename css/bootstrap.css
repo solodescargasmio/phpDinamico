@@ -8,12 +8,20 @@ btn-group
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /*form-control*/
-html {
-    background: url(../img/fondo1.jpg) no-repeat center center fixed;
+/*html {
+    background: url(../imagenes/fondo1.jpg) no-repeat center center fixed;
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
+}*/
+#menus{
+    position: absolute;
+    top: 120px; 
+    left: 400px;
+    width: auto;
+    height: auto;
 }
+
 body {
   margin: 0;
 }
@@ -33,6 +41,7 @@ section,
 summary {
   display: block;
 }
+
 audio,
 canvas,
 progress,
@@ -1604,6 +1613,9 @@ pre code {
   }
 }
 .container-fluid {
+    position: absolute;
+    top: 120px; 
+    background-color: #cccccc;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;

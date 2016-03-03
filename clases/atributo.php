@@ -113,32 +113,34 @@ public function ingresarAtributo(){
  
  
  public function devolverId($nombre) { 
+     
      $conexion=conectar::realizarConexion();
       $resultado=$conexion->query("SELECT id_attributo FROM atributo WHERE nombre='".$nombre."'");   
  while ($fila=$resultado->fetch_object()) {
-
          $dato=$fila->id_attributo;             
+}
+
+        return $dato;
+ }
+ 
+  public function devolverNombre($id) { 
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT nombre FROM atributo WHERE id_attributo=".$id);   
+ while ($fila=$resultado->fetch_object()) {
+
+         $dato=$fila->nombre;             
 }
         return $dato;
  }
  
-// public function ingresarAtributoPaciente(){
-//     $nombre="edad";
-//     $tipo="int";
-//     $calculado=1;
-//      $nombre1="imc";
-//     $tipo1="double";
-//     $calculado1=1;
-//       $nombre2="imc";
-//     $tipo2="double";
-//     $calculado2=1;
-//     $conexion=conectar::realizarConexion();
-//      $smtp=$conexion->prepare("INSERT INTO atributo (nombre, tipo, calculado) VALUES (?,?,?)" );
-//       $smtp->bind_param("ssi",$nombre,$tipo,$calculado);
-//       $smtp->execute();
-//       $res=false;
-//       if($conexion->affected_rows>0){
-//       $res=true;}
-//       return $res;
-// }
+  public function devolverTipo($id) { 
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT tipo FROM atributo WHERE id_attributo=".$id);   
+ while ($fila=$resultado->fetch_object()) {
+
+         $dato=$fila->tipo;             
+}
+        return $dato;
+ }
+ 
 }

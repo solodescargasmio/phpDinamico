@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-25 14:46:10
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-29 16:10:56
          compiled from "vistas\crearFormulario.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:572156c79b761312d9-11621522%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '96409e992390d6a3afe213eb18a5736287f00ea9' => 
     array (
       0 => 'vistas\\crearFormulario.tpl',
-      1 => 1456245799,
+      1 => 1456758645,
       2 => 'file',
     ),
   ),
@@ -38,6 +38,7 @@ and open the template in the editor.
         <title><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
 </title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+ <link href="./css/dashboard.css" rel="stylesheet">
  <script src="js/jquery.js" type="text/javascript"></script>  
     </head>
         <style type="text/css">

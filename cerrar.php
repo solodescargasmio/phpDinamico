@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./controladores/ctrl_usuario.php');
-ingresar();
-
+require_once ('./controladores/ctrl_dinamico.php');
+cerrar();
 

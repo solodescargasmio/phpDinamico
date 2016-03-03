@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-25 00:47:14
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-29 14:56:19
          compiled from "vistas\ingresarAtributo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:562656c8bb70d1cef1-56969332%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04114bdc2a0c065212cc6b95a734caa17ca6071f' => 
     array (
       0 => 'vistas\\ingresarAtributo.tpl',
-      1 => 1456357632,
+      1 => 1456754175,
       2 => 'file',
     ),
   ),
@@ -113,7 +113,8 @@ and open the template in the editor.
        <label  class="col-sm-4 control-label">Agregar opciones de atributo</label>
                     <div class="col-sm-8">
                         <textarea name="selectortexto" placeholder="ej: masculino,   femenino"></textarea>
-                   </div> 
+                        <font style="color: red;font-weight: bold;">   Separados por comas (',')</font>
+                    </div> 
                 </div>   
       <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>

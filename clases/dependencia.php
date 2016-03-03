@@ -62,10 +62,20 @@ class dependencia {
          while ($row = $resultado->fetch_object()) {
              $tato=new dependencia();
              $tato->setId($row->id);
-             $tato->setDato($row->depende);
-             $tato->setDato1($row->de);
+             $tato->setDepende($row->depende);
+             $tato->setDe($row->de);
              $datos[]=$tato;
          }
          return $datos;
  }
+ 
+ public function traerDepende($id){
+  $conexion=  conectar::realizarConexion();
+         $resultado=$conexion->query("SELECT * FROM dependencia WHERE depende=".$id);       
+         while ($row = $resultado->fetch_object()) {
+             $tato=$row->de;
+         }
+         return $tato;
+ }
+ 
 }

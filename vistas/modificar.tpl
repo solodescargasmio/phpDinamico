@@ -49,18 +49,8 @@
 });
 
        $(document).ready(function(){
-           $("#fechatpl").hide();
-  var form=document.getElementById("nomformulario").value;
+           var form=document.getElementById("nomformulario").value;
            if(form=="paciente"){
-           $("#id_usuario").keyup(function(){  
-               con=0;
-            var id=$(this).val();
-            if(id=="."||id==","||id==""){
-        alert("No utilice PUNTOS, COMAS o GUIONES EJ:12345678");
-        return;
-        }     
-    });      
-               
           $('input[name=id_usuario]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
        
                $(function(){
@@ -83,8 +73,6 @@
       
     });        
         
-        }else{
-        $('input[name=id_usuario]').attr('readonly','readonly');
         }
            
             if($('input[name=altura]').length > 0){  //compruebo que el elemento existe       
@@ -110,8 +98,6 @@
         document.getElementById("imc").value=imc;
         }
     });
-    
-    
     
     });
 
@@ -179,22 +165,8 @@ return edad;
 <body>
     {include file="cabeza.tpl"}
     <div class="container-fluid" style="position: absolute;top: 120px;">
- 
+        {if isset($mensage)}{$mensage}{/if}
         <div id="respuestauser"></div>
-       {if is_null($cedula) && $nombreform!="paciente"}
-           <h4>
-               <font style="color: red;font-weight: bold;">Debe ingresar un paciente nuevo en el formulario "PACIENTE", <br>
-               seleccionar un paciente de la lista ó buscar ID de un paciente en la caja que dice 'cedula paciente'</font></h4>
-       <div class="col-lg-offset-2 col-lg-10">
-           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='index.php'">Atras</button>
-    </div>
-           {elseif $ok==false}
-            <font style="color: red;font-weight: bold;">{$mensage}</font> 
-             <div class="col-lg-offset-2 col-lg-10">
-           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='index.php'">Atras</button>
-    </div>
-       {elseif !isset($estudios)}
-           
         <form style="width: 500px;" method="POST">
             
             <fieldset><legend>{if isset($nombreform)}{$nombreform|upper}{/if}</legend></fieldset>
@@ -217,24 +189,18 @@ return edad;
                
             </select>
              {else}
-                 <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
+            <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
             {/if} 
             {elseif $atributo->getTipo()=="date"}
           <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker" required="">
           {elseif  $atributo->getTipo()=="int"}
-              {if $atributo->getNombre()=="id_usuario"}
-                  <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" value="{$cedula}">
-            {else}
-                <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
-              {/if}
-             
-          {else}
+              <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
+        {else}
             <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
           {/if}
     </div>
   </div>
             {/foreach}
-            
  {/if}
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
@@ -243,40 +209,9 @@ return edad;
   </div>
             
         </form>
-  
-  {else}      
-  
-
- <form style="width: 500px;" method="POST">   
-            <fieldset><legend>{$nombreform|upper}</legend></fieldset>
-        {foreach from=$estudios item=estudio}
-            <input type="text" name="nomformulario" value="{$nombreform}" id="nomformulario" hidden="">
-            <div class="form-group">
-                <label for="nombre" class="col-lg-2 control-label">{$estudio->getNom_attributo()|upper}</label>
-    <div class="col-lg-offset-2 col-lg-10">
-        {if $estudio->getNom_attributo()=="fecha_nacimiento" || $estudio->getNom_attributo()=="id_usuario" || $estudio->getNom_attributo()=="fecha_estudio" || $estudio->getNom_attributo()=="edad"}
-            <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" readonly="">
-        {else} 
-         <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}">
-        {/if}
-        </div>
-  </div>
-            {/foreach}
-            <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-       <input type="submit" name="modificar" class="btn btn-primary btn-lg btn-block" value="Modificar datos">
-       <br> <a href="ingresar.php" >   <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location:'ingresar.php'">Cancelar Modificacion</button> </a>
+ 
     </div>
-  </div> 
-        </form>
-      
-    
-      
-      
- {/if}
-    </div>
-  <div id="fechatpl">
- {include file="fecha.tpl"}</div>
+ {include file="fecha.tpl"}
 </body>
 
 </html>

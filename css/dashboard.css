@@ -4,12 +4,23 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 html{
-	background: url(../imagenes/fondoprueba1.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
 	min-height: 100%;
+    
+}
+
+        .encuadro{
+            float: right;
+        background: #c3defe;
+        width: 260px;
+        height: auto; 
+        margin: 5px;
+        }
+.container-fluid{
+
 }
 
 .separador{
@@ -19,6 +30,10 @@ html{
   float: right;
 }*/
 body {
+      
+    position: absolute; 
+    height: 100% autho;
+    opacity: 0.9;
   padding-top: 50px;
   width: 100%;
 }

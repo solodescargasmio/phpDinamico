@@ -81,6 +81,7 @@ class formulario {
       $resultado=$conexion->query("SELECT DISTINCT * FROM form group by nombre");   
  while ($fila=$resultado->fetch_object()) {
          $form=new formulario();
+         $form->setId_form($fila->id_form);
          $form->setNombre($fila->nombre);
          $form->setVersion($fila->version);
             $formularios[]=$form;          
@@ -91,7 +92,7 @@ class formulario {
   public function traerFormularioId() {
       $nombre= $this->getNombre();
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT * FROM form WHERE nombre='".$nombre."' AND fecha_crea=(SELECT MAX(fecha_crea) FROM form)");   
+      $resultado=$conexion->query("SELECT * FROM form WHERE nombre='".$nombre."' AND fecha_crea=(SELECT MAX(fecha_crea) FROM form WHERE nombre='".$nombre."')");   
  while ($fila=$resultado->fetch_object()) {
          $form=new formulario();
          $form->setId_form($fila->id_form);
@@ -111,6 +112,14 @@ class formulario {
         return $dato;
  }
  
+ public function traerNombre($id_form){
+  $conexion=  conectar::realizarConexion();
+         $resultado=$conexion->query("SELECT nombre FROM form WHERE id_form=".$id_form);       
+          while ($fila=$resultado->fetch_object()) {
+         $dato=$fila->nombre;
+        }
+        return $dato;
+ }
    
 
 }

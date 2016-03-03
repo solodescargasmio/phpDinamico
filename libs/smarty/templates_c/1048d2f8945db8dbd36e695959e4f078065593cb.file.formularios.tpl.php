@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-25 18:17:13
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-03 17:17:22
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1456420630,
+      1 => 1457021840,
       2 => 'file',
     ),
   ),
@@ -20,12 +20,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'titulo' => 0,
-    'mensage' => 0,
+    'cedula' => 0,
     'nombreform' => 0,
+    'ok' => 0,
+    'mensage' => 0,
+    'estudios' => 0,
     'atributos' => 0,
     'atributo' => 0,
     'tablas' => 0,
     'opcion' => 0,
+    'estudio' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -81,8 +85,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 });
 
        $(document).ready(function(){
-           var form=document.getElementById("nomformulario").value;
+           $("#fechatpl").hide();
+  var form=document.getElementById("nomformulario").value;
            if(form=="paciente"){
+           $("#id_usuario").keyup(function(){  
+               con=0;
+            var id=$(this).val();
+            if(id=="."||id==","||id==""){
+        alert("No utilice PUNTOS, COMAS o GUIONES EJ:12345678");
+        return;
+        }     
+    });      
+               
           $('input[name=id_usuario]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
        
                $(function(){
@@ -105,6 +119,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       
     });        
         
+        }else{
+        $('input[name=id_usuario]').attr('readonly','readonly');
         }
            
             if($('input[name=altura]').length > 0){  //compruebo que el elemento existe       
@@ -130,6 +146,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         document.getElementById("imc").value=imc;
         }
     });
+    
+    
     
     });
 
@@ -198,9 +216,23 @@ return edad;
     <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
     <div class="container-fluid" style="position: absolute;top: 120px;">
-        <?php if (isset($_smarty_tpl->tpl_vars['mensage']->value)) {?><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
-<?php }?>
+ 
         <div id="respuestauser"></div>
+       <?php if (is_null($_smarty_tpl->tpl_vars['cedula']->value)&&$_smarty_tpl->tpl_vars['nombreform']->value!="paciente") {?>
+           <h4>
+               <font style="color: red;font-weight: bold;">Debe ingresar un paciente nuevo en el formulario "PACIENTE", <br>
+               seleccionar un paciente de la lista ó buscar ID de un paciente en la caja que dice 'cedula paciente'</font></h4>
+       <div class="col-lg-offset-2 col-lg-10">
+           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='index.php'">Atras</button>
+    </div>
+           <?php } elseif ($_smarty_tpl->tpl_vars['ok']->value==false) {?>
+            <font style="color: red;font-weight: bold;"><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
+</font> 
+             <div class="col-lg-offset-2 col-lg-10">
+           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='index.php'">Atras</button>
+    </div>
+       <?php } elseif (!isset($_smarty_tpl->tpl_vars['estudios']->value)) {?>
+           
         <form style="width: 500px;" method="POST">
             
             <fieldset><legend><?php if (isset($_smarty_tpl->tpl_vars['nombreform']->value)) {?><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['nombreform']->value, 'UTF-8');?>
@@ -237,7 +269,7 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
                
             </select>
              <?php } else { ?>
-            <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+                 <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " required="">
             <?php }?> 
@@ -245,10 +277,18 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
           <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="datepicker" required="">
           <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="int") {?>
-              <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+              <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getNombre()=="id_usuario") {?>
+                  <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" value="<?php echo $_smarty_tpl->tpl_vars['cedula']->value;?>
+">
+            <?php } else { ?>
+                <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 ">
-        <?php } else { ?>
+              <?php }?>
+             
+          <?php } else { ?>
             <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
 " class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
@@ -257,6 +297,7 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
     </div>
   </div>
             <?php } ?>
+            
  <?php }?>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
@@ -265,10 +306,52 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
   </div>
             
         </form>
- 
-    </div>
- <?php echo $_smarty_tpl->getSubTemplate ("fecha.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+  
+  <?php } else { ?>      
+  
 
+ <form style="width: 500px;" method="POST">   
+            <fieldset><legend><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['nombreform']->value, 'UTF-8');?>
+</legend></fieldset>
+        <?php  $_smarty_tpl->tpl_vars['estudio'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['estudio']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['estudios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['estudio']->key => $_smarty_tpl->tpl_vars['estudio']->value) {
+$_smarty_tpl->tpl_vars['estudio']->_loop = true;
+?>
+            <input type="text" name="nomformulario" value="<?php echo $_smarty_tpl->tpl_vars['nombreform']->value;?>
+" id="nomformulario" hidden="">
+            <div class="form-group">
+                <label for="nombre" class="col-lg-2 control-label"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo(), 'UTF-8');?>
+</label>
+    <div class="col-lg-offset-2 col-lg-10">
+        <?php if ($_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo()=="fecha_nacimiento"||$_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo()=="id_usuario"||$_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo()=="fecha_estudio"||$_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo()=="edad") {?>
+            <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getValor();?>
+" name="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
+" readonly="">
+        <?php } else { ?> 
+         <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getValor();?>
+" name="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
+">
+        <?php }?>
+        </div>
+  </div>
+            <?php } ?>
+            <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+       <input type="submit" name="modificar" class="btn btn-primary btn-lg btn-block" value="Modificar datos">
+       <br> <a href="ingresar.php" >   <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location:'ingresar.php'">Cancelar Modificacion</button> </a>
+    </div>
+  </div> 
+        </form>
+      
+    
+      
+      
+ <?php }?>
+    </div>
+  <div id="fechatpl">
+ <?php echo $_smarty_tpl->getSubTemplate ("fecha.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+</div>
 </body>
 
 </html><?php }} ?>

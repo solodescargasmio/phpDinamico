@@ -14,17 +14,51 @@ require_once ('./clases/tabla.php');
 require_once ('./clases/estudio_medico.php');
 require_once ('./clases/dependencia.php');
 require_once ('./clases/datosPrecargados.php');
+require_once ('./multimedia/crearMKdir.php');
+require_once ('./multimedia/guardarMultimedia.php');
 function principal(){ 
+ error_reporting(0);
     Session::init();
-     error_reporting(0);
+    $tipouser=  Session::get("usuario");
+   if($_GET['idpaciente']){//trabajar con este paciente
+      $id_user=$_GET['idpaciente'];
+       $form=new formulario();
+       $id_form=$form->traerId("paciente"); 
+       $estudio=new estudio_medico();
+       $estudios=$estudio->traerFormId_usuario($id_user, $id_form);
+       foreach ($estudios as $key => $value){
+           $ides=$value->getId_estudio();
+           Session::set("estudio", $ides); 
+           $attr1=new atributo();
+           $nombat=$attr1->devolverNombre($value->getId_attributo());
+           if(strcmp($nombat, "id_usuario")==0){
+            Session::set("cedula", $value->getValor());  
+           }else if(strcmp($nombat, "apellido")==0){
+            Session::set("apellido", $value->getValor());  
+           }else
+               if(strcmp($nombat, "edad")==0){
+            Session::set("edad", $value->getValor()); 
+           }
+       }
+         }//fin trabajar con este paciente
+    $id_user=Session::get('cedula');
+    $apell= Session::get('apellido');
+    $edad=  Session::get('edad');
     $mensage="";
     $tpl=new Template();
     $titulo="Estudios Médicos";
     $form=new formulario();
     $attr1=new atributo();
+    $estudio=new estudio_medico();
+    $estud=$estudio->traerPacientes(); 
+      if($estud!=null){
+          foreach ($estud as $keys => $values) {
+              $estudios[]=$values;//guardo todos los formularios dinamicos para mostrarlos en cabeza.tpl
+              }
+          }
     $resultado=$form->traerFormularios();//obtengo todos los forms 
     //"Esto lo hago en todas las funciones para que cabeza.tpl siempre tenga los forms"
-          if($resultado!=null){
+    if($resultado!=null){
           foreach ($resultado as $key => $value) {
          $formularios[]=$value;//guardo todos los formularios dinamicos para mostrarlos en cabeza.tpl
               }        
@@ -32,17 +66,27 @@ function principal(){
               //con esto aseguro q los formularios y atributos se generen una sola ves
               cargarDatosPaciente();}
        $datos=array(
+           "operador" => $tipouser,
+           "usuarios" => $estudios,
            "mensage" => $mensage,
          "formularios" => $formularios 
        );   
-
-       $tpl->asignar("titulo", $titulo);
-       $tpl->mostrar("index", $datos);
+    $tpl->asignar('edad', $edad);
+    $tpl->asignar('cedula', $id_user);
+    $tpl->asignar('apellido', $apell);
+    $tpl->asignar("titulo", $titulo);
+    $tpl->mostrar("principal", $datos);
 }
 
 function formularios(){
     Session::init();
+    $id_user=Session::get('cedula');
+    $id_usuario=$id_user;
+    $apell= Session::get('apellido');
+    $edad=  Session::get('edad');
+    $id_estudio= Session::get("estudio"); 
      error_reporting(0);
+     $ok=true;
        $mensage="";
     $tpl=new Template();
     $titulo="Estudios Médicos"; 
@@ -51,33 +95,98 @@ function formularios(){
         $tabla=new tabla();
         $form=new formulario();
         $idf=$form->traerId($nombre);
+        
+        if($id_estudio){
+        $estu=new estudio_medico();
+        $estudio=$estu->traerFormEstudioId($id_estudio, $idf);
+        foreach ($estudio as $key => $value) {
+           $estudios[]=$value;
+        }
+        }
+        
+        
+        $depen=new dependencia();
+        $de=$depen->traerDepende($idf);
+        if($de){
+            $nomf=$form->traerNombre($de);
+            $idfde=$form->traerId($nomf);
+            $est=new estudio_medico();
+            if($id_user){
+            $da=$est->traerFormId_usuario($id_user, $idfde);
+            if(isset($da)){
+         $ok=true;
+            }else{
+       $mensage="Este formulario: ".strtoupper($nombre)." : depende que: ".strtoupper($nomf)." esté COMPLETO";       
+       $ok=false; 
+       
+            }}
+        }
+        
         $fr_atr=new form_attr();
         $dat=$fr_atr->existenAtributos($idf);
+
+if($_POST['modificar']){
+             $estudio=new estudio_medico();
+             $estudio->setId_usuario($id_user);
+             $estudio->setId_form($idf);
+             $estudio->setId_estudio($id_estudio);
+         if(strcmp($nomf, "paciente")==0){
+             Session::set("cedula",$id_usuario);
+             Session::set("apellido", $_POST['apellido']);
+             Session::set("edad", $_POST['edad']);
+         }
+             
+               $datos=$_POST; 
+             //  
+            $ok=false;   
+          foreach ($datos as $key => $value) { 
+            if((strcmp($key,"nomformulario")==0)||(strcmp($key,"modificar")==0)){}
+             else{ 
+             $aa=new atributo();
+                $id_attributo=$aa->devolverId($key); 
+            if($estudio->actualizaciones($id_attributo, $value)){
+                $ok=true;
+           
+                }  
+         }
+        }
+        if($ok){
+        header('Location: ingresar.php');
+        exit();}
+    
+       }  
+    
         if($_POST['nomformulario']){
             $nomf=$_POST['nomformulario'];
             $id_usuario=$_POST['id_usuario'];
-         if(strcmp($nomf, "paciente")==0){
-             Session::set("cedula",$id_usuario);
-         }
-          $estudio=new estudio_medico();
+             $estudio=new estudio_medico();
              $estudio->setId_usuario($id_usuario);
              $estudio->setId_form($idf);
+         if(strcmp($nomf, "paciente")==0){
+             Session::set("cedula",$id_usuario);
+             Session::set("apellido", $_POST['apellido']);
+             Session::set("edad", $_POST['edad']);
+             crearDir($id_usuario);
              $id_estudio=$estudio->ingresarEstudio();
+         }
+            
              $estudio->setId_estudio($id_estudio);
-             if($estudio->ingresarEstudioForm()){
                $datos=$_POST;
+               $ok=false;
          foreach ($datos as $key => $value) {
             if(strcmp($key, "nomformulario")!=0){
              $id_attributo=$atr->devolverId($key);
              $estudio->setId_attributo($id_attributo);
              $estudio->setValor($value);
-             $estudio->completarDatos();
-            }
-         }   
-             }
+             if($estudio->ingresarEstudioForm()){
+                 $ok=true;
+             }   
+         }
         
         }
-//        
+      if($ok){
+                    header("Location: ingresar.php");}
+       } 
         if($dat>0){
         $resultado=$atr->traerAtributosForm($idf);
         $tablas=$tabla->traerTablas(); 
@@ -86,10 +195,13 @@ function formularios(){
              // var_dump($values);exit();
          $selectos[]=$values;
           }}
-       // var_dump($tablas);exit();
         if($resultado==null){
-          $mensage="No existen para este formulario.<br> Ingrese una nueva version del formulario.";  
+          $mensage="No existen atributos para este formulario.<br> Ingrese una nueva version del formulario.";  
         }
+           //
+        }
+
+
         $form=new formulario();
           $resultados=$form->traerFormularios();
           if($resultados!=null){
@@ -97,20 +209,28 @@ function formularios(){
          $formularios[]=$value;
           }}
         $datos=array(
+            "estudios" => $estudios,
+            "ok" => $ok,
             "nombreform" => $nombre,
             "atributos" => $resultado,
             "tablas" => $selectos,
             "mensage" => $mensage
         );
+           $tpl->asignar('edad', $edad);
+    $tpl->asignar('cedula', $id_user);
+    $tpl->asignar('apellido', $apell);
    $tpl->asignar( "formularios", $formularios);
         $tpl->asignar("titulo", $titulo);
         $tpl->mostrar("formularios",$datos);
          
-}
-}
+                 }           
+     
 
 function ingresarAtributo() {
-    Session::init();
+     Session::init();
+    $id_user=Session::get('cedula');
+    $apell= Session::get('apellido');
+    $edad=  Session::get('edad');
     error_reporting(0);
     $mensage="";
     $tpl=new Template();
@@ -139,7 +259,7 @@ function ingresarAtributo() {
     $atr->setCalculado(0);
     $atr->setTabla(0);
     if($atr->ingresarAtributo()){
-        header("Location: index.php");
+        header("Location: ingresar.php");
     } else{
   $mensage="Error al ingresar atributo. Verifique.";        
     } }   
@@ -154,6 +274,9 @@ function ingresarAtributo() {
             "atributos" => $resultado,
             "mensage" => $mensage
         );
+           $tpl->asignar('edad', $edad);
+    $tpl->asignar('cedula', $id_user);
+    $tpl->asignar('apellido', $apell);
    $tpl->asignar( "formularios", $formularios);
         $tpl->asignar("titulo", $titulo);
         $tpl->mostrar("ingresarAtributo",$datos);
@@ -162,7 +285,10 @@ function ingresarAtributo() {
 
 
     function crearFormulario() {
-        Session::init();
+         Session::init();
+    $id_user=Session::get('cedula');
+    $apell= Session::get('apellido');
+    $edad=  Session::get('edad');
         error_reporting(0);
             $mensage="";
     $tpl=new Template();
@@ -206,6 +332,9 @@ foreach ($dato as $key => $value){
             "atributos" => $resultado,
             "mensage" => $mensage
         );
+           $tpl->asignar('edad', $edad);
+    $tpl->asignar('cedula', $id_user);
+    $tpl->asignar('apellido', $apell);
    $tpl->asignar( "formularios", $formularios);
         $tpl->asignar("titulo", $titulo);
         $tpl->mostrar("crearFormulario",$datos);
@@ -213,37 +342,40 @@ foreach ($dato as $key => $value){
 }
 
 function nuevaVersion(){
-    Session::init();
+     Session::init();
+    $id_user=Session::get('cedula');
+    $apell= Session::get('apellido');
+    $edad=  Session::get('edad');
       error_reporting(0);
             $mensage="";
     $tpl=new Template();
     $titulo="Estudios Médicos";
-    if($_POST['nom_formulario']){
-       $dato=$_POST;
-$cant=  count($dato);
-$id=0;
-$con=0;
-$nombre=$_POST['nom_formulario'];
-$version=$_POST['version'];
-$form=new formulario();
-        $form->setNombre($nombre);
-        $form->setVersion($version);
-        $idf=$form->insertarFormulario();
-         $fo_att=new form_attr();
-        $fo_att->setId_form($idf); 
-foreach ($dato as $key => $value){    
- if((strcmp($key, 'nom_formulario')==0)||(strcmp($key, 'version')==0)){ }
- else{ 
-        $attr=new atributo();
-        $ida=$attr->devolverId($key);
-        $fo_att->setId_atributo($ida); 
-        $fo_att->insertarFormulario();
-    }
+            if($_POST['nom_formulario']){
+               $dato=$_POST;
+        $cant=  count($dato);
+        $id=0;
+        $con=0;
+        $nombre=$_POST['nom_formulario'];
+        $version=$_POST['version'];
+        $form=new formulario();
+                $form->setNombre($nombre);
+                $form->setVersion($version);
+                $idf=$form->insertarFormulario();
+                 $fo_att=new form_attr();
+                $fo_att->setId_form($idf); 
+        foreach ($dato as $key => $value){    
+         if((strcmp($key, 'nom_formulario')==0)||(strcmp($key, 'version')==0)){ }
+         else{ 
+                $attr=new atributo();
+                $ida=$attr->devolverId($key);
+                $fo_att->setId_atributo($ida); 
+                $fo_att->insertarFormulario();
+            }
 
-    }
-       
-    
-    }
+            }
+
+
+            }
       $atr=new atributo();            
  $resultado=$atr->traerAtributos();
  if($resultado==null){
@@ -259,13 +391,19 @@ foreach ($dato as $key => $value){
             "atributos" => $resultado,
             "mensage" => $mensage
         );
+           $tpl->asignar('edad', $edad);
+    $tpl->asignar('cedula', $id_user);
+    $tpl->asignar('apellido', $apell);
    $tpl->asignar( "formularios", $formularios);
         $tpl->asignar("titulo", $titulo);
         $tpl->mostrar("nuevaVersion",$datos);    
 }
 
 function dependenciasForm(){
-    Session::init();
+     Session::init();
+    $id_user=Session::get('cedula');
+    $apell= Session::get('apellido');
+    $edad=  Session::get('edad');
          error_reporting(0);
             $mensage="";
     $tpl=new Template();
@@ -273,9 +411,15 @@ function dependenciasForm(){
     if($_POST){
         $dato1=$_POST['selector'];
         $dato2=$_POST['selector1'];
-        $mensage=$dato1." depende de que ".$dato2." esté completo";
+       $fromu=new formulario();      
+       $id1=$fromu->traerId($dato1);
+       $id2=$fromu->traerId($dato2);
+       $depen=new dependencia();
+       $depen->insertarDependencias($id1, $id2);
     }
-                 $form=new formulario();
+        $depencia=new dependencia();
+        $dependencias=$depencia->traerDependencias();
+        $form=new formulario();
           $resultados=$form->traerFormularios();
           if($resultados!=null){
           foreach ($resultados as $key => $value) {
@@ -283,9 +427,27 @@ function dependenciasForm(){
           }}
         $datos=array(
             "atributos" => $resultado,
-            "mensage" => $mensage
+            "mensage" => $mensage,
+            "dependencias" => $dependencias
         );
+           $tpl->asignar('edad', $edad);
+    $tpl->asignar('cedula', $id_user);
+    $tpl->asignar('apellido', $apell);
    $tpl->asignar( "formularios", $formularios);
         $tpl->asignar("titulo", $titulo);
         $tpl->mostrar("dependencia",$datos);      
 }
+
+function guardarArchivos(){
+    subirDatos();//Esta funcion esta en la carpeta multimedia 
+    //en el archivo guardar...php
+}
+
+function cerrar() {
+    Session::init();
+    $tipo=Session::get("usuario");
+    Session::destroy();
+    Session::set("usuario", $tipo);
+    principal();
+}
+

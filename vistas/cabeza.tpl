@@ -2,6 +2,77 @@
   <script src="js/bootstrap.min.js" type="text/javascript"></script>
  <script src="js/jquery.js" type="text/javascript"></script> 
  <script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript"></script> 
+  <script type="text/javascript">
+  $(document).ready(function() {  
+      $('#suggestions').hide();//oculto el div que muestra las opciones que vá encontrando
+    //Al escribr dentro del input con id="service"
+    $('#service').keyup(function(){
+        //Obtenemos el value del input
+        largo=1;
+    
+        var service = $(this).val();
+        if(service.length>largo){
+         var dataString = 'service='+service;   
+    
+        
+         
+        //Le pasamos el valor del input al ajax
+        $.ajax({
+            type: "POST",
+            url: "autocompletar.php",
+            data: dataString,
+            success: function(data) {
+                //Escribimos las sugerencias que nos manda la consulta
+                $('#suggestions').fadeIn(1000).html(data);
+                //Al hacer click en algua de las sugerencias
+                var id="";
+                $('a').on('click', function(){
+                    //Obtenemos la id unica de la sugerencia pulsada
+                    id= $(this).attr('id') ;
+
+                    //Editamos el valor del input con data de la sugerencia pulsada
+                    $('#service').val($('#'+id).attr('data')); 
+       /////////////////////////////////////////////////////////////
+       //de aca hasta las lineas de abajo es lo mismo que uso en principal
+                      datatypo='idtraer='+id;//genero un array con indice
+     $.ajax({
+         url: 'controlarAjax.php',//llamo a la pagina q hace el control
+         type:'POST',//metodo por el cual paso el dato
+         data:datatypo,
+             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
+                  $("#respuestauser").fadeIn(1000).html(data); //imprimo el mensaje en el div      
+                
+    }
+     });  
+    /////////////////////////////////////////////////////////////   
+//  $('#service').val($('#'+id).attr('data'));
+                    //Hacemos desaparecer el resto de sugerencias
+         
+                   $('#suggestions').fadeOut(1000);
+                  //  window.location='index.php?idpaciente='+id;
+                });              
+            }
+        });}else{ $('#suggestions').fadeOut(1000);
+    }
+    }); 
+  
+}); 
+   </script>
+   <style>
+.suggest-element{
+    
+margin-left:5px;
+margin-top:5px;
+width:350px;
+cursor:pointer;
+}
+#suggestions {
+width:350px;
+height:150px;
+overflow: auto;
+}
+</style>
+ 
  <script>
     // very simple to use!
     $(document).ready(function() {
@@ -17,12 +88,14 @@
         <span class="icon-bar"></span>
       </button>
         <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>
+       
         <a tabindex="-1" class="navbar-brand" href="cerrar.php" style="  margin-left: auto; margin-right: auto;">Cerrar</a>
-
-           <a tabindex="-1" class="navbar-brand" href="formularios.php">Formularios</a>         
- 
+         
+     {if isset($cedula)}
+            <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: {$apellido}<br>Cedula : {$cedula} <br>Edad : {$edad}</font></div>
+        {/if}
            <form class="navbar-form navbar-right">
-        <input type="text" id="service" name="service" class="form-control" placeholder="paciente" >
+        <input type="text" id="service" name="service" class="form-control" placeholder="cedula paciente" >
          <div id="suggestions"></div>
         </form>
  
@@ -42,18 +115,16 @@
          </li>
           {/foreach}
          {/if}
-           
+
          
             </ul>  
         </li>
-
           <li class="dropdown">
             <a tabindex="-1" href="guardarmultimedia.php">Archivos</a>
           </li>
-
-        
+       {if $operador=="admin"}   
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">FormulariosAdmin<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Administrar Formularios<b class="caret"></b></a>
            <ul class="dropdown-menu">
               <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
               <li><a tabindex="-1" href="nuevaVersion.php">Nueva Version Formulario</a></li>
@@ -61,8 +132,9 @@
               <li><a tabindex="-1" href="depende.php">Dependencias Formularios</a></li>
             </ul>  
         </li>
+        {/if}
         <li class="dropdown">
-            <a tabindex="-1" href="comentarios.php">Comentarios</a>
+            <a tabindex="-1" href="#"></a>
           </li>
            <li class="dropdown">
             <a tabindex="-1" href="imprimir.php">Ver Ficha</a>

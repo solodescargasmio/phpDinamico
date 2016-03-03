@@ -9,6 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>{$titulo}</title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+ <link href="./css/dashboard.css" rel="stylesheet">
  <script src="js/jquery.js" type="text/javascript"></script>  
     </head>
         <style type="text/css">
@@ -35,8 +36,12 @@ $(document).ready(function(){
     $('#miform').hide();
     $('#formversion').show();
 		$("#mostrar").on( "click", function() {
+                    nomb_form=document.getElementById("nom_formulario").value;
+                    if(nomb_form!=""){
 			$('#miform').show(); //muestro mediante id 
-                        $('#formversion').hide();
+                        $('#formversion').hide();}else{
+        alert("Debe de seleccionar un formulario");            
+        }
 		 });
 		$("#ocultar").on( "click", function() {
                          $('#miform').hide();
@@ -105,9 +110,8 @@ $(function() {
         $('#formversion').hide();
             var $datove= $(".formu",this).val();
         document.getElementById("nom_formulario").value=$datove; 
-          nomb_form=$datove;
+          nomb_form=$datove;    
       datatypo='formulario='+nomb_form;
-     // alert(datatypo);
           $.ajax({
          url: 'controlarAjax.php',//llamo a la pagina q hace el control
          type:'POST',//metodo por el cual paso el dato
@@ -162,22 +166,13 @@ function capitalize(s)//convierte minusculas a Mayusculas
      
         
         </script>     
-<body>
+        <body>
    {include file="cabeza.tpl"}
-    <div class="container-fluid" style="position: absolute;top: 120px;">
-       
-      <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>  
-      <h3>Formulario</h3>
-      <form id="my-dynamic-form" method="POST"> 
-           <div class="form-group">       
-    <div class="col-lg-10">
-   <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
-   </div></div><br><br> 
-   <div id="avizo"></div>
-      </form>
-    <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
-   <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
-       <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+   <div id="menus" >
+         <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
+   <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>      
+     
+        <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
            <br> <table class="table-responsive" border="1">  
                 <tr>
                   <td>Nombre y tipo Campo :</td>
@@ -193,8 +188,8 @@ function capitalize(s)//convierte minusculas a Mayusculas
                        {$mensage}
 {/if}
            </table> 
-      </form>      
-           <div style="position: absolute;float: right;">    
+      </form> 
+        <div style="position: absolute;float: right;">    
     <form id="formversion" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
            <br> <table class="table-responsive" border="1">  
                 <tr>
@@ -208,8 +203,21 @@ function capitalize(s)//convierte minusculas a Mayusculas
                    {/foreach}
 {/if}
            </table> 
-           </form>      </div>     
-       </div> 
+           </form>      </div>  
+       
+   </div>
+    <div class="container-fluid" style="">
+       
+      <h6><font style="color: red;font-weight: bold;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>  
+      <h3>Formulario</h3>
+      <form id="my-dynamic-form" method="POST"> 
+           <div class="form-group">       
+    <div class="col-lg-10">
+   <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
+   </div></div><br><br> 
+   <div id="avizo"></div>
+      </form>
+    </div> 
          
 </body>
 </html>

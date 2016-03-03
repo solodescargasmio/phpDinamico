@@ -11,7 +11,6 @@ and open the template in the editor.
        <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/dateFechamio.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="./css/dashboard.css" rel="stylesheet">
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/dateFechamio.js"></script>
@@ -86,7 +85,8 @@ and open the template in the editor.
        <label  class="col-sm-4 control-label">Agregar opciones de atributo</label>
                     <div class="col-sm-8">
                         <textarea name="selectortexto" placeholder="ej: masculino,   femenino"></textarea>
-                   </div> 
+                        <font style="color: red;font-weight: bold;">   Separados por comas (',')</font>
+                    </div> 
                 </div>   
       <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>

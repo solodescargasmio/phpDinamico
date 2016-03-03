@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-23 19:31:47
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-29 16:47:04
          compiled from "vistas\dependencia.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2480756cc98916ea051-87374881%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '02b32823f164b4258280cc3218fabee614ed280c' => 
     array (
       0 => 'vistas\\dependencia.tpl',
-      1 => 1456252302,
+      1 => 1456757590,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'titulo' => 0,
-    'mensage' => 0,
+    'dependencias' => 0,
     'formularios' => 0,
+    'depen' => 0,
+    'formula' => 0,
+    'mensage' => 0,
     'formulario1' => 0,
     'formulario' => 0,
   ),
@@ -39,11 +42,65 @@ and open the template in the editor.
         <title><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
 </title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
- <script src="js/jquery.js" type="text/javascript"></script>  
+ <script src="js/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript">
+/*$(document).ready(function(){
+	$("select[name=selector1]").change(function(){
+            var dos=$('select[name=selector1]').val();
+             var uno=$('select[name=selector]').val();
+             if(uno==dos){
+            alert("Los formularios deben de ser distintos"); 
+        }
+        });
+    });*/
+    
+    function control(){
+        var ok=true;
+         var dos=$('select[name=selector1]').val();
+             var uno=$('select[name=selector]').val();
+             if(uno==dos){
+            alert("Los formularios deben de ser distintos"); 
+            ok=false;
+        }
+        return ok;
+    };
+ </script>
     </head>   
 <body>
    <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
+   <div id="menus">
+<?php if (isset($_smarty_tpl->tpl_vars['dependencias']->value)) {?>
+    <table border="1" class="table table-striped">
+        <tr class="success">
+            <td>Depende</td>
+            <td>De</td>
+        </tr>
+        <?php  $_smarty_tpl->tpl_vars['depen'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['depen']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['dependencias']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['depen']->key => $_smarty_tpl->tpl_vars['depen']->value) {
+$_smarty_tpl->tpl_vars['depen']->_loop = true;
+?>
+            <tr >   <?php  $_smarty_tpl->tpl_vars['formula'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['formula']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['formularios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['formula']->key => $_smarty_tpl->tpl_vars['formula']->value) {
+$_smarty_tpl->tpl_vars['formula']->_loop = true;
+?>
+            <?php if ($_smarty_tpl->tpl_vars['depen']->value->getDepende()==$_smarty_tpl->tpl_vars['formula']->value->getId_form()) {?>
+                <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formula']->value->getNombre(), 'UTF-8');?>
+</td> 
+              <?php }?>
+              <?php if ($_smarty_tpl->tpl_vars['depen']->value->getDe()==$_smarty_tpl->tpl_vars['formula']->value->getId_form()) {?>
+              <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formula']->value->getNombre(), 'UTF-8');?>
+</td> 
+              <?php }?>
+            <?php } ?> </tr>
+         <?php } ?>
+           
+        
+    </table>
+<?php }?>
+   </div>
     <div class="container-fluid" style="position: absolute;top: 120px;">
   <h3>Dependencias entre Formularios</h3>
 
@@ -65,7 +122,7 @@ $_smarty_tpl->tpl_vars['formulario1']->_loop = true;
 "><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formulario1']->value->getNombre(), 'UTF-8');?>
 </option>
                    <?php } ?>
-    </select><h5>Depende de que :</h5>
+    </select><h5><font style="color: red;font-weight: bold;">Depende de que :</font></h5>
     </div>
   </div>
     
@@ -84,13 +141,13 @@ $_smarty_tpl->tpl_vars['formulario']->_loop = true;
 </option>
                    <?php } ?>
     
-<?php }?></select><h5> esté completo</h5>
+       <?php }?></select><h5><font style="color: red;font-weight: bold;"> esté completo</font></h5>
  </div>
   </div>
 
 <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <button type="submit" class="btn btn-primary btn-lg btn-block">Guardar dependencias</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="return control();">Guardar dependencias</button>
     </div>
   </div>
         </form>

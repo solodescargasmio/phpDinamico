@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-25 15:27:30
+<?php /* Smarty version Smarty-3.1.20, created on 2016-02-29 16:26:32
          compiled from "vistas\nuevaVersion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2102256c79b7c0f4248-01145316%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6069c9dab9ffb0777a7aedb5e3ab575fb91ec69c' => 
     array (
       0 => 'vistas\\nuevaVersion.tpl',
-      1 => 1456245794,
+      1 => 1456759569,
       2 => 'file',
     ),
   ),
@@ -40,6 +40,7 @@ and open the template in the editor.
         <title><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
 </title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+ <link href="./css/dashboard.css" rel="stylesheet">
  <script src="js/jquery.js" type="text/javascript"></script>  
     </head>
         <style type="text/css">
@@ -66,8 +67,12 @@ $(document).ready(function(){
     $('#miform').hide();
     $('#formversion').show();
 		$("#mostrar").on( "click", function() {
+                    nomb_form=document.getElementById("nom_formulario").value;
+                    if(nomb_form!=""){
 			$('#miform').show(); //muestro mediante id 
-                        $('#formversion').hide();
+                        $('#formversion').hide();}else{
+        alert("Debe de seleccionar un formulario");            
+        }
 		 });
 		$("#ocultar").on( "click", function() {
                          $('#miform').hide();
@@ -136,9 +141,8 @@ $(function() {
         $('#formversion').hide();
             var $datove= $(".formu",this).val();
         document.getElementById("nom_formulario").value=$datove; 
-          nomb_form=$datove;
+          nomb_form=$datove;    
       datatypo='formulario='+nomb_form;
-     // alert(datatypo);
           $.ajax({
          url: 'controlarAjax.php',//llamo a la pagina q hace el control
          type:'POST',//metodo por el cual paso el dato
@@ -193,23 +197,14 @@ function capitalize(s)//convierte minusculas a Mayusculas
      
         
         </script>     
-<body>
+        <body>
    <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-    <div class="container-fluid" style="position: absolute;top: 120px;">
-       
-      <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>  
-      <h3>Formulario</h3>
-      <form id="my-dynamic-form" method="POST"> 
-           <div class="form-group">       
-    <div class="col-lg-10">
-   <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
-   </div></div><br><br> 
-   <div id="avizo"></div>
-      </form>
-    <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
-   <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
-       <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+   <div id="menus" >
+         <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
+   <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>      
+     
+        <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
            <br> <table class="table-responsive" border="1">  
                 <tr>
                   <td>Nombre y tipo Campo :</td>
@@ -234,8 +229,8 @@ $_smarty_tpl->tpl_vars['valor']->_loop = true;
 
 <?php }?>
            </table> 
-      </form>      
-           <div style="position: absolute;float: right;">    
+      </form> 
+        <div style="position: absolute;float: right;">    
     <form id="formversion" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
            <br> <table class="table-responsive" border="1">  
                 <tr>
@@ -255,8 +250,21 @@ $_smarty_tpl->tpl_vars['formulario']->_loop = true;
                    <?php } ?>
 <?php }?>
            </table> 
-           </form>      </div>     
-       </div> 
+           </form>      </div>  
+       
+   </div>
+    <div class="container-fluid" style="">
+       
+      <h6><font style="color: red;font-weight: bold;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>  
+      <h3>Formulario</h3>
+      <form id="my-dynamic-form" method="POST"> 
+           <div class="form-group">       
+    <div class="col-lg-10">
+   <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
+   </div></div><br><br> 
+   <div id="avizo"></div>
+      </form>
+    </div> 
          
 </body>
 </html><?php }} ?>
