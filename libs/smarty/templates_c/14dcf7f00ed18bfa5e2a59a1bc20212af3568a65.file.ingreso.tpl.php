@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-02 02:09:57
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-03 19:16:25
          compiled from "vistas\ingreso.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1001556d5d884ec82e4-26066348%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '14dcf7f00ed18bfa5e2a59a1bc20212af3568a65' => 
     array (
       0 => 'vistas\\ingreso.tpl',
-      1 => 1456880993,
+      1 => 1457028981,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'titulo' => 0,
+    'mensage' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -73,6 +74,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
   <div class="container-fluid" style="background: #fff;">
+      <font style="color: red;font-weight: bold;"><p>Si ingresa como Administrador podra crear formularios y agregar atributos en el sistema</p>
  <button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Administrador</button>
  <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm" onclick="window.location='index.php?user=usuario'">Usuario</button></a>
        <div class="modal fade" id="formulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:200px;">
@@ -104,14 +106,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                <div class="form-group">  
                               <label  class="col-sm-8 control-label"></label>
                                  <div class="col-lg-10">
-   <input type="submit" value="Ingresar como Administrador" class="btn btn-primary btn-group-justified">
+                                     <input type="submit" value="Ingresar como Administrador" class="btn btn-primary btn-group-justified">
                                  </div>
                           </div>
                       </form> 
                   </div>
               </div>
           </div>   
-      </div>
+       </div><br>
+       <?php if (isset($_smarty_tpl->tpl_vars['mensage']->value)) {?><font style="color: red;font-weight: bold;"><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
+<?php }?></font>
    </div>
       
 </body>

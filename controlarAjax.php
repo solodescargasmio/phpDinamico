@@ -83,4 +83,5 @@ $form=$formula->traerFormularioId();
  echo '<img src="./imagenes/no.png"/><font style="color:red;"> Error en usuario</font>';     
         }else{ echo '<img src="./imagenes/si.png"/>';}     
             }
+            
  

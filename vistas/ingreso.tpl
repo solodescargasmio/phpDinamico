@@ -46,6 +46,7 @@
 <body>
     {include file="cabeza.tpl"}
   <div class="container-fluid" style="background: #fff;">
+      <font style="color: red;font-weight: bold;"><p>Si ingresa como Administrador podra crear formularios y agregar atributos en el sistema</p>
  <button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Administrador</button>
  <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm" onclick="window.location='index.php?user=usuario'">Usuario</button></a>
        <div class="modal fade" id="formulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:200px;">
@@ -77,14 +78,15 @@
                <div class="form-group">  
                               <label  class="col-sm-8 control-label"></label>
                                  <div class="col-lg-10">
-   <input type="submit" value="Ingresar como Administrador" class="btn btn-primary btn-group-justified">
+                                     <input type="submit" value="Ingresar como Administrador" class="btn btn-primary btn-group-justified">
                                  </div>
                           </div>
                       </form> 
                   </div>
               </div>
           </div>   
-      </div>
+       </div><br>
+       {if isset($mensage)}<font style="color: red;font-weight: bold;">{$mensage}{/if}</font>
    </div>
       
 </body>

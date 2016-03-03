@@ -26,16 +26,14 @@ function ingresar(){
     if($_POST){
         $user=$_POST['user'];
         $pass=$_POST['pass'];
-        if(strcmp($user,$admin->getUser())==0){
-         if(strcmp($user,$admin->getUser())==0){
+        if((strcmp($user,$admin->getUser())==0) && (strcmp($pass,$admin->getPass())==0)){
              Session::set("usuario", "admin");
              header("Location: ingresar.php");
-         }else{$mensage="Error en password. Verifíque";}   
         }  else {
-        $mensage="Error en Usuario. Verifíque";    
+        $mensage="Error en Usuario o Contraseña.<br> Verifíque o comuniquese con el administrador de la Base de Datos";    
         }
     }else{
-        if($_GET){
+        if($_GET['user']){
             $user=$_GET['user'];
             Session::set("usuario", "comun");
              header("Location: ingresar.php");
