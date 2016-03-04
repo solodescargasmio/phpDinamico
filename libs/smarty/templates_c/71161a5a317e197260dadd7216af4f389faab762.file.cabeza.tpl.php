@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-02 02:17:05
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-04 02:22:31
          compiled from "vistas\cabeza.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1091256c797902625a7-76210626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '71161a5a317e197260dadd7216af4f389faab762' => 
     array (
       0 => 'vistas\\cabeza.tpl',
-      1 => 1456881422,
+      1 => 1457054548,
       2 => 'file',
     ),
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cedula' => 0,
     'apellido' => 0,
     'edad' => 0,
+    'operador' => 0,
     'formularios' => 0,
     'value' => 0,
-    'operador' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -141,6 +141,7 @@ overflow: auto;
 
 
         <ul class="nav navbar-nav">
+            <?php if ($_smarty_tpl->tpl_vars['operador']->value=="comun"||$_smarty_tpl->tpl_vars['operador']->value=="admin") {?> 
               <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ingresar Datos<b class="caret"></b></a>
            <ul class="dropdown-menu">
@@ -161,6 +162,7 @@ $_smarty_tpl->tpl_vars['value']->_loop = true;
          
             </ul>  
         </li>
+        <?php }?>
           <li class="dropdown">
             <a tabindex="-1" href="guardarmultimedia.php">Archivos</a>
           </li>

@@ -105,6 +105,7 @@ overflow: auto;
 
 
         <ul class="nav navbar-nav">
+            {if $operador=="comun"||$operador=="admin"} 
               <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ingresar Datos<b class="caret"></b></a>
            <ul class="dropdown-menu">
@@ -119,6 +120,7 @@ overflow: auto;
          
             </ul>  
         </li>
+        {/if}
           <li class="dropdown">
             <a tabindex="-1" href="guardarmultimedia.php">Archivos</a>
           </li>

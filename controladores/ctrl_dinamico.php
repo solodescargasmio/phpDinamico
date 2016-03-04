@@ -78,6 +78,8 @@ function principal(){
     $tpl->mostrar("principal", $datos);
 }
 
+
+
 function formularios(){
     Session::init();
     $id_user=Session::get('cedula');
@@ -85,6 +87,7 @@ function formularios(){
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
     $id_estudio= Session::get("estudio"); 
+     $tipouser=  Session::get("usuario");
      error_reporting(0);
      $ok=true;
        $mensage="";
@@ -209,6 +212,7 @@ if($_POST['modificar']){
          $formularios[]=$value;
           }}
         $datos=array(
+             "operador" => $tipouser,
             "estudios" => $estudios,
             "ok" => $ok,
             "nombreform" => $nombre,
@@ -226,11 +230,15 @@ if($_POST['modificar']){
                  }           
      
 
+                 
+                 
+                 
 function ingresarAtributo() {
      Session::init();
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
+     $tipouser=  Session::get("usuario");
     error_reporting(0);
     $mensage="";
     $tpl=new Template();
@@ -271,6 +279,7 @@ function ingresarAtributo() {
          $formularios[]=$value;
           }}
         $datos=array(
+             "operador" => $tipouser,
             "atributos" => $resultado,
             "mensage" => $mensage
         );
@@ -289,6 +298,7 @@ function ingresarAtributo() {
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
+     $tipouser=  Session::get("usuario");
         error_reporting(0);
             $mensage="";
     $tpl=new Template();
@@ -329,6 +339,7 @@ foreach ($dato as $key => $value){
          $formularios[]=$value;
           }}
         $datos=array(
+             "operador" => $tipouser,
             "atributos" => $resultado,
             "mensage" => $mensage
         );
@@ -341,11 +352,14 @@ foreach ($dato as $key => $value){
      
 }
 
+
+
 function nuevaVersion(){
      Session::init();
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
+     $tipouser=  Session::get("usuario");
       error_reporting(0);
             $mensage="";
     $tpl=new Template();
@@ -388,6 +402,7 @@ function nuevaVersion(){
          $formularios[]=$value;
           }}
         $datos=array(
+             "operador" => $tipouser,
             "atributos" => $resultado,
             "mensage" => $mensage
         );
@@ -399,11 +414,14 @@ function nuevaVersion(){
         $tpl->mostrar("nuevaVersion",$datos);    
 }
 
+
+
 function dependenciasForm(){
      Session::init();
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
+     $tipouser=  Session::get("usuario");
          error_reporting(0);
             $mensage="";
     $tpl=new Template();
@@ -426,6 +444,7 @@ function dependenciasForm(){
          $formularios[]=$value;
           }}
         $datos=array(
+             "operador" => $tipouser,
             "atributos" => $resultado,
             "mensage" => $mensage,
             "dependencias" => $dependencias
@@ -447,6 +466,7 @@ function cerrar() {
     Session::init();
     $tipo=Session::get("usuario");
     Session::destroy();
+    Session::init();
     Session::set("usuario", $tipo);
     principal();
 }
