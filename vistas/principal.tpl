@@ -20,8 +20,9 @@
 </head>
 
 <body>
+ <font style="font-weight: bold;">  <div class="container-fluid" style="background: #fff; opacity: 0.8; height: 100%;">
     {include file="cabeza.tpl"}
-  <div class="container-fluid" style="background: #fff; opacity: 0.8; height: 100%;">
+  
         <div class="row">
             {if isset($mensage)}
           {$mensage}

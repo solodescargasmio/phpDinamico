@@ -87,12 +87,13 @@ overflow: auto;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>
-       
+        <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>       
         <a tabindex="-1" class="navbar-brand" href="cerrar.php" style="  margin-left: auto; margin-right: auto;">Cerrar</a>
-         
+  
+        
+        
      {if isset($cedula)}
-            <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: {$apellido}<br>Cedula : {$cedula} <br>Edad : {$edad}</font></div>
+    <font style="font-weight: bold;">        <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: {$apellido}<br>Cedula : {$cedula} <br>Edad : {$edad}</font></div>
         {/if}
            <form class="navbar-form navbar-right">
         <input type="text" id="service" name="service" class="form-control" placeholder="cedula paciente" >
@@ -100,11 +101,11 @@ overflow: auto;
         </form>
  
          <!--   <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: {$apellido}<br>Cedula : {$cedula} <br>Edad : {$edad}</font></div>-->
-
+</div> <!-- .container -->
         <div class="navbar-collapse nav-collapse collapse navbar-header">
 
 
-        <ul class="nav navbar-nav">
+       <ul class="nav navbar-nav">
             {if $operador=="comun"||$operador=="admin"} 
               <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ingresar Datos<b class="caret"></b></a>
@@ -112,7 +113,7 @@ overflow: auto;
           {if $formularios}
           {foreach from=$formularios item=value}
                <li class="dropdown">
-               <a tabindex="-1" href="formularios.php?nombre={$value->getNombre()}">{$value->getNombre()|upper}</a>
+                   <a tabindex="-1" href="formularios.php?nombre={$value->getNombre()}"> <font style="font-weight: bold;">{$value->getNombre()|upper}</font></a>
          </li>
           {/foreach}
          {/if}
@@ -128,10 +129,10 @@ overflow: auto;
         <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Administrar Formularios<b class="caret"></b></a>
            <ul class="dropdown-menu">
-              <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
+      <font style="font-weight: bold;">        <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
               <li><a tabindex="-1" href="nuevaVersion.php">Nueva Version Formulario</a></li>
               <li><a tabindex="-1" href="atrapar.php">Ingresar Atributos</a></li>
-              <li><a tabindex="-1" href="depende.php">Dependencias Formularios</a></li>
+              <li><a tabindex="-1" href="depende.php">Dependencias Formularios</a></li></font>
             </ul>  
         </li>
         {/if}
@@ -144,5 +145,5 @@ overflow: auto;
         </ul>
         
       </div> <!-- .nav-collapse -->
-    </div> <!-- .container -->
+    
   </header> <!-- .navbar -->

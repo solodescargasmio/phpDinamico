@@ -1,5 +1,5 @@
  <link href="css/dashboard.css" rel="stylesheet" type="text/css">
-<div> <h4>Archivo actuales de paciente</h4>
+<font style="font-weight: bold;"><div> <h4>Archivo actuales de paciente</h4>
     
     {if isset($archivos)}
     {foreach from=$archivos item=archivo}

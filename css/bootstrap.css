@@ -14,6 +14,7 @@ btn-group
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }*/
+
 #menus{
     position: absolute;
     top: 120px; 
@@ -25,7 +26,8 @@ btn-group
 body {
   margin: 0;
 }
-.fondo{background: #fff;}
+.fondo{background: #fff;
+}
 article,
 aside,
 details,

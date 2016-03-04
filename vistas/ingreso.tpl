@@ -44,9 +44,11 @@
 </head>
 
 <body>
+    <div class="container-fluid" style="background: #fff;">
+    
     {include file="cabeza.tpl"}
-  <div class="container-fluid" style="background: #fff;">
-      <font style="color: red;font-weight: bold;"><p>Si ingresa como Administrador podra crear formularios y agregar atributos en el sistema</p>
+  
+      <font style="color: red;font-weight: bold;"><p>Si ingresa como Administrador podra crear formularios y agregar atributos en el sistema</p></font>
  <button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Administrador</button>
  <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm" onclick="window.location='index.php?user=usuario'">Usuario</button></a>
        <div class="modal fade" id="formulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:200px;">
@@ -88,7 +90,7 @@
        </div><br>
        {if isset($mensage)}<font style="color: red;font-weight: bold;">{$mensage}{/if}</font>
    </div>
-      
+ 
 </body>
 
 </html>

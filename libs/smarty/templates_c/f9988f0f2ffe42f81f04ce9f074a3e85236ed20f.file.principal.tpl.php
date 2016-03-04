@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-02 02:12:40
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-04 18:25:49
          compiled from "vistas\principal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1324156d63e08e4e1c5-49206679%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f9988f0f2ffe42f81f04ce9f074a3e85236ed20f' => 
     array (
       0 => 'vistas\\principal.tpl',
-      1 => 1456759422,
+      1 => 1457112301,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.20',
+  'unifunc' => 'content_56d63e0907a129_53164421',
   'variables' => 
   array (
     'titulo' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usuario' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.20',
-  'unifunc' => 'content_56d63e0907a129_53164421',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56d63e0907a129_53164421')) {function content_56d63e0907a129_53164421($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
@@ -50,9 +50,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </head>
 
 <body>
+ <font style="font-weight: bold;">  <div class="container-fluid" style="background: #fff; opacity: 0.8; height: 100%;">
     <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-  <div class="container-fluid" style="background: #fff; opacity: 0.8; height: 100%;">
+  
         <div class="row">
             <?php if (isset($_smarty_tpl->tpl_vars['mensage']->value)) {?>
           <?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>

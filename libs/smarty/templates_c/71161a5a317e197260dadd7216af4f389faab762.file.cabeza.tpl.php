@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-04 02:22:31
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-04 18:31:13
          compiled from "vistas\cabeza.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1091256c797902625a7-76210626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '71161a5a317e197260dadd7216af4f389faab762' => 
     array (
       0 => 'vistas\\cabeza.tpl',
-      1 => 1457054548,
+      1 => 1457112669,
       2 => 'file',
     ),
   ),
@@ -117,12 +117,13 @@ overflow: auto;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>
-       
+        <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>       
         <a tabindex="-1" class="navbar-brand" href="cerrar.php" style="  margin-left: auto; margin-right: auto;">Cerrar</a>
-         
+  
+        
+        
      <?php if (isset($_smarty_tpl->tpl_vars['cedula']->value)) {?>
-            <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: <?php echo $_smarty_tpl->tpl_vars['apellido']->value;?>
+    <font style="font-weight: bold;">        <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: <?php echo $_smarty_tpl->tpl_vars['apellido']->value;?>
 <br>Cedula : <?php echo $_smarty_tpl->tpl_vars['cedula']->value;?>
  <br>Edad : <?php echo $_smarty_tpl->tpl_vars['edad']->value;?>
 </font></div>
@@ -136,11 +137,11 @@ overflow: auto;
 <br>Cedula : <?php echo $_smarty_tpl->tpl_vars['cedula']->value;?>
  <br>Edad : <?php echo $_smarty_tpl->tpl_vars['edad']->value;?>
 </font></div>-->
-
+</div> <!-- .container -->
         <div class="navbar-collapse nav-collapse collapse navbar-header">
 
 
-        <ul class="nav navbar-nav">
+       <ul class="nav navbar-nav">
             <?php if ($_smarty_tpl->tpl_vars['operador']->value=="comun"||$_smarty_tpl->tpl_vars['operador']->value=="admin") {?> 
               <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ingresar Datos<b class="caret"></b></a>
@@ -152,9 +153,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_var
 $_smarty_tpl->tpl_vars['value']->_loop = true;
 ?>
                <li class="dropdown">
-               <a tabindex="-1" href="formularios.php?nombre=<?php echo $_smarty_tpl->tpl_vars['value']->value->getNombre();?>
-"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['value']->value->getNombre(), 'UTF-8');?>
-</a>
+                   <a tabindex="-1" href="formularios.php?nombre=<?php echo $_smarty_tpl->tpl_vars['value']->value->getNombre();?>
+"> <font style="font-weight: bold;"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['value']->value->getNombre(), 'UTF-8');?>
+</font></a>
          </li>
           <?php } ?>
          <?php }?>
@@ -170,10 +171,10 @@ $_smarty_tpl->tpl_vars['value']->_loop = true;
         <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Administrar Formularios<b class="caret"></b></a>
            <ul class="dropdown-menu">
-              <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
+      <font style="font-weight: bold;">        <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
               <li><a tabindex="-1" href="nuevaVersion.php">Nueva Version Formulario</a></li>
               <li><a tabindex="-1" href="atrapar.php">Ingresar Atributos</a></li>
-              <li><a tabindex="-1" href="depende.php">Dependencias Formularios</a></li>
+              <li><a tabindex="-1" href="depende.php">Dependencias Formularios</a></li></font>
             </ul>  
         </li>
         <?php }?>
@@ -186,5 +187,5 @@ $_smarty_tpl->tpl_vars['value']->_loop = true;
         </ul>
         
       </div> <!-- .nav-collapse -->
-    </div> <!-- .container -->
+    
   </header> <!-- .navbar --><?php }} ?>
