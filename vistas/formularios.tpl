@@ -225,7 +225,7 @@ return edad;
               {if $atributo->getNombre()=="id_usuario"}
                   <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" value="{$cedula}">
             {else}
-                <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
+                <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
               {/if}
              
           {else}

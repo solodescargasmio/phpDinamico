@@ -44,7 +44,7 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="background: #fff;">
+   <div class="container-fluid" style="background: #fff; opacity: 0.8; height: 100%;">
     
     {include file="cabeza.tpl"}
   

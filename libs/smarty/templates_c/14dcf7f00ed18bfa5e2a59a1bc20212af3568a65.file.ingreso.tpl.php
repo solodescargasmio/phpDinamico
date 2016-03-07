@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-04 18:22:15
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-06 22:03:17
          compiled from "vistas\ingreso.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1001556d5d884ec82e4-26066348%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '14dcf7f00ed18bfa5e2a59a1bc20212af3568a65' => 
     array (
       0 => 'vistas\\ingreso.tpl',
-      1 => 1457107254,
+      1 => 1457297861,
       2 => 'file',
     ),
   ),
@@ -71,7 +71,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </head>
 
 <body>
-    <div class="container-fluid" style="background: #fff;">
+   <div class="container-fluid" style="background: #fff; opacity: 0.8; height: 100%;">
     
     <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 

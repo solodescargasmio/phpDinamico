@@ -23,7 +23,7 @@ function subirDatos(){
     if(isset($_POST['nombre'])){
 $serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
 $varia=$_POST['nombre'];
-//var_dump($varia);exit();
+var_dump($serv);
   $exten=explode(".",$_FILES['archivo']['name']);
         $ex=  end($exten);
         $var=$varia.'.'.$ex;
@@ -51,36 +51,46 @@ $varia=$_POST['nombre'];
 	$remoto = $_FILES["archivo"]["tmp_name"];
 	// Juntamos la ruta del servidor con el nombre real del archivo
 	$ruta = $serv.$local;
-        
 		// Verificamos si ya se subio el archivo temporal
 		if (is_uploaded_file($remoto)){
-                        $archivo->setId_usuario($id_user);
-                        $archivo->setNombre($varia);
-                        $archivo->setExtension($ex);
-                        if($archivo->insertarArchivo()){//guardamos nombre en base de datos        
-                            copy($remoto, $ruta);
-                  if(strcasecmp($ex, "png")!=0){
-                //input.jpg ffmpeg -i -vf scale = 320: 240    
-            $img=exec($remoto." ffmpeg -i -vf ./multimedia/$id_user/".$varia.".png");
-             $ruta = $serv.$img;
-            //  var_dump($ruta);exit();
-         copy($remoto, $ruta);
-            
-                  }          
-                            
-                //              
-                            
-                            if(strcmp($ex,"avi")==0||strcmp($ex,"mp4")==0||strcmp($ex,"flv")==0){
-
+                       //guardamos nombre en base de datos        
+                  if(strcasecmp($ex, "jpg")==0){
+             $newpng =$varia.'.png'; 
+             $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name']), $newpng);
+             $ruta = $serv.$png;
+             copy($remoto, $ruta);
+             $ex="png";
+                  }else
+                   if(strcasecmp($ex, "gif")==0){
+             $newpng =$varia.'.png'; 
+             $png = imagepng(imagecreatefromgif($_FILES['archivo']['tmp_name']), $newpng);
+             $ruta = $serv.$newpng;
+             copy($remoto, $ruta);
+             $ex="png";    
+             }else
+                         if(strcasecmp($ex, "bmp")==0){
+             $newpng =$varia.'.png'; 
+             $png = imagepng(imagecreatefromwbmp($_FILES['archivo']['tmp_name']), $newpng);
+             $ruta = $serv.$png;
+             copy($remoto, $ruta);
+             $ex="png";           
+                         }else
+                            if(strcmp($ex,"avi")==0||strcmp($ex,"mp4")==0||strcmp($ex,"wmv")==0||strcmp($ex,"mkv")==0||strcmp($ex,"3gp")==0){
+              copy($remoto, $ruta);  
          $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ./multimedia/$id_user/".$varia.".webm");
                //  exec("ffmpeg -i ".$remoto." -vcodec copy -ss 1 -t 120 -acodec ".$varia.".webm 2>&1"); 
-          $ruta = $serv.$video;
+          $ruta = $serv.$video; 
          copy($remoto, $ruta);
          }
          ////-vcodec copy -ss 1 -t 120 -acodec //corta los videos
                           //  exec("ffmpeg -i ".$remoto." ./multimedia/$id_user/".$varia.".webm 2>&1");
                 // copiamos el archivo temporal, del directorio de temporales de nuestro servidor a la ruta que creamos	  
-                        }else{$mensaje="error al guardar archivo";}
+                        $archivo->setId_usuario($id_user);
+                        $archivo->setNombre($varia);
+                        $archivo->setExtension($ex);
+                        if($archivo->insertarArchivo()){}else{
+                            $mensaje="Error al guardar archivo, verifique";
+                        }
                       
 		}
 		// Sino se pudo subir el temporal

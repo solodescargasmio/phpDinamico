@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-03 17:59:44
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-04 18:41:39
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1457024376,
+      1 => 1457113291,
       2 => 'file',
     ),
   ),
@@ -285,7 +285,7 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
             <?php } else { ?>
                 <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-">
+" required="">
               <?php }?>
              
           <?php } else { ?>

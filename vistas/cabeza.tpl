@@ -136,12 +136,16 @@ overflow: auto;
             </ul>  
         </li>
         {/if}
-        <li class="dropdown">
-            <a tabindex="-1" href="#"></a>
-          </li>
-           <li class="dropdown">
-            <a tabindex="-1" href="imprimir.php">Ver Ficha</a>
-          </li>
+        {if isset($cedula)}
+                <li class="dropdown">   
+     <a tabindex="-1" href="exportarExcel.php">Ver Ficha1</a>
+            </li>
+             <li class="dropdown">    
+     <a tabindex="-1" href="exportarExcel1.php">Ver Ficha2</a>
+            </li>
+        {/if}
+               
+         
         </ul>
         
       </div> <!-- .nav-collapse -->
