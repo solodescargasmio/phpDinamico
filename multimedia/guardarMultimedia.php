@@ -29,7 +29,7 @@ if (!file_exists($directorio)) {
     if(isset($_POST['nombre'])){
 $serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
 $varia=$_POST['nombre'];
-var_dump($serv);
+
   $exten=explode(".",$_FILES['archivo']['name']);
         $ex=  end($exten);
         $var=$varia.'.'.$ex;
