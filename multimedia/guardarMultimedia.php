@@ -10,6 +10,7 @@ require_once ('./clases/template.php');
 require_once ('./clases/session.php');
 require_once ('./clases/archivo.php');
 require_once ('./conexion/configuracion.php');
+require_once ('crearMKdir.php');
 function subirDatos(){ 
     error_reporting(0);
  Session::init();
@@ -20,6 +21,11 @@ function subirDatos(){
     $mensaje="";
     $titulo="Multimedia"; 
     $archivo=new archivo();
+    $directorio = dirname(__FILE__).'/'.$id_user;
+
+if (!file_exists($directorio)) {
+    crearDir($id_user);
+}
     if(isset($_POST['nombre'])){
 $serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
 $varia=$_POST['nombre'];
