@@ -132,7 +132,7 @@ overflow: auto;
       <font style="font-weight: bold;">        <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
               <li><a tabindex="-1" href="nuevaVersion.php">Nueva Version Formulario</a></li>
               <li><a tabindex="-1" href="atrapar.php">Ingresar Atributos</a></li>
-              <li><a tabindex="-1" href="depende.php">Dependencias Formularios</a></li></font>
+              <li><a tabindex="-1" href="depende.php">Dependencia Formulario</a></li></font>
             </ul>  
         </li>
         {/if}

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-08 19:25:36
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-08 19:49:25
          compiled from "vistas\dependencia.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2480756cc98916ea051-87374881%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '02b32823f164b4258280cc3218fabee614ed280c' => 
     array (
       0 => 'vistas\\dependencia.tpl',
-      1 => 1457461532,
+      1 => 1457462962,
       2 => 'file',
     ),
   ),
@@ -66,7 +66,7 @@ and open the template in the editor.
 <body>
    <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-   <div id="menus">
+   <div id="menuses">
 <?php if (isset($_smarty_tpl->tpl_vars['dependencias']->value)) {?>
     <table border="1" class="table table-striped">
         <tr class="success">

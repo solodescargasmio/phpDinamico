@@ -32,7 +32,7 @@ and open the template in the editor.
     </head>   
 <body>
    {include file="cabeza.tpl"}
-   <div id="menus">
+   <div id="menuses">
 {if isset($dependencias)}
     <table border="1" class="table table-striped">
         <tr class="success">

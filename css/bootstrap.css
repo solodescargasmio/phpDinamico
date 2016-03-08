@@ -24,6 +24,13 @@ btn-group
     width: auto;
     height: auto;
 }
+#menuses{
+    position: absolute;
+    top: 20%; 
+    left:50%;
+    width: auto;
+    height: auto;
+}
 .fondo{background: #fff;
 }
 article,
