@@ -89,7 +89,7 @@ overflow: auto;
       </button>
         <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>       
         <a tabindex="-1" class="navbar-brand" href="cerrar.php" style="  margin-left: auto; margin-right: auto;">Cerrar</a>
-  
+     <a tabindex="-1" class="navbar-brand" href="ingresar.php">Home</a> 
         
         
      {if isset($cedula)}

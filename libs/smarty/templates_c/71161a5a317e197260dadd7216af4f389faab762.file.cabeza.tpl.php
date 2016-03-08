@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-07 02:34:06
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-07 17:14:02
          compiled from "vistas\cabeza.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1091256c797902625a7-76210626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '71161a5a317e197260dadd7216af4f389faab762' => 
     array (
       0 => 'vistas\\cabeza.tpl',
-      1 => 1457314005,
+      1 => 1457367238,
       2 => 'file',
     ),
   ),
@@ -119,7 +119,7 @@ overflow: auto;
       </button>
         <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>       
         <a tabindex="-1" class="navbar-brand" href="cerrar.php" style="  margin-left: auto; margin-right: auto;">Cerrar</a>
-  
+     <a tabindex="-1" class="navbar-brand" href="ingresar.php">Home</a> 
         
         
      <?php if (isset($_smarty_tpl->tpl_vars['cedula']->value)) {?>

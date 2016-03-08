@@ -10,6 +10,7 @@ and open the template in the editor.
         <title>{$titulo}</title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
  <script src="js/jquery.js" type="text/javascript"></script>  
+ <link href="css/dashboard.css" rel="stylesheet">
     </head>
         <style type="text/css">
         body { font-family:Lucida Sans, Arial, Helvetica, Sans-Serif; font-size:13px; margin:20px;}
@@ -139,23 +140,12 @@ function capitalize(s)//convierte minusculas a Mayusculas
         </script>     
 <body>
    {include file="cabeza.tpl"}
-    <div class="container-fluid" style="position: absolute;top: 120px;">
-       
-      <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
-      
-       <div id="avizo"></div>
-      
-      <h3>Formulario</h3>
-      <form id="my-dynamic-form" method="POST"> 
-           <div class="form-group">       
-    <div class="col-lg-10">
-   <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
-   </div></div><br><br>      
-      </form>
-    <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
+    <div class="container-fluid">
+          <div id="menus">
+                <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
    <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
    <a href="nuevaVersion.php" > <button id="ver"  class="btn btn-primary btn-group-sm">Nueva Version</button></a> 
- 
+      
        <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
            <br> <table class="table-responsive" border="1">  
                 <tr>
@@ -172,7 +162,19 @@ function capitalize(s)//convierte minusculas a Mayusculas
                        {$mensage}
 {/if}
            </table> 
-      </form>             
+      </form></div>
+      <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
+      
+       <div id="avizo"></div>
+      
+      <h3>Formulario</h3>
+      <form id="my-dynamic-form" method="POST"> 
+           <div class="form-group">       
+    <div class="col-lg-10">
+   <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
+   </div></div><br><br>      
+      </form>
+         
        </div> 
          
 </body>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-04 18:41:39
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-08 18:30:33
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1457113291,
+      1 => 1457458221,
       2 => 'file',
     ),
   ),
@@ -223,7 +223,7 @@ return edad;
                <font style="color: red;font-weight: bold;">Debe ingresar un paciente nuevo en el formulario "PACIENTE", <br>
                seleccionar un paciente de la lista ó buscar ID de un paciente en la caja que dice 'cedula paciente'</font></h4>
        <div class="col-lg-offset-2 col-lg-10">
-           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='index.php'">Atras</button>
+           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='ingresar.php'">Atras</button>
     </div>
            <?php } elseif ($_smarty_tpl->tpl_vars['ok']->value==false) {?>
             <font style="color: red;font-weight: bold;"><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>

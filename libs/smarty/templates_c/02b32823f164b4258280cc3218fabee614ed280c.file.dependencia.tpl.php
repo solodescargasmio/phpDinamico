@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-29 16:47:04
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-08 19:25:36
          compiled from "vistas\dependencia.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2480756cc98916ea051-87374881%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '02b32823f164b4258280cc3218fabee614ed280c' => 
     array (
       0 => 'vistas\\dependencia.tpl',
-      1 => 1456757590,
+      1 => 1457461532,
       2 => 'file',
     ),
   ),
@@ -45,13 +45,10 @@ and open the template in the editor.
  <script src="js/jquery.js" type="text/javascript"></script>
  <script type="text/javascript">
 /*$(document).ready(function(){
-	$("select[name=selector1]").change(function(){
-            var dos=$('select[name=selector1]').val();
-             var uno=$('select[name=selector]').val();
-             if(uno==dos){
-            alert("Los formularios deben de ser distintos"); 
-        }
-        });
+	 $('.campo1').click( function(){
+            var id= $(".valor",this).val();
+         datatypo='dependencia'   
+    });
     });*/
     
     function control(){
@@ -93,11 +90,11 @@ $_smarty_tpl->tpl_vars['formula']->_loop = true;
               <?php if ($_smarty_tpl->tpl_vars['depen']->value->getDe()==$_smarty_tpl->tpl_vars['formula']->value->getId_form()) {?>
               <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formula']->value->getNombre(), 'UTF-8');?>
 </td> 
+              <td><a style="cursor:pointer;" href="depende.php?ide=<?php echo $_smarty_tpl->tpl_vars['depen']->value->getId();?>
+">Eliminar</a></td>
               <?php }?>
             <?php } ?> </tr>
-         <?php } ?>
-           
-        
+         <?php } ?>   
     </table>
 <?php }?>
    </div>

@@ -17,6 +17,7 @@ function subirDatos(){
     $id_user=Session::get("cedula");
     $apell=Session::get("apellido");
     $edad=Session::get('edad'); 
+    $tipouser=  Session::get("usuario");
     $tpl=new Template();
     $mensaje="";
     $titulo="Multimedia"; 
@@ -113,6 +114,7 @@ $archivos=$archivo->listarArchivos($id_user);
 //$imagen=$archivo->mostrarArchivo($id_user,$_POST['cursos']);
 //
    $datos=array(
+       "operador" => $tipouser,
        'archivos' => $archivos,
        'imagen' => $imagen,
         'mensaje' => $mensaje,

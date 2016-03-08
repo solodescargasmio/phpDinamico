@@ -9,6 +9,7 @@ require_once ('./clases/formulario.php');
 require_once ('./clases/atributo.php');
 require_once ('./clases/admin.php');
 require_once ('./clases/estudio_medico.php');
+require_once ('./clases/dependencia.php');
 error_reporting(0);
 if($_POST['nom_formulario']){
 $nomb=$_POST['nom_formulario'];
@@ -82,6 +83,7 @@ $form=$formula->traerFormularioId();
             if(strcmp($id_usuario,$admin->getUser())!=0){
  echo '<img src="./imagenes/no.png"/><font style="color:red;"> Error en usuario</font>';     
         }else{ echo '<img src="./imagenes/si.png"/>';}     
-            }
+            }  
+     
             
  

@@ -47,7 +47,7 @@
    
     
     {include file="cabeza.tpl"}
-  <div class="container-fluid">
+    <div class="container-fluid">
       <font style="color: red;font-weight: bold;"><p>Si ingresa como Administrador podra crear formularios y agregar atributos en el sistema</p></font>
  <button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Administrador</button>
  <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm" onclick="window.location='index.php?user=usuario'">Usuario</button></a>

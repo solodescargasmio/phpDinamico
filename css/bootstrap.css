@@ -14,17 +14,15 @@ btn-group
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }*/
-
+#my-dynamic-form{
+    width: 45%;
+}
 #menus{
     position: absolute;
-    top: 120px; 
-    left: 400px;
+    top: 8%; 
+    left:50%;
     width: auto;
     height: auto;
-}
-
-body {
-  margin: 0;
 }
 .fondo{background: #fff;
 }

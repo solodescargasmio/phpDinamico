@@ -167,7 +167,9 @@ function capitalize(s)//convierte minusculas a Mayusculas
         
         </script>     
         <body>
+             
    {include file="cabeza.tpl"}
+   <div class="container-fluid" style=""> 
    <div id="menus" >
          <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
    <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>      
@@ -206,8 +208,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
            </form>      </div>  
        
    </div>
-    <div class="container-fluid" style="">
-       
+    
       <h6><font style="color: red;font-weight: bold;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>  
       <h3>Formulario</h3>
       <form id="my-dynamic-form" method="POST"> 

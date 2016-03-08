@@ -186,7 +186,7 @@ return edad;
                <font style="color: red;font-weight: bold;">Debe ingresar un paciente nuevo en el formulario "PACIENTE", <br>
                seleccionar un paciente de la lista ó buscar ID de un paciente en la caja que dice 'cedula paciente'</font></h4>
        <div class="col-lg-offset-2 col-lg-10">
-           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='index.php'">Atras</button>
+           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='ingresar.php'">Atras</button>
     </div>
            {elseif $ok==false}
             <font style="color: red;font-weight: bold;">{$mensage}</font> 

@@ -12,13 +12,10 @@ and open the template in the editor.
  <script src="js/jquery.js" type="text/javascript"></script>
  <script type="text/javascript">
 /*$(document).ready(function(){
-	$("select[name=selector1]").change(function(){
-            var dos=$('select[name=selector1]').val();
-             var uno=$('select[name=selector]').val();
-             if(uno==dos){
-            alert("Los formularios deben de ser distintos"); 
-        }
-        });
+	 $('.campo1').click( function(){
+            var id= $(".valor",this).val();
+         datatypo='dependencia'   
+    });
     });*/
     
     function control(){
@@ -49,11 +46,10 @@ and open the template in the editor.
               {/if}
               {if $depen->getDe()==$formula->getId_form()}
               <td>{$formula->getNombre()|upper}</td> 
+              <td><a style="cursor:pointer;" href="depende.php?ide={$depen->getId()}">Eliminar</a></td>
               {/if}
             {/foreach} </tr>
-         {/foreach}
-           
-        
+         {/foreach}   
     </table>
 {/if}
    </div>

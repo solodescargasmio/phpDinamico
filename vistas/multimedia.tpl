@@ -51,6 +51,23 @@
     <label for="ci" class="col-lg-2 control-label">Seccion del archivo</label>
     <div id="respuestauser"></div>
    </div>
+     <!--   <div class="form-group">     
+       <label  class="col-sm-4 control-label">Nombre del archivo a ingresar</label>
+                    <div class="col-sm-8">
+        <select name="selector">
+            <option value="opcion">Opciones de nombre</option>
+        <option value="Ecografia Carotidea Izquierda">Ecografia Carotidea Izquierda</option>
+        <option value="Ecografia Femoral Comun Izquierda">Ecografia Femoral Comun Izquierda</option>
+        <option value="Arteria Vertebral Izquierda">Arteria Vertebral Izquierda</option>
+        <option value="Ecografia Carotidea Derecha">Ecografia Carotidea Derecha</option>
+        <option value="Ecografia Femoral Comun Derecha">Ecografia Femoral Comun Derecha</option>
+          <option value="Arteria Vertebral Derecha">Arteria Vertebral Derecha</option>
+        <option value="Ecografia Radial Derecha">Ecografia Radial Derecha</option>
+        <option value="Ecografia Braquial Derecha">Ecografia Braquial Derecha</option>
+        </select>
+                   </div> 
+                </div> -->
+
           <div class="form-group">
     <label for="ci" class="col-lg-2 control-label">Introducir nombre de archivo (Sin extencion, este nombre es el que se usara para identificar el archivo en BD)</label>
     <div class="col-lg-10">

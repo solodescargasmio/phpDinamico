@@ -436,6 +436,16 @@ function dependenciasForm(){
        $depen=new dependencia();
        $depen->insertarDependencias($id1, $id2);
     }
+    
+    if($_GET['ide']){
+        $id=$_GET['ide'];
+       $depen=new dependencia();
+       if($depen->eliminarDepende($id)){}else{
+        $mensage="No se pudo eliminar la dependencia. Verifique";   
+       }
+    }
+    
+    
         $depencia=new dependencia();
         $dependencias=$depencia->traerDependencias();
         $form=new formulario();

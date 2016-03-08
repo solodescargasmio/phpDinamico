@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-02 16:21:40
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-07 17:10:16
          compiled from "vistas\multimedia.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1425256d70469af79e8-30105245%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a4476edd9599b2423eec33ce33184a85efd0072f' => 
     array (
       0 => 'vistas\\multimedia.tpl',
-      1 => 1456932096,
+      1 => 1457367008,
       2 => 'file',
     ),
   ),
@@ -81,6 +81,23 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <label for="ci" class="col-lg-2 control-label">Seccion del archivo</label>
     <div id="respuestauser"></div>
    </div>
+     <!--   <div class="form-group">     
+       <label  class="col-sm-4 control-label">Nombre del archivo a ingresar</label>
+                    <div class="col-sm-8">
+        <select name="selector">
+            <option value="opcion">Opciones de nombre</option>
+        <option value="Ecografia Carotidea Izquierda">Ecografia Carotidea Izquierda</option>
+        <option value="Ecografia Femoral Comun Izquierda">Ecografia Femoral Comun Izquierda</option>
+        <option value="Arteria Vertebral Izquierda">Arteria Vertebral Izquierda</option>
+        <option value="Ecografia Carotidea Derecha">Ecografia Carotidea Derecha</option>
+        <option value="Ecografia Femoral Comun Derecha">Ecografia Femoral Comun Derecha</option>
+          <option value="Arteria Vertebral Derecha">Arteria Vertebral Derecha</option>
+        <option value="Ecografia Radial Derecha">Ecografia Radial Derecha</option>
+        <option value="Ecografia Braquial Derecha">Ecografia Braquial Derecha</option>
+        </select>
+                   </div> 
+                </div> -->
+
           <div class="form-group">
     <label for="ci" class="col-lg-2 control-label">Introducir nombre de archivo (Sin extencion, este nombre es el que se usara para identificar el archivo en BD)</label>
     <div class="col-lg-10">

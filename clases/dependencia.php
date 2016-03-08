@@ -77,5 +77,19 @@ class dependencia {
          }
          return $tato;
  }
- 
+ /*
+DELETE FROM `phpfinal`.`dependencia` WHERE `dependencia`.`id` = 6"
+  *   */
+  public function eliminarDepende($id){
+  $conexion=  conectar::realizarConexion();
+         $smtp=$conexion->prepare("DELETE FROM dependencia WHERE id =?");       
+      $smtp->bind_param("i",$id);
+        $smtp->execute();
+        $res=false;
+        if($conexion->affected_rows>0){
+            $res=true;
+        }
+        
+         return $res;
+ }
 }

@@ -44,8 +44,8 @@ $objSheet->setCellValue('B'.$numero,$value->getValor());
 
 }
 $objWriter = PHPExcel_IOFactory::createWriter($objXLS, 'Excel5');
-$objWriter->save(__DIR__ . "\Regiones.xls");
-echo 'Archivo Guardado en '.(__DIR__ . "\Regiones.xls");
+$objWriter->save("E:\\Escritorio\Paciente".$id_usuario.".xls");
+header("Location: ingresar.php");
  
 
 
