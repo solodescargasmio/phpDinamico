@@ -30,10 +30,12 @@ $(document).ready(function(){
   
 		$("#mostrar").on( "click", function() {
 			$('#miform').show(); //muestro mediante id 
+                        $('#formversion').hide(); //oculto mediante id 
      
 		 });
 		$("#ocultar").on( "click", function() {
                          $('#miform').hide();
+                          $('#formversion').show(); //muestro mediante id 
 
 		});
   });
@@ -67,7 +69,11 @@ $(document).ready(function(){
                  '<label  class="col-sm-8 control-label">Versíon(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="text" name="version" required="">').appendTo($fieldset);
-      $('</div></div>')
+      $('</div></div>').appendTo($fieldset);
+         $(' <div class="form-group">'+ 
+    '<div class="col-lg-10">').appendTo($fieldset);
+    $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
+      $('</div></div>').appendTo($fieldset);
         $fieldset.appendTo($form); 
     $('.campo1').click( function(){
 
@@ -76,12 +82,18 @@ $(document).ready(function(){
 
        da=recorrerDom($dato);
        if(da==0){ //si son distintos lo agrego
+           gu="guardo";
+           $("#my-dynamic-form input").remove("#"+gu+""); 
         $(' <div class="form-group" id="'+ $dato +'">'+
                  '<label  class="col-sm-8 control-label">'+ capitalize($dato) +'</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
         $('<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>').appendTo($fieldset);
         $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()"></div></div>').appendTo($fieldset);
-        $fieldset.appendTo($form);}
+          $(' <div class="form-group">'+
+    '<div class="col-lg-10">').appendTo($fieldset);
+    $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
+      $('</div></div>').appendTo($fieldset);    
+    $fieldset.appendTo($form);}
     else{ //si son iguales mando el alert e impido que un boludo ingrese dos veces el mismo atributo
         alert('El atributo que intenta agregar, ya existe en el formulario.');
     }
@@ -162,17 +174,35 @@ function capitalize(s)//convierte minusculas a Mayusculas
                        {$mensage}
 {/if}
            </table> 
-      </form></div>
+      </form>
+          
+                <div style="position: absolute;float: right;">    
+    <form id="formversion" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+           <br> <table class="table-responsive" border="1">  
+                <tr>
+                  <td>Formularios :</td>
+               </tr>
+{if isset($formularios)}
+    {foreach from=$formularios item=formulario}
+               <tr>
+                   <td><a style="cursor:pointer;">{$formulario->getNombre()|upper}</a></td>                 
+                   </tr>
+                   {/foreach}
+{/if}
+           </table> 
+           </form>      </div> 
+           
+          </div>
       <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
       
+      <div style="float: right;"><h6><font style="color: red;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
        <div id="avizo"></div>
       
       <h3>Formulario</h3>
       <form id="my-dynamic-form" method="POST"> 
-           <div class="form-group">       
-    <div class="col-lg-10">
+
    <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
-   </div></div><br><br>      
+    
       </form>
          
        </div> 

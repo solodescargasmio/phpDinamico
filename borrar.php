@@ -1,34 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-13 19:19:12
-         compiled from "vistas\crearFormulario.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:572156c79b761312d9-11621522%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    '96409e992390d6a3afe213eb18a5736287f00ea9' => 
-    array (
-      0 => 'vistas\\crearFormulario.tpl',
-      1 => 1457893149,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '572156c79b761312d9-11621522',
-  'function' => 
-  array (
-  ),
-  'version' => 'Smarty-3.1.20',
-  'unifunc' => 'content_56c79b763567e2_83344899',
-  'variables' => 
-  array (
-    'titulo' => 0,
-    'atributos' => 0,
-    'valor' => 0,
-    'mensage' => 0,
-    'formularios' => 0,
-    'formulario' => 0,
-  ),
-  'has_nocache_code' => false,
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_56c79b763567e2_83344899')) {function content_56c79b763567e2_83344899($_smarty_tpl) {?><!DOCTYPE html>
+<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -37,8 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
-</title>
+        <title>{$titulo}</title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
  <script src="js/jquery.js" type="text/javascript"></script>  
  <link href="css/dashboard.css" rel="stylesheet">
@@ -56,17 +25,17 @@ and open the template in the editor.
             <script>
              
 $(document).ready(function(){
+ 
+  
   
     $('#miform').hide();
   
 		$("#mostrar").on( "click", function() {
 			$('#miform').show(); //muestro mediante id 
-                        $('#formversion').hide(); //oculto mediante id 
      
 		 });
 		$("#ocultar").on( "click", function() {
                          $('#miform').hide();
-                          $('#formversion').show(); //muestro mediante id 
 
 		});
   });
@@ -100,12 +69,15 @@ $(document).ready(function(){
                  '<label  class="col-sm-8 control-label">Versíon(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="text" name="version" required="">').appendTo($fieldset);
-      $('</div></div>').appendTo($fieldset);
-         $(' <div class="form-group">'+ 
+      $('</div></div>')
+        $(' <div class="form-group">'+
+                 '<label  class="col-sm-8 control-label">Versíon(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);
         $fieldset.appendTo($form); 
+ 
+        
     $('.campo1').click( function(){
 
             var $dato= $(".campo",this).val();
@@ -121,6 +93,7 @@ $(document).ready(function(){
         $('<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>').appendTo($fieldset);
         $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()"></div></div>').appendTo($fieldset);
           $(' <div class="form-group">'+
+                 '<label  class="col-sm-8 control-label">Versíon(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);    
@@ -163,16 +136,24 @@ function eliminarElementoDom() {
          va=$(el).attr('name');
        $("#my-dynamic-form input").remove("#"+va+"");
         $("#my-dynamic-form div").remove("#"+va+"") 
+        $("#my-dynamic-form input").remove("#"+gu+"") 
      };
 
      });
 // 
     }
      )};
-//function ver_data_estado() 
-//{ 
-//alert("boton presionado | ID: "+$(this).attr('ident')); 
-//} 
+ 
+
+  
+
+ 
+function alertar() 
+{ 
+
+      alert("presionaste"); 
+
+} 
 
 function capitalize(s)//convierte minusculas a Mayusculas
 {
@@ -182,8 +163,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
         
         </script>     
 <body>
-   <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
-
+   {include file="cabeza.tpl"}
     <div class="container-fluid">
           <div id="menus">
                 <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
@@ -195,63 +175,24 @@ function capitalize(s)//convierte minusculas a Mayusculas
                 <tr>
                   <td>Nombre y tipo Campo :</td>
                </tr>
-<?php if (isset($_smarty_tpl->tpl_vars['atributos']->value)) {?>
-    <?php  $_smarty_tpl->tpl_vars['valor'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['valor']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['atributos']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['valor']->key => $_smarty_tpl->tpl_vars['valor']->value) {
-$_smarty_tpl->tpl_vars['valor']->_loop = true;
-?>
+
                <tr class="agregar">
-                   <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getNombre();?>
-" hidden=""><?php echo $_smarty_tpl->tpl_vars['valor']->value->getNombre();?>
-
-                      &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
-" hidden=""><?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
-</a></td>                 
+                   <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="{$valor->getNombre()}" hidden="">{$valor->getNombre()}
+                      &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="{$valor->getTipo()}" hidden="">{$valor->getTipo()}</a></td>                 
                    </tr>
-                   <?php } ?>
-                   <?php } else { ?>
-                       <?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
-
-<?php }?>
+   
            </table> 
-      </form>
-          
-                <div style="position: absolute;float: right;">    
-    <form id="formversion" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-           <br> <table class="table-responsive" border="1">  
-                <tr>
-                  <td>Formularios :</td>
-               </tr>
-<?php if (isset($_smarty_tpl->tpl_vars['formularios']->value)) {?>
-    <?php  $_smarty_tpl->tpl_vars['formulario'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['formulario']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['formularios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['formulario']->key => $_smarty_tpl->tpl_vars['formulario']->value) {
-$_smarty_tpl->tpl_vars['formulario']->_loop = true;
-?>
-               <tr>
-                   <td><a style="cursor:pointer;"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formulario']->value->getNombre(), 'UTF-8');?>
-</a></td>                 
-                   </tr>
-                   <?php } ?>
-<?php }?>
-           </table> 
-           </form>      </div> 
-           
-          </div>
+      </form></div>
       <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
       
-      <div style="float: right;"><h6><font style="color: red;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
        <div id="avizo"></div>
       
       <h3>Formulario</h3>
       <form id="my-dynamic-form" method="POST"> 
-
-   <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
-    
+      
       </form>
          
        </div> 
          
 </body>
-</html><?php }} ?>
+</html>

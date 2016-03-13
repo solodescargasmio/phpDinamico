@@ -22,4 +22,5 @@ class conectar {
           mysqli_set_charset($conexion,"utf8");
            return $conexion;
       }
+     
 }

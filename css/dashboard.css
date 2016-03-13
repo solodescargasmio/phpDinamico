@@ -28,6 +28,21 @@ html{
 .separador{
     height: 100px;
 }
+.marco{
+    width: 50%;
+    height: 100%;
+
+}
+.muestro{
+    position: absolute;
+    float: right;
+    top: 25px;
+    left: 70%;
+}
+.imgprincipal{
+    width: 120%;
+    height: 20%;
+}
 /*#comentario{
   float: right;
 }*/

@@ -17,7 +17,7 @@ error_reporting(0);
            $attr1=new atributo();
            $nombat=$attr1->devolverNombre($value->getId_attributo());
            if(strcmp($nombat, "id_usuario")==0){
-     echo '<div class="suggest-element"><a data="'.$value->getValor().'" id="'.$value->getValor().'">'.$value->getValor().'</a></div>';      
+     echo '<div class="suggest-element"><a data="'.$value->getValor().'" id="'.$value->getValor().'"><font style="color:white;">'.$value->getValor().'</font></a></div>';      
            }  
        }
 }else{

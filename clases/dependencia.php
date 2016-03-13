@@ -52,7 +52,7 @@ class dependencia {
         if($conexion->affected_rows>0){
             $res=true;
         }
-        
+         mysqli_close($conexion);
          return $res;
          
         }
@@ -65,7 +65,7 @@ class dependencia {
              $tato->setDepende($row->depende);
              $tato->setDe($row->de);
              $datos[]=$tato;
-         }
+         } mysqli_close($conexion);
          return $datos;
  }
  
@@ -74,7 +74,7 @@ class dependencia {
          $resultado=$conexion->query("SELECT * FROM dependencia WHERE depende=".$id);       
          while ($row = $resultado->fetch_object()) {
              $tato=$row->de;
-         }
+         } mysqli_close($conexion);
          return $tato;
  }
  /*
@@ -89,7 +89,7 @@ DELETE FROM `phpfinal`.`dependencia` WHERE `dependencia`.`id` = 6"
         if($conexion->affected_rows>0){
             $res=true;
         }
-        
+         mysqli_close($conexion);
          return $res;
  }
 }

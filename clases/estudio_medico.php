@@ -112,7 +112,7 @@ public function ingresarEstudioForm(){
        $res=false;
        if($conexion->affected_rows>0){
        $res=true;
-       }
+       } mysqli_close($conexion);
        return $res;
  }
  
@@ -124,7 +124,7 @@ public function ingresarEstudioForm(){
          $estudio->setId_estudio($fila->id_estudio);
          $estudio->setId_usuario($fila->id_usuario);
          $estudio->setId_estudio($fila->id_form);
-}
+} mysqli_close($conexion);
         return $estudio;
  } 
  
@@ -145,7 +145,7 @@ public function ingresarEstudioForm(){
          $estudio->setValor($fila->valor);
          
          $estudios[]=$estudio;
-}
+} mysqli_close($conexion);
         return $estudios;
  }
  
@@ -159,7 +159,7 @@ public function ingresarEstudioForm(){
          $estudio->setId_attributo($fila->id_attributo);
          $estudio->setValor($fila->valor);
          $estudios[]=$estudio;
-          }
+          } mysqli_close($conexion);
         return $estudios;
  }
  
@@ -173,7 +173,7 @@ public function ingresarEstudioForm(){
          $estudio->setId_attributo($fila->id_attributo);
          $estudio->setValor($fila->valor);  
          $estudios[]=$estudio;
-}
+} mysqli_close($conexion);
       return $estudios;
  }
  
@@ -184,7 +184,7 @@ public function ingresarEstudioForm(){
 
          $dato=$fila->id_estudio;
 
-}
+} mysqli_close($conexion);
         return $dato;
  } 
  
@@ -193,7 +193,7 @@ public function ingresarEstudioForm(){
       $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.id_usuario=".$id_usuario);   
  while ($fila=$resultado->fetch_object()) {   
          $estudios[]=$fila->id_form;
-          }
+          } mysqli_close($conexion);
         return $estudios;
  }
  
@@ -206,7 +206,7 @@ public function ingresarEstudioForm(){
          $estudio->setId_attributo($fila->id_attributo);
          $estudio->setValor($fila->valor);  
          $estudios[]=$estudio;
-}
+} mysqli_close($conexion);
       return $estudios;
  }
  
@@ -218,7 +218,7 @@ public function ingresarEstudioForm(){
          $estudio->setId_attributo($fila->id_attributo);
          $estudio->setValor($fila->valor); 
          $estudios[]=$estudio;
-          }
+          } mysqli_close($conexion);
         return $estudios;
  }
 
@@ -232,7 +232,7 @@ public function ingresarEstudioForm(){
       $res=false;
        if($conexion->affected_rows>0){
        $res=true;
-       }
+       } mysqli_close($conexion);
        return $res;
      
  }
@@ -249,7 +249,7 @@ public function ingresarEstudioForm(){
 if(strcmp($nomb,$nombre)==0){   
          $ok=true;   
         }
-    }
+    } mysqli_close($conexion);
         return $ok;
  }
 

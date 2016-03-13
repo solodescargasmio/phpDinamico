@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-08 19:50:19
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-13 15:29:22
          compiled from "vistas\cabeza.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1091256c797902625a7-76210626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '71161a5a317e197260dadd7216af4f389faab762' => 
     array (
       0 => 'vistas\\cabeza.tpl',
-      1 => 1457463016,
+      1 => 1457879360,
       2 => 'file',
     ),
   ),
@@ -19,10 +19,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_56c797902dc6c4_04552139',
   'variables' => 
   array (
+    'operador' => 0,
     'cedula' => 0,
     'apellido' => 0,
     'edad' => 0,
-    'operador' => 0,
     'formularios' => 0,
     'value' => 0,
   ),
@@ -97,6 +97,7 @@ width:350px;
 cursor:pointer;
 }
 #suggestions {
+
 width:350px;
 height:150px;
 overflow: auto;
@@ -112,25 +113,44 @@ overflow: auto;
 </script>
  <header class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
+      <?php if (isset($_smarty_tpl->tpl_vars['operador']->value)) {?>  
+        <div id="cuadrado" class="nav navbar-nav navbar-left">
+    <font style="font-weight: bold;">        
+        <font style="color: #fff;">
+        Usuario: <?php echo $_smarty_tpl->tpl_vars['operador']->value;?>
+</font><br>
+    <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Cerrar sesion</a>
+        </div>
+        <?php }?>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>       
-        <a tabindex="-1" class="navbar-brand" href="cerrar.php" style="  margin-left: auto; margin-right: auto;">Cerrar</a>
-     <a tabindex="-1" class="navbar-brand" href="ingresar.php">Home</a> 
+        <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso y registro</a>       
+        <a tabindex="-1" class="navbar-brand" href="ingresar.php">Pagina Principal</a> 
         
         
      <?php if (isset($_smarty_tpl->tpl_vars['cedula']->value)) {?>
-    <font style="font-weight: bold;">        <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: <?php echo $_smarty_tpl->tpl_vars['apellido']->value;?>
+           
+           <div id="cuadrado" class="nav navbar-nav navbar-right">
+    <font style="font-weight: bold;">        
+        <font style="color: #fff;">
+        Paciente<br>
+        Apellido: <?php echo $_smarty_tpl->tpl_vars['apellido']->value;?>
 <br>Cedula : <?php echo $_smarty_tpl->tpl_vars['cedula']->value;?>
- <br>Edad : <?php echo $_smarty_tpl->tpl_vars['edad']->value;?>
-</font></div>
+</font><br>
+    <a tabindex="-1" class="navbar-brand" href="cerrar.php">Cambiar Paciente</a>
+ </div>
+  
         <?php }?>
            <form class="navbar-form navbar-right">
-        <input type="text" id="service" name="service" class="form-control" placeholder="cedula paciente" >
-         <div id="suggestions"></div>
+        <div class="form-group">  
+                         <div class="col-lg-10">
+         <input type="text" id="service" name="service" class="form-control" placeholder="cedula paciente" >
+                                 </div>
+                          </div>        
+  <div id="suggestions"><font style="color:white;"></font></div>
         </form>
  
          <!--   <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: <?php echo $_smarty_tpl->tpl_vars['apellido']->value;?>
@@ -159,35 +179,41 @@ $_smarty_tpl->tpl_vars['value']->_loop = true;
          </li>
           <?php } ?>
          <?php }?>
-
-         
-            </ul>  
+            </ul> 
         </li>
+          <li class="dropdown">    
+           <a tabindex="-1" href="modificarPerfil.php">Modificar Datos Perfil</a>
+            </li>
         <?php }?>
-          <li class="dropdown">
-            <a tabindex="-1" href="guardarmultimedia.php">Archivos</a>
-          </li>
        <?php if ($_smarty_tpl->tpl_vars['operador']->value=="admin") {?>   
         <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Administrar Formularios<b class="caret"></b></a>
            <ul class="dropdown-menu">
-      <font style="font-weight: bold;">        <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
+      <font style="font-weight: bold;"><li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
               <li><a tabindex="-1" href="nuevaVersion.php">Nueva Version Formulario</a></li>
-              <li><a tabindex="-1" href="atrapar.php">Ingresar Atributos</a></li>
+              <li><a tabindex="-1" href="atrapar.php">Crear Atributo</a></li>
               <li><a tabindex="-1" href="depende.php">Dependencia Formulario</a></li></font>
-            </ul>  
+            </ul> 
         </li>
         <?php }?>
         <?php if (isset($_smarty_tpl->tpl_vars['cedula']->value)) {?>
-                <li class="dropdown">   
-     <a tabindex="-1" href="exportarExcel.php">Ver Ficha1</a>
+               <li class="dropdown">
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ver Fichas<b class="caret"></b></a>
+           <ul class="dropdown-menu">
+         <li class="dropdown">   
+     <a tabindex="-1" href="exportarExcel.php">Como tablas en EXEL</a>
             </li>
              <li class="dropdown">    
-     <a tabindex="-1" href="exportarExcel1.php">Ver Ficha2</a>
+     <a tabindex="-1" href="exportarExcel1.php">Como hojas en EXEL</a>
             </li>
+           </ul>  
+        </li>
+            
+            
+            
+            
+              
         <?php }?>
-               
-         
         </ul>
         
       </div> <!-- .nav-collapse -->

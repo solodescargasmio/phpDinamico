@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-08 18:30:33
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-11 10:20:39
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1457458221,
+      1 => 1457688036,
       2 => 'file',
     ),
   ),
@@ -215,7 +215,7 @@ return edad;
 <body>
     <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-    <div class="container-fluid" style="position: absolute;top: 120px;">
+    <div class="container-fluid" style="position: absolute;top: 25%;">
  
         <div id="respuestauser"></div>
        <?php if (is_null($_smarty_tpl->tpl_vars['cedula']->value)&&$_smarty_tpl->tpl_vars['nombreform']->value!="paciente") {?>
@@ -289,8 +289,7 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
               <?php }?>
              
           <?php } else { ?>
-            <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
-" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+              <input type="file" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 ">
           <?php }?>

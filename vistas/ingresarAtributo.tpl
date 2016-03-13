@@ -65,6 +65,7 @@ and open the template in the editor.
         <option value="double">double</option>
         <option value="int">int</option>
         <option value="date">date</option>
+        <option value="file">file</option>
         </select>
                    </div> 
                 </div>   

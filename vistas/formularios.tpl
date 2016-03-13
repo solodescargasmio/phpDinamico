@@ -178,7 +178,7 @@ return edad;
 
 <body>
     {include file="cabeza.tpl"}
-    <div class="container-fluid" style="position: absolute;top: 120px;">
+    <div class="container-fluid" style="position: absolute;top: 25%;">
  
         <div id="respuestauser"></div>
        {if is_null($cedula) && $nombreform!="paciente"}
@@ -228,8 +228,8 @@ return edad;
                 <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
               {/if}
              
-          {else}
-            <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
+          {else $atributo->getTipo()=="file"}
+              <input type="file" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
           {/if}
     </div>
   </div>

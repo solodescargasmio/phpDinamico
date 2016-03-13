@@ -70,7 +70,7 @@ class formulario {
           while ($fila=$resultado->fetch_object()) {
          $dato=$fila->id_form;
            
-}
+} mysqli_close($conexion);
          return $dato;
          
         }
@@ -85,7 +85,7 @@ class formulario {
          $form->setNombre($fila->nombre);
          $form->setVersion($fila->version);
             $formularios[]=$form;          
-}
+} mysqli_close($conexion);
         return $formularios;
  }
  
@@ -100,7 +100,7 @@ class formulario {
          $form->setVersion($fila->version);
          $form->setFecha_crea($fila->fecha_crea);
                
-}
+} mysqli_close($conexion);
         return $form;
  }
  public function traerId($nombre){
@@ -108,7 +108,7 @@ class formulario {
          $resultado=$conexion->query("SELECT id_form FROM form WHERE nombre='".$nombre."' AND fecha_crea =(SELECT MAX(fecha_crea) FROM form WHERE nombre='".$nombre."')");       
           while ($fila=$resultado->fetch_object()) {
          $dato=$fila->id_form;
-        }
+        } mysqli_close($conexion);
         return $dato;
  }
  
@@ -117,7 +117,7 @@ class formulario {
          $resultado=$conexion->query("SELECT nombre FROM form WHERE id_form=".$id_form);       
           while ($fila=$resultado->fetch_object()) {
          $dato=$fila->nombre;
-        }
+        } mysqli_close($conexion);
         return $dato;
  }
    

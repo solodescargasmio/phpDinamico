@@ -43,8 +43,13 @@ $objSheet->setCellValue('B'.$numero,$value->getValor());
 }
 
 }
+header('Content-type: application/vnd.ms-excel');
+header("Content-Disposition: attachment; filename=Datos".$id_usuario.".xls");
+header("Pragma: no-cache");
+header("Expires: 0");
 $objWriter = PHPExcel_IOFactory::createWriter($objXLS, 'Excel5');
-$objWriter->save("E:\\Escritorio\Paciente".$id_usuario.".xls");
+$objWriter->save('php://output');
+//$objWriter->save("E:\\Escritorio\Paciente".$id_usuario.".xls");
 header("Location: ingresar.php");
  
 

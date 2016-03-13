@@ -43,7 +43,7 @@ public function ingresarTabla(){
        $res=false;
        if($conexion->affected_rows>0){
        $res=true;
-       }
+       } mysqli_close($conexion);
       // var_dump($res);
     return $res;
  }
@@ -56,7 +56,7 @@ public function ingresarTabla(){
          $tabla->setId_atributo($fila->id_attributo);
          $tabla->setOpcion($fila->opcion);
             $tablas[]=$tabla;          
-}
+} mysqli_close($conexion);
         return $tablas;
  }
 

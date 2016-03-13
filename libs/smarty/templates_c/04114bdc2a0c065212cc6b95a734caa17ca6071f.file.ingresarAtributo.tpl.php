@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-02-29 14:56:19
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-10 02:37:47
          compiled from "vistas\ingresarAtributo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:562656c8bb70d1cef1-56969332%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04114bdc2a0c065212cc6b95a734caa17ca6071f' => 
     array (
       0 => 'vistas\\ingresarAtributo.tpl',
-      1 => 1456754175,
+      1 => 1457573836,
       2 => 'file',
     ),
   ),
@@ -36,7 +36,6 @@ and open the template in the editor.
        <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/dateFechamio.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="./css/dashboard.css" rel="stylesheet">
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/dateFechamio.js"></script>
@@ -93,6 +92,7 @@ and open the template in the editor.
         <option value="double">double</option>
         <option value="int">int</option>
         <option value="date">date</option>
+        <option value="file">file</option>
         </select>
                    </div> 
                 </div>   

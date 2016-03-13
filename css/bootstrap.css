@@ -14,15 +14,17 @@ btn-group
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }*/
+
+
 #my-dynamic-form{
     width: 45%;
 }
 #menus{
     position: absolute;
     top: 8%; 
-    left:50%;
+    left:55%;
     width: auto;
-    height: auto;
+    height: auto;  
 }
 #menuses{
     position: absolute;
@@ -32,6 +34,9 @@ btn-group
     height: auto;
 }
 .fondo{background: #fff;
+}
+#cuadrado{ 
+    background: violet;
 }
 article,
 aside,

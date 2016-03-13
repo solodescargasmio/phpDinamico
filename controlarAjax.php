@@ -43,7 +43,7 @@ $form=$formula->traerFormularioId();
                 $estudio=new estudio_medico();
                 $estudio=$estudio->traerEstudioId($id_usuario);
             if(isset($estudio)){
- echo '<h4><font style="color:red;">Ya existe el paciente en base de datos<br> Verifique la cedula </font></h4>';     
+ echo '<h4><font style="color:red;font-weight: bold;">Ya existe el paciente en base de datos<br> Verifique la cedula </font></h4>';     
         }     
             }
             else
@@ -79,10 +79,21 @@ $form=$formula->traerFormularioId();
             if($_POST['admin']){
                 $id_usuario=$_POST['admin'];
                 $admin=new admin();
+                $admin->setNick($id_usuario);
+                $admin=$admin->traerAdmin();       
+           if($admin==null){
+ echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> Error en usuario, el sistema reconoce mayusculas y minusculas. Verifique</font>';     
+        }else{
+            echo '<img src="./imagenes/si.png"/>';}     
+            } else
+            if($_POST['nick']){
+                $id_usuario=$_POST['nick'];
+                $admin=new admin();
+                $admin->setNick($id_usuario);
                 $admin=$admin->traerAdmin();
-            if(strcmp($id_usuario,$admin->getUser())!=0){
- echo '<img src="./imagenes/no.png"/><font style="color:red;"> Error en usuario</font>';     
-        }else{ echo '<img src="./imagenes/si.png"/>';}     
+            if($admin!=null){
+ echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> El usuario ya existe en el sistema</font>';     
+        }    
             }  
      
             

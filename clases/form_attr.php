@@ -44,7 +44,7 @@ function insertarFormulario() {
         $res=false;
         if($conexion->affected_rows>0){
             $res=true;
-                      }
+                      } mysqli_close($conexion);
 return $res;
         }
         
@@ -56,7 +56,7 @@ return $res;
          $form_att=new form_attr();
          $form_att->setId_atributo($fila->id_atributo);
             $form_attis[]=$form_att;          
-}
+} mysqli_close($conexion);
         return $form_attis;
  }
  
@@ -69,7 +69,7 @@ return $res;
               $valor=$value;   
             }
                     
-} 
+}  mysqli_close($conexion);
         return $valor; 
       }
       

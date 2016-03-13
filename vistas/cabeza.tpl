@@ -67,6 +67,7 @@ width:350px;
 cursor:pointer;
 }
 #suggestions {
+
 width:350px;
 height:150px;
 overflow: auto;
@@ -82,22 +83,41 @@ overflow: auto;
 </script>
  <header class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
+      {if isset($operador)}  
+        <div id="cuadrado" class="nav navbar-nav navbar-left">
+    <font style="font-weight: bold;">        
+        <font style="color: #fff;">
+        Usuario: {$operador}</font><br>
+    <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Cerrar sesion</a>
+        </div>
+        {/if}
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a tabindex="-1" class="navbar-brand" href="index.php">Inicio</a>       
-        <a tabindex="-1" class="navbar-brand" href="cerrar.php" style="  margin-left: auto; margin-right: auto;">Cerrar</a>
-     <a tabindex="-1" class="navbar-brand" href="ingresar.php">Home</a> 
+        <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso y registro</a>       
+        <a tabindex="-1" class="navbar-brand" href="ingresar.php">Pagina Principal</a> 
         
         
      {if isset($cedula)}
-    <font style="font-weight: bold;">        <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: {$apellido}<br>Cedula : {$cedula} <br>Edad : {$edad}</font></div>
+           
+           <div id="cuadrado" class="nav navbar-nav navbar-right">
+    <font style="font-weight: bold;">        
+        <font style="color: #fff;">
+        Paciente<br>
+        Apellido: {$apellido}<br>Cedula : {$cedula}</font><br>
+    <a tabindex="-1" class="navbar-brand" href="cerrar.php">Cambiar Paciente</a>
+ </div>
+  
         {/if}
            <form class="navbar-form navbar-right">
-        <input type="text" id="service" name="service" class="form-control" placeholder="cedula paciente" >
-         <div id="suggestions"></div>
+        <div class="form-group">  
+                         <div class="col-lg-10">
+         <input type="text" id="service" name="service" class="form-control" placeholder="cedula paciente" >
+                                 </div>
+                          </div>        
+  <div id="suggestions"><font style="color:white;"></font></div>
         </form>
  
          <!--   <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: {$apellido}<br>Cedula : {$cedula} <br>Edad : {$edad}</font></div>-->
@@ -117,35 +137,41 @@ overflow: auto;
          </li>
           {/foreach}
          {/if}
-
-         
-            </ul>  
+            </ul> 
         </li>
+          <li class="dropdown">    
+           <a tabindex="-1" href="modificarPerfil.php">Modificar Datos Perfil</a>
+            </li>
         {/if}
-          <li class="dropdown">
-            <a tabindex="-1" href="guardarmultimedia.php">Archivos</a>
-          </li>
        {if $operador=="admin"}   
         <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Administrar Formularios<b class="caret"></b></a>
            <ul class="dropdown-menu">
-      <font style="font-weight: bold;">        <li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
+      <font style="font-weight: bold;"><li><a tabindex="-1" href="crearFormulario.php">Crear Formularios</a></li>
               <li><a tabindex="-1" href="nuevaVersion.php">Nueva Version Formulario</a></li>
-              <li><a tabindex="-1" href="atrapar.php">Ingresar Atributos</a></li>
+              <li><a tabindex="-1" href="atrapar.php">Crear Atributo</a></li>
               <li><a tabindex="-1" href="depende.php">Dependencia Formulario</a></li></font>
-            </ul>  
+            </ul> 
         </li>
         {/if}
         {if isset($cedula)}
-                <li class="dropdown">   
-     <a tabindex="-1" href="exportarExcel.php">Ver Ficha1</a>
+               <li class="dropdown">
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ver Fichas<b class="caret"></b></a>
+           <ul class="dropdown-menu">
+         <li class="dropdown">   
+     <a tabindex="-1" href="exportarExcel.php">Como tablas en EXEL</a>
             </li>
              <li class="dropdown">    
-     <a tabindex="-1" href="exportarExcel1.php">Ver Ficha2</a>
+     <a tabindex="-1" href="exportarExcel1.php">Como hojas en EXEL</a>
             </li>
+           </ul>  
+        </li>
+            
+            
+            
+            
+              
         {/if}
-               
-         
         </ul>
         
       </div> <!-- .nav-collapse -->

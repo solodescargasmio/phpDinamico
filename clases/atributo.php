@@ -80,7 +80,7 @@ public function ingresarAtributo(){
  while ($fila=$resultado->fetch_object()) {
          $dato=$fila->id_attributo;             
 }      
-       }
+       } mysqli_close($conexion);
     return $dato;
  }
  
@@ -93,7 +93,7 @@ public function ingresarAtributo(){
          $atr->setTipo($fila->tipo);
          $atr->setCalculado($fila->calculado);
             $atributos[]=$atr;          
-}
+} mysqli_close($conexion);
         return $atributos;
  }
  
@@ -107,7 +107,7 @@ public function ingresarAtributo(){
          $atr->setTipo($fila->tipo);
          $atr->setTabla($fila->tabla);
             $atributos[]=$atr;          
-}
+} mysqli_close($conexion);
         return $atributos;
  }
  
@@ -119,7 +119,7 @@ public function ingresarAtributo(){
  while ($fila=$resultado->fetch_object()) {
          $dato=$fila->id_attributo;             
 }
-
+ mysqli_close($conexion);
         return $dato;
  }
  
@@ -129,7 +129,7 @@ public function ingresarAtributo(){
  while ($fila=$resultado->fetch_object()) {
 
          $dato=$fila->nombre;             
-}
+} mysqli_close($conexion);
         return $dato;
  }
  
@@ -139,7 +139,7 @@ public function ingresarAtributo(){
  while ($fila=$resultado->fetch_object()) {
 
          $dato=$fila->tipo;             
-}
+} mysqli_close($conexion);
         return $dato;
  }
  

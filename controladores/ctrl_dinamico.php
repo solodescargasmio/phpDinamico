@@ -4,7 +4,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- * "http://ingenieroweb.com.co/exportar-datos-desde-mysql-excel-con-php";
+ * 
  */
 require_once ('./clases/atributo.php');
 require_once ('./clases/formulario.php');
@@ -154,10 +154,9 @@ if($_POST['modificar']){
                 }  
          }
         }
-        if($ok){
+        if($ok){//eliminar esto para que vuelva al mismo lugar
         header('Location: ingresar.php');
         exit();}
-    
        }  
     
         if($_POST['nomformulario']){
@@ -188,7 +187,7 @@ if($_POST['modificar']){
          }
         
         }
-      if($ok){
+      if($ok){//eliminar esto para que vuelva al mismo lugar
                     header("Location: ingresar.php");}
        } 
         if($dat>0){
@@ -267,7 +266,7 @@ function ingresarAtributo() {
     $atr->setTipo($_POST['selector']);
     $atr->setCalculado(0);
     $atr->setTabla(0);
-    if($atr->ingresarAtributo()){
+    if($atr->ingresarAtributo()){//eliminar esto para que vuelva al mismo lugar
         header("Location: ingresar.php");
     } else{
   $mensage="Error al ingresar atributo. Verifique.";        
