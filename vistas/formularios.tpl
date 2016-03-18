@@ -208,13 +208,11 @@ return edad;
         {if $atributo->getTipo()=="double" || $atributo->getTipo()=="text"|| $atributo->getTipo()=="float"}
             {if $atributo->getTabla()=="1"}
             <select name="{$atributo->getNombre()}">
-            
                 {foreach from=$tablas item=opcion}
                     {if $opcion->getId_atributo()==$atributo->getId_attributo()}
                         <option value="{$opcion->getOpcion()}">{$opcion->getOpcion()|upper}</option>
                     {/if}
-                  {/foreach}
-               
+                  {/foreach}  
             </select>
              {else}
                 {if $atributo->getObligatorio()==0}<input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">{else} 
@@ -224,7 +222,7 @@ return edad;
           <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker" required="">
           {elseif  $atributo->getTipo()=="int"}
               {if $atributo->getNombre()=="id_usuario"}
-                  <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" value="{$cedula}">
+                  <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" value="{$cedula}" >
             {else}
                 {if $atributo->getObligatorio()==0}<input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">{else}
                 <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">{/if}

@@ -103,6 +103,7 @@ public function ingresarAtributo(){
          $atr->setNombre($fila->nombre);
          $atr->setTipo($fila->tipo);
          $atr->setCalculado($fila->calculado);
+         $atr->setTabla($fila->tabla);
             $atributos[]=$atr;          
 } mysqli_close($conexion);
         return $atributos;

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-17 22:03:44
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-18 20:53:13
          compiled from "vistas\crearFormulario.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:572156c79b761312d9-11621522%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '96409e992390d6a3afe213eb18a5736287f00ea9' => 
     array (
       0 => 'vistas\\crearFormulario.tpl',
-      1 => 1458248621,
+      1 => 1458330579,
       2 => 'file',
     ),
   ),
@@ -101,16 +101,17 @@ $(document).ready(function(){
     $('.campo1').click( function(){
             var $dato= $(".campo",this).val();
             var $dato1= $(".valor",this).val();
-            var $id_att= $(".id_att",this).val();
+            var $id_att=0;
+            $id_att=$(".ids",this).val();
        da=recorrerDom($dato);
        if(da==0){ //si son distintos lo agrego
            gu="guardo";
            $("#my-dynamic-form input").remove("#"+gu+""); 
         $(' <div class="form-group" id="'+ $dato +'">'+
                  '<label  class="col-sm-8 control-label">'+ capitalize($dato) +'</label>'+
-    '<div class="col-lg-10">').appendTo($fieldset);
-        $('<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>').appendTo($fieldset);
-            $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()">Obligatorio <input type="checkbox" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
+    '<div class="col-lg-10">'+
+        '<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>'+
+            '<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom('+$id_att+')">Obligatorio<input type="checkbox" id="'+ $id_att +'" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
             $(' <div class="form-group">'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
@@ -141,18 +142,21 @@ $(function() {
      });
     return va;
     }
-function eliminarElementoDom() {
+function eliminarElementoDom($id_att) {
  $("input[type='button']").on('click',function(){
-     dat=$(this).attr('ident');  
+     dat=$(this).attr('ident');
         $("#my-dynamic-form input").each(function (idx, el){
      if($(el).attr('name')==dat){
          va=$(el).attr('name');
-       $("#my-dynamic-form input").remove("#"+va+"");
-        $("#my-dynamic-form div").remove("#"+va+"") 
+         alert($id_att);
+         $("#my-dynamic-form input").remove("#"+va+"");
+        $("#my-dynamic-form div").remove("#"+va+""); 
+        $("#my-dynamic-form input").remove("#"+$id_att+"");
      };
      });
 // 
     }
+            
      )};
 //function ver_data_estado() 
 //{ 
@@ -191,7 +195,10 @@ $_smarty_tpl->tpl_vars['valor']->_loop = true;
 
                       &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
 " hidden=""><?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
-</a></td>                 
+</a>
+                   <input type="text" name="id_att" class="ids" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getId_attributo();?>
+" hidden=""> 
+                   </td>                 
                    </tr>
                    <?php } ?>
                    <?php } else { ?>

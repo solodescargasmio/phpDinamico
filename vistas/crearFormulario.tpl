@@ -70,16 +70,17 @@ $(document).ready(function(){
     $('.campo1').click( function(){
             var $dato= $(".campo",this).val();
             var $dato1= $(".valor",this).val();
-            var $id_att= $(".id_att",this).val();
+            var $id_att=0;
+            $id_att=$(".ids",this).val();
        da=recorrerDom($dato);
        if(da==0){ //si son distintos lo agrego
            gu="guardo";
            $("#my-dynamic-form input").remove("#"+gu+""); 
         $(' <div class="form-group" id="'+ $dato +'">'+
                  '<label  class="col-sm-8 control-label">'+ capitalize($dato) +'</label>'+
-    '<div class="col-lg-10">').appendTo($fieldset);
-        $('<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>').appendTo($fieldset);
-            $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()">Obligatorio <input type="checkbox" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
+    '<div class="col-lg-10">'+
+        '<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>'+
+            '<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom('+$id_att+')">Obligatorio<input type="checkbox" id="'+ $id_att +'" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
             $(' <div class="form-group">'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
@@ -110,18 +111,21 @@ $(function() {
      });
     return va;
     }
-function eliminarElementoDom() {
+function eliminarElementoDom($id_att) {
  $("input[type='button']").on('click',function(){
-     dat=$(this).attr('ident');  
+     dat=$(this).attr('ident');
         $("#my-dynamic-form input").each(function (idx, el){
      if($(el).attr('name')==dat){
          va=$(el).attr('name');
-       $("#my-dynamic-form input").remove("#"+va+"");
-        $("#my-dynamic-form div").remove("#"+va+"") 
+         alert($id_att);
+         $("#my-dynamic-form input").remove("#"+va+"");
+        $("#my-dynamic-form div").remove("#"+va+""); 
+        $("#my-dynamic-form input").remove("#"+$id_att+"");
      };
      });
 // 
     }
+            
      )};
 //function ver_data_estado() 
 //{ 
@@ -151,7 +155,9 @@ function capitalize(s)//convierte minusculas a Mayusculas
     {foreach from=$atributos item=valor}
                <tr class="agregar">
                    <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="{$valor->getNombre()}" hidden="">{$valor->getNombre()}
-                      &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="{$valor->getTipo()}" hidden="">{$valor->getTipo()}</a></td>                 
+                      &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="{$valor->getTipo()}" hidden="">{$valor->getTipo()}</a>
+                   <input type="text" name="id_att" class="ids" value="{$valor->getId_attributo()}" hidden=""> 
+                   </td>                 
                    </tr>
                    {/foreach}
                    {else}

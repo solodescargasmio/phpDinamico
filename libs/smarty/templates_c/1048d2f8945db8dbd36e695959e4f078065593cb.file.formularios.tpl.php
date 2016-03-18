@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-18 02:30:17
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-18 21:09:42
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1458264610,
+      1 => 1458331732,
       2 => 'file',
     ),
   ),
@@ -254,7 +254,6 @@ $_smarty_tpl->tpl_vars['atributo']->_loop = true;
             <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTabla()=="1") {?>
             <select name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 ">
-            
                 <?php  $_smarty_tpl->tpl_vars['opcion'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['opcion']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['tablas']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['opcion']->key => $_smarty_tpl->tpl_vars['opcion']->value) {
@@ -265,8 +264,7 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
 "><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['opcion']->value->getOpcion(), 'UTF-8');?>
 </option>
                     <?php }?>
-                  <?php } ?>
-               
+                  <?php } ?>  
             </select>
              <?php } else { ?>
                 <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()==0) {?><input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
@@ -284,7 +282,7 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
                   <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " value="<?php echo $_smarty_tpl->tpl_vars['cedula']->value;?>
-">
+" >
             <?php } else { ?>
                 <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()==0) {?><input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>

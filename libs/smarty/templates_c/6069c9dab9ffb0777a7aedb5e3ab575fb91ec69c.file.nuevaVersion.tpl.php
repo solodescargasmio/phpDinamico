@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-17 22:03:05
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-18 20:16:37
          compiled from "vistas\nuevaVersion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2102256c79b7c0f4248-01145316%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6069c9dab9ffb0777a7aedb5e3ab575fb91ec69c' => 
     array (
       0 => 'vistas\\nuevaVersion.tpl',
-      1 => 1458248582,
+      1 => 1458328581,
       2 => 'file',
     ),
   ),
@@ -101,7 +101,7 @@ $(document).ready(function(){
     $('.campo1').click( function(){
             var $dato= $(".campo",this).val();
             var $dato1= $(".valor",this).val();
-            var $id_att= $(".id_att",this).val();
+            var $id_att= $(".ids",this).val();
        da=recorrerDom($dato);
        if(da==0){ //si son distintos lo agrego
            gu="guardo";
@@ -189,7 +189,9 @@ $_smarty_tpl->tpl_vars['valor']->_loop = true;
                       &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
 " hidden=""><?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
 </a></td>                 
-                   </tr>
+               <input type="text" name="ids" class="ids" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getId_attributo();?>
+" hidden="">    
+               </tr>
                    <?php } ?>
                    <?php } else { ?>
                        <?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
