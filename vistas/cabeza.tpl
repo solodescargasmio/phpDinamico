@@ -142,6 +142,10 @@ overflow: auto;
           <li class="dropdown">    
            <a tabindex="-1" href="modificarPerfil.php">Modificar Datos Perfil</a>
             </li>
+            
+            <li class="dropdown">    
+           <a tabindex="-1" href="paginado.php">Paginado</a>
+            </li>
         {/if}
        {if $operador=="admin"}   
         <li class="dropdown">

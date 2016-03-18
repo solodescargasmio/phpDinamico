@@ -44,9 +44,10 @@ class dependencia {
 
     
  function insertarDependencias($dato1,$dato2) {
+    // var_dump($dato1);var_dump($dato2);exit();
         $conexion=  conectar::realizarConexion();
         $smtp=$conexion->prepare("INSERT INTO dependencia (depende,de) VALUES(?,?)");
-        $smtp->bind_param("ii",$dato1,$dato2);
+        $smtp->bind_param("ss",$dato1,$dato2);
         $smtp->execute();
         $res=false;
         if($conexion->affected_rows>0){
@@ -71,7 +72,7 @@ class dependencia {
  
  public function traerDepende($id){
   $conexion=  conectar::realizarConexion();
-         $resultado=$conexion->query("SELECT * FROM dependencia WHERE depende=".$id);       
+         $resultado=$conexion->query("SELECT * FROM dependencia WHERE depende='".$id."'");       
          while ($row = $resultado->fetch_object()) {
              $tato=$row->de;
          } mysqli_close($conexion);

@@ -18,9 +18,19 @@ class atributo {
     private $tipo="";
     private $calculado=0;
     private $tabla=0;
+    private $obligatorio=0;
   
    public function __construct() {
     }
+    
+    public function getObligatorio() {
+        return $this->obligatorio;
+    }
+
+    public function setObligatorio($obligatorio) {
+        $this->obligatorio = $obligatorio;
+    }
+   
     public function getTabla() {
         return $this->tabla;
     }
@@ -89,6 +99,7 @@ public function ingresarAtributo(){
       $resultado=$conexion->query("SELECT * FROM atributo");   
  while ($fila=$resultado->fetch_object()) {
          $atr=new atributo();
+         $atr->setId_attributo($fila->id_attributo);
          $atr->setNombre($fila->nombre);
          $atr->setTipo($fila->tipo);
          $atr->setCalculado($fila->calculado);
@@ -99,13 +110,14 @@ public function ingresarAtributo(){
  
  public function traerAtributosForm($id) {
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT atributo.id_attributo,atributo.nombre,atributo.tipo,atributo.tabla FROM atributo,form_attr WHERE atributo.id_attributo=form_attr.id_attributo AND form_attr.id_form=".$id);   
+      $resultado=$conexion->query("SELECT atributo.id_attributo,atributo.nombre,atributo.tipo,atributo.calculado,form_attr.obligatorio FROM atributo,form_attr WHERE atributo.id_attributo=form_attr.id_attributo AND form_attr.id_form=".$id);   
           while ($fila=$resultado->fetch_object()) {
          $atr=new atributo();
          $atr->setId_attributo($fila->id_attributo);
          $atr->setNombre($fila->nombre);
          $atr->setTipo($fila->tipo);
          $atr->setTabla($fila->tabla);
+         $atr->setObligatorio($fila->obligatorio);
             $atributos[]=$atr;          
 } mysqli_close($conexion);
         return $atributos;
@@ -140,6 +152,29 @@ public function ingresarAtributo(){
 
          $dato=$fila->tipo;             
 } mysqli_close($conexion);
+        return $dato;
+ }
+ 
+ public function traerAtributosPaginados($inicio,$fin) { 
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT * FROM atributo LIMIT ".$inicio.",".$fin);   
+ while ($fila=$resultado->fetch_object()) {
+         $atr=new atributo();
+         $atr->setId_attributo($fila->id_attributo);
+         $atr->setNombre($fila->nombre);
+         $atr->setTipo($fila->tipo);
+         $atr->setCalculado($fila->calculado);
+            $atributos[]=$atr;          
+} mysqli_close($conexion);
+        return $atributos;
+ }
+ 
+ public function contarAtributos() { 
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT COUNT(*) FROM atributo");   
+  while ($fila=$resultado->fetch_object()) {
+         $dato=$fila;
+        } mysqli_close($conexion);
         return $dato;
  }
  

@@ -15,9 +15,17 @@ require_once ('./conexion/conectar.php');
 class form_attr {
     private $id_form;
     private $id_atributo;
+    private $obligatorio;
     function __construct() {
         
     }
+    public function getObligatorio() {
+        return $this->obligatorio;
+    }
+    public function setObligatorio($obligatorio) {
+        $this->obligatorio = $obligatorio;
+    }
+   
     public function getId_form() {
         return $this->id_form;
     }
@@ -37,9 +45,10 @@ class form_attr {
 function insertarFormulario() {
         $id_form=$this->getId_form();
         $id_atributo=$this->getId_atributo();
+        $obli=1;
         $conexion=  conectar::realizarConexion();
-        $smtp=$conexion->prepare("INSERT INTO form_attr (id_form,id_attributo) VALUES (?,?);");
-        $smtp->bind_param("ii",$id_form,$id_atributo);
+        $smtp=$conexion->prepare("INSERT INTO form_attr (id_form,id_attributo,obligatorio) VALUES (?,?,?);");
+        $smtp->bind_param("iii",$id_form,$id_atributo,$obli);
         $smtp->execute();
         $res=false;
         if($conexion->affected_rows>0){
@@ -72,5 +81,20 @@ return $res;
 }  mysqli_close($conexion);
         return $valor; 
       }
+      
+      function obligatorio() {
+        $id_form=$this->getId_form();
+        $id_atributo=$this->getId_atributo();
+        $obli=0;
+        $conexion=  conectar::realizarConexion();
+        $smtp=$conexion->prepare("UPDATE form_attr SET obligatorio =?  WHERE id_form =? AND id_attributo =?");
+        $smtp->bind_param("iii",$obli,$id_form,$id_atributo);
+        $smtp->execute();
+        $res=false;
+        if($conexion->affected_rows>0){
+            $res=true;
+                      } mysqli_close($conexion);
+return $res;
+        }
       
 }

@@ -36,7 +36,6 @@ $(document).ready(function(){
 		$("#ocultar").on( "click", function() {
                          $('#miform').hide();
                           $('#formversion').show(); //muestro mediante id 
-
 		});
   });
     
@@ -56,30 +55,22 @@ $(document).ready(function(){
      
         </script>
                 <script>
-        $(function() {
+          $(function() {
             var $fieldset = $('<fieldset>');    
     var $form = $("#my-dynamic-form");
     $(' <div class="form-group">'+
                  '<label  class="col-sm-8 control-label">Nombre Formulario(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" required="">').appendTo($fieldset);
-      $('</div></div>')
-        $fieldset.appendTo($form); 
-          $(' <div class="form-group">'+
-                 '<label  class="col-sm-8 control-label">Versíon(*)</label>'+
-    '<div class="col-lg-10">').appendTo($fieldset);
-    $('<input type="text" name="version" required="">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);
-         $(' <div class="form-group">'+ 
-    '<div class="col-lg-10">').appendTo($fieldset);
-    $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
+        $fieldset.appendTo($form); 
+    $('<div class="form-group"><div class="col-lg-10"><br><input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);
         $fieldset.appendTo($form); 
     $('.campo1').click( function(){
-
             var $dato= $(".campo",this).val();
             var $dato1= $(".valor",this).val();
-
+            var $id_att= $(".id_att",this).val();
        da=recorrerDom($dato);
        if(da==0){ //si son distintos lo agrego
            gu="guardo";
@@ -88,8 +79,8 @@ $(document).ready(function(){
                  '<label  class="col-sm-8 control-label">'+ capitalize($dato) +'</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
         $('<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>').appendTo($fieldset);
-        $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()"></div></div>').appendTo($fieldset);
-          $(' <div class="form-group">'+
+            $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()">Obligatorio <input type="checkbox" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
+            $(' <div class="form-group">'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);    
@@ -107,9 +98,6 @@ $(function() {
         document.getElementById("nom_formulario").value=$datove;    
         });
     });
-
-
-
  function recorrerDom(valor) { 
     va=0;
     //recorro todos los label y si alguno tiene el mismo texto no le permito ingresar el atributo
@@ -119,11 +107,9 @@ $(function() {
          if($(el).html()==capitalize(valor)){     
          va=1;    
          }
-
      });
     return va;
     }
-
 function eliminarElementoDom() {
  $("input[type='button']").on('click',function(){
      dat=$(this).attr('ident');  
@@ -133,7 +119,6 @@ function eliminarElementoDom() {
        $("#my-dynamic-form input").remove("#"+va+"");
         $("#my-dynamic-form div").remove("#"+va+"") 
      };
-
      });
 // 
     }
@@ -142,7 +127,6 @@ function eliminarElementoDom() {
 //{ 
 //alert("boton presionado | ID: "+$(this).attr('ident')); 
 //} 
-
 function capitalize(s)//convierte minusculas a Mayusculas
 {
     return s.toUpperCase();
@@ -200,9 +184,6 @@ function capitalize(s)//convierte minusculas a Mayusculas
       
       <h3>Formulario</h3>
       <form id="my-dynamic-form" method="POST"> 
-
-   <input type="submit" value="Guardar Formulario" class="btn btn-primary btn-group-justified">
-    
       </form>
          
        </div> 

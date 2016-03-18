@@ -25,18 +25,30 @@ and open the template in the editor.
             <script>
              
 $(document).ready(function(){
- 
-  
-  
+
     $('#miform').hide();
   
 		$("#mostrar").on( "click", function() {
 			$('#miform').show(); //muestro mediante id 
+                        
+                        $ini=0;
+                        dato='inicio='+0;
+                        $.ajax({
+                          url: "paginador.php",
+                          type: 'POST',
+                          data: dato,
+                          success: function (data) {
+                        $("#miform").fadeIn(1000).html(data);
+                    }
+                        });
+                        
+                        
+                        $('#formversion').hide(); //oculto mediante id 
      
 		 });
 		$("#ocultar").on( "click", function() {
                          $('#miform').hide();
-
+                          $('#formversion').show(); //muestro mediante id 
 		});
   });
     
@@ -65,24 +77,15 @@ $(document).ready(function(){
     $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" required="">').appendTo($fieldset);
       $('</div></div>')
         $fieldset.appendTo($form); 
-          $(' <div class="form-group">'+
-                 '<label  class="col-sm-8 control-label">Versíon(*)</label>'+
-    '<div class="col-lg-10">').appendTo($fieldset);
-    $('<input type="text" name="version" required="">').appendTo($fieldset);
-      $('</div></div>')
-        $(' <div class="form-group">'+
-                 '<label  class="col-sm-8 control-label">Versíon(*)</label>'+
-    '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);
         $fieldset.appendTo($form); 
- 
-        
     $('.campo1').click( function(){
-
+        alert('$dato');
             var $dato= $(".campo",this).val();
             var $dato1= $(".valor",this).val();
-
+            var $id_att= $(".id_att",this).val();
+            
        da=recorrerDom($dato);
        if(da==0){ //si son distintos lo agrego
            gu="guardo";
@@ -91,9 +94,8 @@ $(document).ready(function(){
                  '<label  class="col-sm-8 control-label">'+ capitalize($dato) +'</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
         $('<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>').appendTo($fieldset);
-        $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()"></div></div>').appendTo($fieldset);
-          $(' <div class="form-group">'+
-                 '<label  class="col-sm-8 control-label">Versíon(*)</label>'+
+            $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()">Obligatorio <input type="checkbox" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
+            $(' <div class="form-group">'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);    
@@ -111,9 +113,6 @@ $(function() {
         document.getElementById("nom_formulario").value=$datove;    
         });
     });
-
-
-
  function recorrerDom(valor) { 
     va=0;
     //recorro todos los label y si alguno tiene el mismo texto no le permito ingresar el atributo
@@ -123,11 +122,9 @@ $(function() {
          if($(el).html()==capitalize(valor)){     
          va=1;    
          }
-
      });
     return va;
     }
-
 function eliminarElementoDom() {
  $("input[type='button']").on('click',function(){
      dat=$(this).attr('ident');  
@@ -136,63 +133,63 @@ function eliminarElementoDom() {
          va=$(el).attr('name');
        $("#my-dynamic-form input").remove("#"+va+"");
         $("#my-dynamic-form div").remove("#"+va+"") 
-        $("#my-dynamic-form input").remove("#"+gu+"") 
      };
-
      });
 // 
     }
      )};
- 
-
-  
-
- 
-function alertar() 
-{ 
-
-      alert("presionaste"); 
-
-} 
-
+//function ver_data_estado() 
+//{ 
+//alert("boton presionado | ID: "+$(this).attr('ident')); 
+//} 
 function capitalize(s)//convierte minusculas a Mayusculas
 {
     return s.toUpperCase();
 }
      
         
-        </script>     
-<body>
-   {include file="cabeza.tpl"}
-    <div class="container-fluid">
+        </script>  
+    <body>
+<div class="container-fluid">
           <div id="menus">
                 <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
    <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
    <a href="nuevaVersion.php" > <button id="ver"  class="btn btn-primary btn-group-sm">Nueva Version</button></a> 
       
-       <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+      <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+   
+        
+      </form>
+          
+ <!--               <div style="position: absolute;float: right;">    
+    <form id="formversion" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
            <br> <table class="table-responsive" border="1">  
                 <tr>
-                  <td>Nombre y tipo Campo :</td>
+                  <td>Formularios :</td>
                </tr>
-
-               <tr class="agregar">
-                   <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="{$valor->getNombre()}" hidden="">{$valor->getNombre()}
-                      &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="{$valor->getTipo()}" hidden="">{$valor->getTipo()}</a></td>                 
+{if isset($formularios)}
+    {foreach from=$formularios item=formulario}
+               <tr>
+                   <td><a style="cursor:pointer;">{$formulario->getNombre()|upper}</a></td>                 
                    </tr>
-   
+                   {/foreach}
+{/if}
            </table> 
-      </form></div>
+           </form>      </div> 
+           
+          </div>-->
       <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
       
+      <div style="float: right;"><h6><font style="color: red;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
        <div id="avizo"></div>
       
       <h3>Formulario</h3>
       <form id="my-dynamic-form" method="POST"> 
-      
+
       </form>
          
        </div> 
+     </div> 
          
 </body>
 </html>

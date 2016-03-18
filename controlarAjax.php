@@ -17,7 +17,7 @@ $formula=new formulario();
 $formula->setNombre($nomb);
 $form=$formula->traerFormularioId();
         if(isset($form)){
- echo '<h4><font style="color:red;">Ya existe la ficha en base de datos<br> Puede ingresar una nueva version de la misma presionando Nueva Version </font></h4>';     
+ echo '<br><h4><font style="color:red;">El formulario ya existe en base de datos<br> Puede ingresar una nueva version presionando Nueva Version </font></h4>';     
         }
 }
         else
@@ -94,7 +94,38 @@ $form=$formula->traerFormularioId();
             if($admin!=null){
  echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> El usuario ya existe en el sistema</font>';     
         }    
-            }  
+            }  else
+                if($_POST['inicio']){
+                var_dump("dentro");exit();}
+                else{
+               $inicio=$_POST['inicio'];
+              $atr=new atributo();
+            $form=new formulario();
+            $ca=$form->traerCantidad("ficha_patronimica");
+            $con=$atr->contarAtributos();
+            $total=0;
+           $fin=5; 
+            foreach ($con as $value) {
+             $ca=$value;   
+            }
+            $id='';
+            echo ' <br> <table class="table-responsive" border="1">  
+                <tr>
+                  <td>Nombre y tipo Campo y algo:</td>
+               </tr>';
+            
+            $atributos=$atr->traerAtributosPaginados($inicio,$fin);
+            foreach ($atributos as $key => $value) {
+                echo '<tr class="agregar">';
+  echo'<td class=campo1><a style=cursor:pointer;><input type=text name=campo class=campo value='.$value->getNombre().' hidden=>'.$value->getNombre();
+  echo '&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value='.$value->getTipo().' hidden="">'.$value->getTipo().'</a></td>';
+  echo '</tr>';
+}
+$inicio=$inicio+$fin;
+echo '<input type=text id=inicio value='.$inicio.'  hidden>';
+echo '<a href="#"> <button  class="btn btn-primary btn-group-sm">Siguiente >></button></a>';
+echo '</table>';        
+}
      
             
  

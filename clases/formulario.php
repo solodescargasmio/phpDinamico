@@ -86,8 +86,23 @@ class formulario {
          $form->setVersion($fila->version);
             $formularios[]=$form;          
 } mysqli_close($conexion);
-        return $formularios;
+       return $formularios;
  }
+ 
+  public function traerTodosFormularios() { 
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT * FROM form");   
+ while ($fila=$resultado->fetch_object()) {
+         $form=new formulario();
+         $form->setId_form($fila->id_form);
+         $form->setNombre($fila->nombre);
+         $form->setVersion($fila->version);
+            $formularios[]=$form;          
+} mysqli_close($conexion);
+       return $formularios;
+ }
+ 
+ 
  
   public function traerFormularioId() {
       $nombre= $this->getNombre();
@@ -120,5 +135,16 @@ class formulario {
         } mysqli_close($conexion);
         return $dato;
  }
-   
+ /**/
+ public function traerCantidad($id_form){  
+     $dato=0;
+  $conexion= conectar::realizarConexion();
+         $resultado=$conexion->query("SELECT COUNT(*) FROM form WHERE nombre='".$id_form."'");       
+          while ($fila=$resultado->fetch_object()) {
+         $dato=$fila;
+        } mysqli_close($conexion);
+        return $dato;
+ }
+ 
+ 
 }

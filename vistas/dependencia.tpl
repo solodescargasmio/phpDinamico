@@ -9,6 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>{$titulo}</title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+
  <script src="js/jquery.js" type="text/javascript"></script>
  <script type="text/javascript">
 /*$(document).ready(function(){
@@ -32,6 +33,7 @@ and open the template in the editor.
     </head>   
 <body>
    {include file="cabeza.tpl"}
+  
    <div id="menuses">
 {if isset($dependencias)}
     <table border="1" class="table table-striped">
@@ -40,20 +42,17 @@ and open the template in the editor.
             <td>De</td>
         </tr>
         {foreach from=$dependencias item=depen}
-            <tr >   {foreach from=$formularios item=formula}
-            {if $depen->getDepende()==$formula->getId_form()}
-                <td>{$formula->getNombre()|upper}</td> 
-              {/if}
-              {if $depen->getDe()==$formula->getId_form()}
-              <td>{$formula->getNombre()|upper}</td> 
-              <td><a style="cursor:pointer;" href="depende.php?ide={$depen->getId()}">Eliminar</a></td>
-              {/if}
-            {/foreach} </tr>
+            <tr>  
+                <td>{$depen->getDepende()|upper}</td> 
+              <td>{$depen->getDe()|upper}</td> 
+              <td><a style="cursor:pointer;" href="depende.php?ide={$depen->getId()}">
+                      Eliminar</a></td>
+             
          {/foreach}   
     </table>
 {/if}
    </div>
-    <div class="container-fluid" style="position: absolute;top: 120px;">
+    <div class="container-fluid" style="position: absolute;top: 25%;"> 
   <h3>Dependencias entre Formularios</h3>
 
    <div id="avizo">{$mensage}</div>

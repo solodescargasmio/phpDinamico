@@ -191,7 +191,7 @@ return edad;
            {elseif $ok==false}
             <font style="color: red;font-weight: bold;">{$mensage}</font> 
              <div class="col-lg-offset-2 col-lg-10">
-           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='index.php'">Atras</button>
+           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='ingresar.php'">Atras</button>
     </div>
        {elseif !isset($estudios)}
            
@@ -217,7 +217,8 @@ return edad;
                
             </select>
              {else}
-                 <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
+                {if $atributo->getObligatorio()==0}<input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">{else} 
+                 <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">{/if}
             {/if} 
             {elseif $atributo->getTipo()=="date"}
           <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker" required="">
@@ -225,11 +226,13 @@ return edad;
               {if $atributo->getNombre()=="id_usuario"}
                   <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" value="{$cedula}">
             {else}
-                <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
+                {if $atributo->getObligatorio()==0}<input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">{else}
+                <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">{/if}
               {/if}
              
           {else $atributo->getTipo()=="file"}
-              <input type="file" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
+          {if $atributo->getObligatorio()==0}<input type="file" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">{else}
+              <input type="file" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">{/if}
           {/if}
     </div>
   </div>

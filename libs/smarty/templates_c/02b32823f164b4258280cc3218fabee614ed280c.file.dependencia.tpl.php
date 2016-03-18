@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-08 19:49:25
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-18 02:33:18
          compiled from "vistas\dependencia.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2480756cc98916ea051-87374881%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '02b32823f164b4258280cc3218fabee614ed280c' => 
     array (
       0 => 'vistas\\dependencia.tpl',
-      1 => 1457462962,
+      1 => 1458264794,
       2 => 'file',
     ),
   ),
@@ -21,10 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'titulo' => 0,
     'dependencias' => 0,
-    'formularios' => 0,
     'depen' => 0,
-    'formula' => 0,
     'mensage' => 0,
+    'formularios' => 0,
     'formulario1' => 0,
     'formulario' => 0,
   ),
@@ -42,6 +41,7 @@ and open the template in the editor.
         <title><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
 </title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+
  <script src="js/jquery.js" type="text/javascript"></script>
  <script type="text/javascript">
 /*$(document).ready(function(){
@@ -66,6 +66,7 @@ and open the template in the editor.
 <body>
    <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
+  
    <div id="menuses">
 <?php if (isset($_smarty_tpl->tpl_vars['dependencias']->value)) {?>
     <table border="1" class="table table-striped">
@@ -78,27 +79,20 @@ and open the template in the editor.
 foreach ($_from as $_smarty_tpl->tpl_vars['depen']->key => $_smarty_tpl->tpl_vars['depen']->value) {
 $_smarty_tpl->tpl_vars['depen']->_loop = true;
 ?>
-            <tr >   <?php  $_smarty_tpl->tpl_vars['formula'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['formula']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['formularios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['formula']->key => $_smarty_tpl->tpl_vars['formula']->value) {
-$_smarty_tpl->tpl_vars['formula']->_loop = true;
-?>
-            <?php if ($_smarty_tpl->tpl_vars['depen']->value->getDepende()==$_smarty_tpl->tpl_vars['formula']->value->getId_form()) {?>
-                <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formula']->value->getNombre(), 'UTF-8');?>
+            <tr>  
+                <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['depen']->value->getDepende(), 'UTF-8');?>
 </td> 
-              <?php }?>
-              <?php if ($_smarty_tpl->tpl_vars['depen']->value->getDe()==$_smarty_tpl->tpl_vars['formula']->value->getId_form()) {?>
-              <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formula']->value->getNombre(), 'UTF-8');?>
+              <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['depen']->value->getDe(), 'UTF-8');?>
 </td> 
               <td><a style="cursor:pointer;" href="depende.php?ide=<?php echo $_smarty_tpl->tpl_vars['depen']->value->getId();?>
-">Eliminar</a></td>
-              <?php }?>
-            <?php } ?> </tr>
+">
+                      Eliminar</a></td>
+             
          <?php } ?>   
     </table>
 <?php }?>
    </div>
-    <div class="container-fluid" style="position: absolute;top: 120px;">
+    <div class="container-fluid" style="position: absolute;top: 25%;"> 
   <h3>Dependencias entre Formularios</h3>
 
    <div id="avizo"><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
