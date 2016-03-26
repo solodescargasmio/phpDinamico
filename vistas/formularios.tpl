@@ -195,77 +195,81 @@ return edad;
     </div>
        {elseif !isset($estudios)}
            
-        <form style="width: 500px;" method="POST">
+           <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data">
             
             <fieldset><legend>{if isset($nombreform)}{$nombreform|upper}{/if}</legend></fieldset>
             <input type="text" name="nomformulario" value="{$nombreform}" id="nomformulario" hidden="">
             {if isset($atributos)}
                 {foreach from=$atributos item=atributo}
-              <div class="form-group">
-    <label for="nombre" class="col-lg-2 control-label">{$atributo->getNombre()|upper}</label>
+                    <div class="form-group" style="border-width: 10px; background:#C8C0C0;">
+    <label for="nombre" class="col-lg-2 control-label">{$atributo->getNombre()|upper}:</label>
     <div class="col-lg-10">
-           
-        {if $atributo->getTipo()=="double" || $atributo->getTipo()=="text"|| $atributo->getTipo()=="float"}
-            {if $atributo->getTabla()=="1"}
+          
+      {if $atributo->getTipo()=="double" || $atributo->getTipo()=="float"}
+         <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}"> 
+        {elseif $atributo->getTipo()=="text"}
+           {if $atributo->getTabla()=="1"}
+          
             <select name="{$atributo->getNombre()}">
+            
                 {foreach from=$tablas item=opcion}
                     {if $opcion->getId_atributo()==$atributo->getId_attributo()}
                         <option value="{$opcion->getOpcion()}">{$opcion->getOpcion()|upper}</option>
                     {/if}
-                  {/foreach}  
+                  {/foreach}
+               
             </select>
-             {else}
-                {if $atributo->getObligatorio()==0}<input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">{else} 
-                 <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">{/if}
+               {else}   
+                  <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}"> 
             {/if} 
             {elseif $atributo->getTipo()=="date"}
           <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker" required="">
           {elseif  $atributo->getTipo()=="int"}
-              {if $atributo->getNombre()=="id_usuario"}
-                  <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" value="{$cedula}" >
-            {else}
-                {if $atributo->getObligatorio()==0}<input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">{else}
-                <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">{/if}
+              {if $atributo->getNombre()=="id_usuario" && $nombreform!="paciente"}
+                  <input type="number" class="form-control" value="{$cedula}" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" readonly="">
+              {else}
+                  <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
               {/if}
-             
-          {else $atributo->getTipo()=="file"}
-          {if $atributo->getObligatorio()==0}<input type="file" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">{else}
-              <input type="file" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">{/if}
-          {/if}
+              
+        {elseif $atributo->getTipo()=="file"}
+            <input type="{$atributo->getTipo()}" class="form-control" name="archivo[]" id="{$atributo->getNombre()}">
+        {else}
+           <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">  
+        {/if}
     </div>
   </div>
             {/foreach}
-            
  {/if}
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <button type="submit" class="btn btn-primary btn-lg btn-block">Alta Datos</button>
     </div>
-  </div>
-            
+  </div>       
         </form>
   
   {else}      
   
 
- <form style="width: 500px;" method="POST">   
+ <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data">   
             <fieldset><legend>{$nombreform|upper}</legend></fieldset>
         {foreach from=$estudios item=estudio}
             <input type="text" name="nomformulario" value="{$nombreform}" id="nomformulario" hidden="">
-            <div class="form-group">
+           <div class="form-group" style="border-width: 10px; background: #C8C0C0;">
                 <label for="nombre" class="col-lg-2 control-label">{$estudio->getNom_attributo()|upper}</label>
     <div class="col-lg-offset-2 col-lg-10">
         {if $estudio->getNom_attributo()=="fecha_nacimiento" || $estudio->getNom_attributo()=="id_usuario" || $estudio->getNom_attributo()=="fecha_estudio" || $estudio->getNom_attributo()=="edad"}
             <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" readonly="">
-        {else} 
-         <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" id="{$estudio->getNom_attributo()}">
+        {elseif $estudio->getTipo()=="float" || $estudio->getTipo()=="double" || $estudio->getTipo()=="int"} 
+           <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" id="{$estudio->getNom_attributo()}">   
+        {else}
+          <input type="{$estudio->getTipo()}" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" id="{$estudio->getNom_attributo()}">   
         {/if}
         </div>
   </div>
             {/foreach}
             <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-       <input type="submit" name="modificar" class="btn btn-primary btn-lg btn-block" value="Modificar datos">
+       <input type="submit" name="modificar" class="btn btn-primary btn-lg btn-block" value="Guardar Modificaciones">
        <br> <a href="ingresar.php" >   <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location:'ingresar.php'">Cancelar Modificacion</button> </a>
     </div>
   </div> 

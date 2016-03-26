@@ -40,25 +40,7 @@
            //  datatypo='user='+user;//genero un array con indice
       
     });
-       $(function(){
-	//Aqui se coge el elemento y con la propiedad .on que requiere dos  parametros : change (cuando el valor de ese id cambie, que es cuando se elige otra opcion en la desplegable)y ejecutar la siguiente funcion cuando se haga change
-	$("#nick").keyup( function(){
-            var id=$(this).val();
-     datatypo='nick='+id;//genero un array con indice
-             $.ajax({
-         url: 'controlarAjax.php',//llamo a la pagina q hace el control
-         type:'POST',//metodo por el cual paso el dato
-         data:datatypo,
-             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
-                  $("#respuestanick").fadeIn(1000).html(data); //imprimo el mensaje en el div      
-                
-    }
-     }); 
-      
-    });  
-           //  datatypo='user='+user;//genero un array con indice
-      
-    });
+    
    </script>
 </head>
 
@@ -72,8 +54,7 @@
             <img class="imgprincipal" src="./imagenes/header.jpg" alt="Imagen de la universidad">
             
        {if isset($mensage)} <font style="color: red;font-weight: bold;">{$mensage}</font>{/if}
-        </div><div class="muestro"> <button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Ingresar</button>
- <button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#registro">Registrar Usuario</button>
+        </div><div class="muestro"><button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Ingresar</button>
    </div>   
     
         <div class="modal fade" id="formulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:200px;">
@@ -113,81 +94,8 @@
               </div>
           </div>   
        </div><br>
-       
-       
-       {if isset($mensage)}<font style="color: red;font-weight: bold;">{$mensage}{/if}</font>
-    <div class="modal fade" id="registro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:200px;">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4><font style="color: blue;">Ingrese datos de usuario</font></h4>  
-                  <div id="respuestanick"></div>
-                  </div>
-                  <div class="modal-body">
-                      <form method="POST">
-                         
-                           <div class="form-group">  
-                              <label  class="col-sm-8 control-label">Nick</label>
-                                 <div class="col-lg-10">
-   <input type="text" name="nick" id="nick">
-                                 </div>
-                          </div>
-                          
-                          <div class="form-group">  
-                              <label  class="col-sm-8 control-label">Nombre Usuario</label>
-                                 <div class="col-lg-10">
-   <input type="text" name="nombre" id="nombre">
-                                 </div>
-                          </div>
-                          
-                           <div class="form-group">  
-                              <label  class="col-sm-8 control-label">Apellido Usuario</label>
-                                 <div class="col-lg-10">
-   <input type="text" name="apellido" id="apellido">
-                                 </div>
-                          </div>
-                          
-                           <div class="form-group">  
-                              <label  class="col-sm-8 control-label">Email Usuario(se utilizara para restaurar contraseña)</label>
-                                 <div class="col-lg-10">
-                    <input type="email" name="email" id="email">
-                                 </div>
-                          </div>
-                          
-                          <div class="form-group">  
-                              <label  class="col-sm-8 control-label">Contraseña</label>
-                                 <div class="col-lg-10">
-                                     <input type="password" name="passw" id="passw">     
-                                 </div>
-                          </div>
-                          
-                           <div class="form-group">  
-                              <label  class="col-sm-8 control-label">Privilegios del Usuario</label>
-                                 <div class="col-lg-10">
-                              <select name="privilegio">
-        <option value="todos">Administrador</option>
-        <option value="comun">Usuario Comùn</option>
 
-        </select>    
-                                 </div>
-                          </div>
-                        
-                  </div>
-                  <div class="modal-footer">
-               <div class="form-group">  
-                              <label  class="col-sm-8 control-label"></label>
-                                 <div class="col-lg-10">
-                                     <input type="submit" value="Registrar" class="btn btn-primary btn-group-justified" name="registrar">
-                                 </div>
-                          </div>
-                      </form> 
-                  </div>
-              </div>
-          </div>   
-       </div><br>
-    
-    
+       {if isset($mensage)}<font style="color: red;font-weight: bold;">{$mensage}{/if}</font>  
     </div>
  
 </body>

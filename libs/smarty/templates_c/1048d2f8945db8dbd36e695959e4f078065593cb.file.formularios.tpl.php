@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-18 21:09:42
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-25 17:52:40
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1458331732,
+      1 => 1458924755,
       2 => 'file',
     ),
   ),
@@ -233,7 +233,7 @@ return edad;
     </div>
        <?php } elseif (!isset($_smarty_tpl->tpl_vars['estudios']->value)) {?>
            
-        <form style="width: 500px;" method="POST">
+           <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data">
             
             <fieldset><legend><?php if (isset($_smarty_tpl->tpl_vars['nombreform']->value)) {?><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['nombreform']->value, 'UTF-8');?>
 <?php }?></legend></fieldset>
@@ -245,15 +245,21 @@ return edad;
 foreach ($_from as $_smarty_tpl->tpl_vars['atributo']->key => $_smarty_tpl->tpl_vars['atributo']->value) {
 $_smarty_tpl->tpl_vars['atributo']->_loop = true;
 ?>
-              <div class="form-group">
+                    <div class="form-group" style="border-width: 10px; background:#C8C0C0;">
     <label for="nombre" class="col-lg-2 control-label"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['atributo']->value->getNombre(), 'UTF-8');?>
-</label>
+:</label>
     <div class="col-lg-10">
-           
-        <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="double"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="text"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="float") {?>
-            <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTabla()=="1") {?>
+          
+      <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="double"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="float") {?>
+         <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+"> 
+        <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="text") {?>
+           <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTabla()=="1") {?>
+          
             <select name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 ">
+            
                 <?php  $_smarty_tpl->tpl_vars['opcion'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['opcion']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['tablas']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['opcion']->key => $_smarty_tpl->tpl_vars['opcion']->value) {
@@ -264,59 +270,54 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
 "><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['opcion']->value->getOpcion(), 'UTF-8');?>
 </option>
                     <?php }?>
-                  <?php } ?>  
+                  <?php } ?>
+               
             </select>
-             <?php } else { ?>
-                <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()==0) {?><input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+               <?php } else { ?>   
+                  <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-" required=""><?php } else { ?> 
-                 <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-"><?php }?>
+"> 
             <?php }?> 
             <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="date") {?>
           <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="datepicker" required="">
           <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="int") {?>
-              <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getNombre()=="id_usuario") {?>
+              <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getNombre()=="id_usuario"&&$_smarty_tpl->tpl_vars['nombreform']->value!="paciente") {?>
+                  <input type="number" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['cedula']->value;?>
+" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" readonly="">
+              <?php } else { ?>
                   <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-" value="<?php echo $_smarty_tpl->tpl_vars['cedula']->value;?>
-" >
-            <?php } else { ?>
-                <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()==0) {?><input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-" required=""><?php } else { ?>
-                <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-"><?php }?>
+">
               <?php }?>
-             
-          <?php } else { ?>
-          <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()==0) {?><input type="file" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+              
+        <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="file") {?>
+            <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
+" class="form-control" name="archivo[]" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+">
+        <?php } else { ?>
+           <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
+" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-" required=""><?php } else { ?>
-              <input type="file" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
-"><?php }?>
-          <?php }?>
+">  
+        <?php }?>
     </div>
   </div>
             <?php } ?>
-            
  <?php }?>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <button type="submit" class="btn btn-primary btn-lg btn-block">Alta Datos</button>
     </div>
-  </div>
-            
+  </div>       
         </form>
   
   <?php } else { ?>      
   
 
- <form style="width: 500px;" method="POST">   
+ <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data">   
             <fieldset><legend><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['nombreform']->value, 'UTF-8');?>
 </legend></fieldset>
         <?php  $_smarty_tpl->tpl_vars['estudio'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['estudio']->_loop = false;
@@ -326,7 +327,7 @@ $_smarty_tpl->tpl_vars['estudio']->_loop = true;
 ?>
             <input type="text" name="nomformulario" value="<?php echo $_smarty_tpl->tpl_vars['nombreform']->value;?>
 " id="nomformulario" hidden="">
-            <div class="form-group">
+           <div class="form-group" style="border-width: 10px; background: #C8C0C0;">
                 <label for="nombre" class="col-lg-2 control-label"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo(), 'UTF-8');?>
 </label>
     <div class="col-lg-offset-2 col-lg-10">
@@ -334,18 +335,24 @@ $_smarty_tpl->tpl_vars['estudio']->_loop = true;
             <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getValor();?>
 " name="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
 " readonly="">
-        <?php } else { ?> 
-         <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getValor();?>
+        <?php } elseif ($_smarty_tpl->tpl_vars['estudio']->value->getTipo()=="float"||$_smarty_tpl->tpl_vars['estudio']->value->getTipo()=="double"||$_smarty_tpl->tpl_vars['estudio']->value->getTipo()=="int") {?> 
+           <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getValor();?>
 " name="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
-">
+">   
+        <?php } else { ?>
+          <input type="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getTipo();?>
+" value="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getValor();?>
+" name="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['estudio']->value->getNom_attributo();?>
+">   
         <?php }?>
         </div>
   </div>
             <?php } ?>
             <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-       <input type="submit" name="modificar" class="btn btn-primary btn-lg btn-block" value="Modificar datos">
+       <input type="submit" name="modificar" class="btn btn-primary btn-lg btn-block" value="Guardar Modificaciones">
        <br> <a href="ingresar.php" >   <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location:'ingresar.php'">Cancelar Modificacion</button> </a>
     </div>
   </div> 

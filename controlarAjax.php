@@ -30,6 +30,7 @@ $form=$formula->traerFormularioId();
         //var_dump($form);exit();
         $resultado=$attr->traerAtributosForm($form->getId_form());
         foreach ($resultado as $value) { 
+            
       echo '<div class="form-group" id="'.$value->getNombre().'">';
        echo '<label  class="col-sm-8 control-label">'.strtoupper($value->getNombre()).' v('.$form->getVersion().')</label>';
        echo '<div class="col-lg-10">';
@@ -64,7 +65,7 @@ $form=$formula->traerFormularioId();
        if($estudios!=null){
           foreach ($resul as $key => $value){
              if($estudio->ok($id_usuario, $value->getId_form())){
-             echo '<td><img src="./imagenes/si.png"/></td>';
+   echo '<td><a href="verFormulario.php?nombre='.$value->getNombre().'"><img src="./imagenes/si.png"/></a></td>';
              }else{  
                    echo '<td><img src="./imagenes/no.png" /></td>';
        }

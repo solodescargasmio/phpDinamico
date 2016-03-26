@@ -9,32 +9,44 @@ require_once ('./controladores/ctrl_dinamico.php');
 require_once ('./clases/template.php');
 require_once ('./clases/session.php');
 require_once ('./clases/archivo.php');
+require_once ('./clases/atributo.php');
+require_once ('./clases/estudio_medico.php');
+require_once ('./clases/formulario.php');
+require_once ('./clases/form_attr.php');
 require_once ('./conexion/configuracion.php');
 require_once ('crearMKdir.php');
-function subirDatos(){ 
+function subirDatos($id){ 
     error_reporting(0);
  Session::init();
-    $id_user=Session::get("cedula");
-    $apell=Session::get("apellido");
-    $edad=Session::get('edad'); 
-    $tipouser=  Session::get("usuario");
-    $tpl=new Template();
-    $mensaje="";
-    $titulo="Multimedia"; 
-    $archivo=new archivo();
+             $id_user=Session::get("cedula");
+             $id_estudio= Session::get("estudio"); 
+             $estudio=new estudio_medico();
+             $estudio->setId_estudio($id_estudio);
+             $estudio->setId_usuario($id_user);
+             $estudio->setId_form($id);
+ 
+ $attr=new atributo();
+    $attribu=$attr->traerAtributosFormFile($id);
+    
+    if($_FILES["archivo"]["name"]){   
+        for($i=0;$i<count($_FILES["archivo"]["name"]);$i++){
+          $conta=0;
+            foreach ($attribu as $key => $value) {
+                 $id_attributo=$value->getId_attributo(); 
+                if($i==$conta){
+                     if(strcmp($_FILES["archivo"]["name"][$i],"")!=0){
+ 
     $directorio = dirname(__FILE__).'/'.$id_user;
 
 if (!file_exists($directorio)) {
     crearDir($id_user);
 }
-    if(isset($_POST['nombre'])){
-$serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
-$varia=$_POST['nombre'];
 
-  $exten=explode(".",$_FILES['archivo']['name']);
-        $ex=  end($exten);
-        $var=$varia.'.'.$ex;
-  $ruta=$serv.$_FILES['archivo']['name'];
+$serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
+  $exten=explode(".",$_FILES['archivo']['name'][$i]);
+        $ex=end($exten);
+        $var=$value->getNombre().'.'.$ex;
+  $ruta=$serv.$_FILES['archivo']['name'][$i];
       
   	// Primero creamos un ID de conexión a nuestro servidor
 	$cid = ftp_connect(FTP_HOST);
@@ -55,50 +67,65 @@ $varia=$_POST['nombre'];
 	// el nombre del archivo
 	$local =$var;
 	// Este es el nombre temporal del archivo mientras dura la transmisión
-	$remoto = $_FILES["archivo"]["tmp_name"];
+	$remoto = $_FILES["archivo"]["tmp_name"][$i];
 	// Juntamos la ruta del servidor con el nombre real del archivo
 	$ruta = $serv.$local;
 		// Verificamos si ya se subio el archivo temporal
 		if (is_uploaded_file($remoto)){
                        //guardamos nombre en base de datos        
-                  if(strcasecmp($ex, "jpg")==0){
-             $newpng =$varia.'.png'; 
-             $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name']), $newpng);
+                  if(strcasecmp($ex, "jpeg")==0){
+             $newpng =$value->getNombre().'.png'; 
+             $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name'][$i]), $newpng);
+             $ruta = $serv.$png;
+             copy($remoto, $ruta);
+             $ex="png";
+                  }else
+                    if(strcasecmp($ex, "jpg")==0){
+             $newpng =$value->getNombre().'.png'; 
+             $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name'][$i]), $newpng);
              $ruta = $serv.$png;
              copy($remoto, $ruta);
              $ex="png";
                   }else
                    if(strcasecmp($ex, "gif")==0){
-             $newpng =$varia.'.png'; 
-             $png = imagepng(imagecreatefromgif($_FILES['archivo']['tmp_name']), $newpng);
+             $newpng =$value->getNombre().'.png'; 
+             $png = imagepng(imagecreatefromgif($_FILES['archivo']['tmp_name'][$i]), $newpng);
              $ruta = $serv.$newpng;
              copy($remoto, $ruta);
              $ex="png";    
              }else
                          if(strcasecmp($ex, "bmp")==0){
-             $newpng =$varia.'.png'; 
-             $png = imagepng(imagecreatefromwbmp($_FILES['archivo']['tmp_name']), $newpng);
+             $newpng =$value->getNombre().'.png'; 
+             $png = imagepng(imagecreatefromwbmp($_FILES['archivo']['tmp_name'][$i]), $newpng);
              $ruta = $serv.$png;
              copy($remoto, $ruta);
              $ex="png";           
                          }else
                             if(strcmp($ex,"avi")==0||strcmp($ex,"mp4")==0||strcmp($ex,"wmv")==0||strcmp($ex,"mkv")==0||strcmp($ex,"3gp")==0){
-              copy($remoto, $ruta);  
-         $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ./multimedia/$id_user/".$varia.".webm");
+             $newpng=$value->getNombre().".".$ex;
+                                copy($remoto, $ruta);  
+         $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ./multimedia/$id_user/".$value->getNombre().".webm");
                //  exec("ffmpeg -i ".$remoto." -vcodec copy -ss 1 -t 120 -acodec ".$varia.".webm 2>&1"); 
           $ruta = $serv.$video; 
          copy($remoto, $ruta);
+         }else{
+             $newpng=$var;
+             copy($remoto, $ruta);
          }
          ////-vcodec copy -ss 1 -t 120 -acodec //corta los videos
                           //  exec("ffmpeg -i ".$remoto." ./multimedia/$id_user/".$varia.".webm 2>&1");
                 // copiamos el archivo temporal, del directorio de temporales de nuestro servidor a la ruta que creamos	  
-                        $archivo->setId_usuario($id_user);
-                        $archivo->setNombre($varia);
-                        $archivo->setExtension($ex);
-                        if($archivo->insertarArchivo()){}else{
+//                        $archivo->setId_usuario($id_user);
+//                        $archivo->setNombre($varia);
+//                        $archivo->setExtension($ex);
+//                        //////////////////////////////////////////////////
+             $estudio->setId_attributo($id_attributo);
+             $estudio->setValor($newpng);
+//         
+                        if($estudio->ingresarEstudioForm()){}else{
                             $mensaje="Error al guardar archivo, verifique";
                         }
-                      
+                    ///////////////////////////////////////////////////////  
 		}
 		// Sino se pudo subir el temporal
 		else {
@@ -107,21 +134,25 @@ $varia=$_POST['nombre'];
 	//}
 	//cerramos la conexión FTP
 	ftp_close($cid);
-  
-}
-
-$archivos=$archivo->listarArchivos($id_user);
+  }else{
+          /////////////////////////////////////////            
+            $valor="";
+             $estudio->setId_attributo($id_attributo);
+             $estudio->setValor($valor);
+            // var_dump($estudio);
+              if($estudio->ingresarEstudioForm()){}else{
+                            $mensaje="Error al guardar archivo, verifique";
+                        }
+         ////////////////////////////////////////    
+  }//fin else if(strcmp($_FILES["archivo"]["name"][$i],"")!=0) 
+                  }//fin if($conta==$i)
+     
+      $conta ++;   }//fin foreach ($attribu as $key => $value)
+     
+}//for($i=0;$i<count($_FILES["archivo"]["name"]);$i++)
+                }//fin if ($_FILES["archivo"]["name"])  
+//$archivos=$archivo->listarArchivos($id_user);
 //$imagen=$archivo->mostrarArchivo($id_user,$_POST['cursos']);
-//
-   $datos=array(
-       "operador" => $tipouser,
-       'archivos' => $archivos,
-       'imagen' => $imagen,
-        'mensaje' => $mensaje,
-        'titulo' => $titulo,
-    );
-     $tpl->asignar('edad', $edad);
-    $tpl->asignar('cedula', $id_user);
-    $tpl->asignar('apellido', $apell);
-    $tpl->mostrar("multimedia", $datos); 
+                 //}
+            
                 } 

@@ -22,28 +22,7 @@ function ingresar(){
    Session::init();
     $tpl=new Template();
     $titulo="Estudios Médicos";
-    if($_POST['registrar']){
-       $ad=new admin();
-       $ad->setNick($_POST['nick']);
-       $ad->setNombre($_POST['nombre']);
-       $ad->setApellido($_POST['apellido']);
-       $ad->setEmail($_POST['email']);
-      $pass=sha1($_POST["passw"]);
-       $ad->setPass($pass);
-       $tip=$_POST['privilegio'];
-       $tipo=0;
-       if(strcmp($tip, "todos")!=0){
-           $tipo=1;
-       }
-       $ad->setTipo($tipo);
-       
-       if($ad->registrar()){  
-       }else{
-           $mensage="Error al registrar usuario. Verifique e intentelo nuevamente.";
-       }
-    }
-    
-    
+  
     if($_POST['user']){
         $user=$_POST['user'];
         $pass=$_POST['pass'];
@@ -62,7 +41,7 @@ function ingresar(){
      
         }else {
         $mensage="Error en Contraseña.<br> El enlace a continuacion, envia una nueva contraseña a su correo registrado.<br>
-                Utilizelo si no recuerda su contraseña. <a href='olvidePass.php?nick=$user'>Olvide mi contraseña</a>";     
+                Utilizelo SOLO si no recuerda su contraseña. <a href='olvidePass.php?nick=$user'>Olvide mi contraseña</a>";     
         }
       }else{
    $mensage="Error en Usuario.<br> Verifíque o comuniquese con el administrador de la Base de Datos";             
@@ -155,3 +134,44 @@ function modificarPerfil(){
     $tpl->mostrar("modifPerfil",$datos);
 }
 
+function registrar(){
+  error_reporting(0);
+  $mensage="";
+  $admin=new admin();
+   Session::init();
+    $tipouser= Session::get("usuario");
+    $nick= Session::get("nick");
+    $tpl=new Template();
+    $titulo="Estudios Médicos";
+    if($_POST['registrar']){
+       $ad=new admin();
+       $ad->setNick($_POST['nick']);
+       $ad->setNombre($_POST['nombre']);
+       $ad->setApellido($_POST['apellido']);
+       $ad->setEmail($_POST['email']);
+      $pass=sha1($_POST["passw"]);
+       $ad->setPass($pass);
+       $tip=$_POST['privilegio'];
+       $tipo=0;
+       if(strcmp($tip, "todos")!=0){
+           $tipo=1;
+       }
+       $ad->setTipo($tipo);
+       
+       if($ad->registrar()){  
+       }else{
+           $mensage="Error al registrar usuario. Verifique e intentelo nuevamente.";
+       }
+    }
+        $datos=array(
+            "nick" => $nick,
+             "operador" => $tipouser,
+           "mensage" => $mensage,
+       );   
+    $tpl->asignar("titulo", $titulo);
+    $tpl->mostrar("registrarUsuario", $datos); 
+    
+    
+    
+    
+}

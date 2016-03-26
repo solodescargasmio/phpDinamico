@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-18 20:16:37
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-20 02:25:49
          compiled from "vistas\nuevaVersion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2102256c79b7c0f4248-01145316%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6069c9dab9ffb0777a7aedb5e3ab575fb91ec69c' => 
     array (
       0 => 'vistas\\nuevaVersion.tpl',
-      1 => 1458328581,
+      1 => 1458437146,
       2 => 'file',
     ),
   ),
@@ -56,7 +56,6 @@ and open the template in the editor.
             <script>
              
 $(document).ready(function(){
-  
     $('#miform').hide();
   
 		$("#mostrar").on( "click", function() {
@@ -69,49 +68,39 @@ $(document).ready(function(){
                           $('#formversion').show(); //muestro mediante id 
 		});
   });
-    
-    function control(){
-        nomb_form=document.getElementById("nom_formulario").value;
-      datatypo='nom_formulario='+nomb_form;
-          $.ajax({
-         url: 'controlarAjax.php',//llamo a la pagina q hace el control
-         type:'POST',//metodo por el cual paso el dato
-         data:datatypo,
-             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
-                  $("#avizo").fadeIn(1000).html(data); //imprimo el mensaje en el div      
-                
-    }
-     });  
-    }
+ 
      
         </script>
                 <script>
-           $(function() {
+          $(function() {
             var $fieldset = $('<fieldset>');    
     var $form = $("#my-dynamic-form");
     $(' <div class="form-group">'+
                  '<label  class="col-sm-8 control-label">Nombre Formulario(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
-    $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" required="">').appendTo($fieldset);
-      $('</div></div>').appendTo($fieldset);
-        $fieldset.appendTo($form); 
-    $('<div class="form-group"><div class="col-lg-10"><br><input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
-      $('</div></div>').appendTo($fieldset);
+    $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" required="" readonly>').appendTo($fieldset);
+      $('</div></div><div id="poner"></div>').appendTo($fieldset); 
+         $(' <div class="form-group">'+
+    '<div class="col-lg-10">').appendTo($fieldset);
+    $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
+      $('</div></div>').appendTo($fieldset); 
         $fieldset.appendTo($form); 
     $('.campo1').click( function(){
             var $dato= $(".campo",this).val();
             var $dato1= $(".valor",this).val();
-            var $id_att= $(".ids",this).val();
+            var $id_att=0;
+            $id_att=$(".ids",this).val();
        da=recorrerDom($dato);
        if(da==0){ //si son distintos lo agrego
            gu="guardo";
            $("#my-dynamic-form input").remove("#"+gu+""); 
         $(' <div class="form-group" id="'+ $dato +'">'+
                  '<label  class="col-sm-8 control-label">'+ capitalize($dato) +'</label>'+
+    '<div class="col-lg-10">'+
+        '<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>'+
+            '<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom('+$id_att+')">Obligatorio<input type="checkbox" id="'+ $id_att +'" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
+            $(' <div class="form-group">'+
     '<div class="col-lg-10">').appendTo($fieldset);
-        $('<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>').appendTo($fieldset);
-            $('<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom()">Obligatorio <input type="checkbox" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
-            $(' <div class="form-group"><div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);    
     $fieldset.appendTo($form);}
@@ -122,12 +111,31 @@ $(document).ready(function(){
     });
  
 }); 
-$(function() {
+$(function(){
     $('.version1').click( function(){
-            var $datove= $(".formu",this).val();
-        document.getElementById("nom_formulario").value=$datove;    
-        });
+            var $dato1= $(".formular",this).val();
+        document.getElementById("nom_formulario").value=$dato1; 
+     nomb_form=$dato1; //document.getElementById("nom_formulario").value;
+      datatypo='formulario='+nomb_form;
+         $.ajax({
+         url: 'controlarAjax.php',//llamo a la pagina q hace el control
+         type:'POST',//metodo por el cual paso el dato
+         data:datatypo,
+             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
+                  $("#poner").fadeIn(1000).html(data); //imprimo el mensaje en el div      
+                
+    }
+     });
     });
+    });
+    
+     function control(){
+
+     
+ }
+    
+    
+    
  function recorrerDom(valor) { 
     va=0;
     //recorro todos los label y si alguno tiene el mismo texto no le permito ingresar el atributo
@@ -140,18 +148,20 @@ $(function() {
      });
     return va;
     }
-function eliminarElementoDom() {
+function eliminarElementoDom($id_att) {
  $("input[type='button']").on('click',function(){
-     dat=$(this).attr('ident');  
+     dat=$(this).attr('ident');
         $("#my-dynamic-form input").each(function (idx, el){
      if($(el).attr('name')==dat){
          va=$(el).attr('name');
-       $("#my-dynamic-form input").remove("#"+va+"");
-        $("#my-dynamic-form div").remove("#"+va+"") 
+         $("#my-dynamic-form input").remove("#"+va+"");
+        $("#my-dynamic-form div").remove("#"+va+""); 
+        $("#my-dynamic-form input").remove("#"+$id_att+"");
      };
      });
 // 
     }
+            
      )};
 //function ver_data_estado() 
 //{ 
@@ -170,7 +180,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
     <div class="container-fluid">
           <div id="menus">
                 <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
-   <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a> 
+   <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
        <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
            <br> <table class="table-responsive" border="1">  
                 <tr>
@@ -188,10 +198,11 @@ $_smarty_tpl->tpl_vars['valor']->_loop = true;
 
                       &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
 " hidden=""><?php echo $_smarty_tpl->tpl_vars['valor']->value->getTipo();?>
-</a></td>                 
-               <input type="text" name="ids" class="ids" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getId_attributo();?>
-" hidden="">    
-               </tr>
+</a>
+                   <input type="text" name="id_att" class="ids" value="<?php echo $_smarty_tpl->tpl_vars['valor']->value->getId_attributo();?>
+" hidden=""> 
+                   </td>                 
+                   </tr>
                    <?php } ?>
                    <?php } else { ?>
                        <?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
@@ -212,8 +223,10 @@ $_smarty_tpl->tpl_vars['valor']->_loop = true;
 foreach ($_from as $_smarty_tpl->tpl_vars['formulario']->key => $_smarty_tpl->tpl_vars['formulario']->value) {
 $_smarty_tpl->tpl_vars['formulario']->_loop = true;
 ?>
-               <tr>
-                   <td><a style="cursor:pointer;"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formulario']->value->getNombre(), 'UTF-8');?>
+             <tr>
+                 <td class="version1"><a style="cursor:pointer;">           
+       <input type="text" id="formular" name="formular" class="formular" value="<?php echo $_smarty_tpl->tpl_vars['formulario']->value->getNombre();?>
+" hidden=""><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formulario']->value->getNombre(), 'UTF-8');?>
 </a></td>                 
                    </tr>
                    <?php } ?>
@@ -227,9 +240,10 @@ $_smarty_tpl->tpl_vars['formulario']->_loop = true;
       <div style="float: right;"><h6><font style="color: red;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
        <div id="avizo"></div>
       
-      <h3>Formulario</h3>
+       <h3>Formulario </h3>
       <form id="my-dynamic-form" method="POST"> 
-  </form>
+          
+      </form>
          
        </div> 
          

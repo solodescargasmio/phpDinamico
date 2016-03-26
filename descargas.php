@@ -9,7 +9,7 @@ require_once ('./clases/session.php');
    Session::init();
     $id_user=Session::get('cedula');
     $archivo=$_GET['archivo'];
-   $extencion=$_GET['extension'];
+    $extencion=$_GET['extension'];
     $ruta = './multimedia/'.$id_user.'/'.$archivo.'.'.$extencion;
 if (is_file($ruta))
 {

@@ -58,6 +58,7 @@
   
 }); 
    </script>
+  
    <style>
 .suggest-element{
     
@@ -87,7 +88,7 @@ overflow: auto;
         <div id="cuadrado" class="nav navbar-nav navbar-left">
     <font style="font-weight: bold;">        
         <font style="color: #fff;">
-        Usuario: {$operador}</font><br>
+        Usuario: {$nick}</font><br>
     <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Cerrar sesion</a>
         </div>
         {/if}
@@ -96,9 +97,13 @@ overflow: auto;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso y registro</a>       
+        <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso</a>       
+       {if isset($operador)}
         <a tabindex="-1" class="navbar-brand" href="ingresar.php">Pagina Principal</a> 
-        
+        {/if}
+        {if $operador=="admin"}
+        <a tabindex="-1" class="navbar-brand" href="registrarUsuario.php">Registrar Usuario</a> 
+        {/if}
         
      {if isset($cedula)}
            
@@ -128,7 +133,7 @@ overflow: auto;
        <ul class="nav navbar-nav">
             {if $operador=="comun"||$operador=="admin"} 
               <li class="dropdown">
-            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ingresar Datos<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Formularios <b class="caret"></b></a>
            <ul class="dropdown-menu">
           {if $formularios}
           {foreach from=$formularios item=value}
@@ -143,9 +148,9 @@ overflow: auto;
            <a tabindex="-1" href="modificarPerfil.php">Modificar Datos Perfil</a>
             </li>
             
-            <li class="dropdown">    
-           <a tabindex="-1" href="paginado.php">Paginado</a>
-            </li>
+         <!--   <li class="dropdown">    
+           <a tabindex="-1" href="#">Paginado</a>
+            </li>-->
         {/if}
        {if $operador=="admin"}   
         <li class="dropdown">
@@ -163,10 +168,10 @@ overflow: auto;
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ver Fichas<b class="caret"></b></a>
            <ul class="dropdown-menu">
          <li class="dropdown">   
-     <a tabindex="-1" href="exportarExcel.php">Como tablas en EXEL</a>
+     <a tabindex="-1" href="exportarExcel.php">Como tablas en EXCEL</a>
             </li>
              <li class="dropdown">    
-     <a tabindex="-1" href="exportarExcel1.php">Como hojas en EXEL</a>
+     <a tabindex="-1" href="exportarExcel1.php">Como hojas en EXCEL</a>
             </li>
            </ul>  
         </li>

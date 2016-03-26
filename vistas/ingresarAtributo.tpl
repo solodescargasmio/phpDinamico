@@ -41,7 +41,7 @@ and open the template in the editor.
     </head>
     <body>
         {include file="cabeza.tpl"}
-    <div class="container-fluid" style="position: absolute;top: 120px;">
+    <div class="container-fluid" style="position: absolute;top: 25%;">
         {if isset($mensage)}{$mensage}{/if}
             <a href="#" onclick="mostrarDiv()" id="att"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Atributo Simple</button></a>
    <a href="#" onclick="mostrarDiv()" id="att1"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Atributo Compuesto </button></a>

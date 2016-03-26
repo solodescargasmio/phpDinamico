@@ -95,6 +95,7 @@ $(document).ready(function(){
 }); 
 $(function() {
     $('.version1').click( function(){
+        alert('dentro');
             var $datove= $(".formu",this).val();
         document.getElementById("nom_formulario").value=$datove;    
         });
@@ -174,8 +175,8 @@ function capitalize(s)//convierte minusculas a Mayusculas
                </tr>
 {if isset($formularios)}
     {foreach from=$formularios item=formulario}
-               <tr>
-                   <td><a style="cursor:pointer;">{$formulario->getNombre()|upper}</a></td>                 
+             <tr class="version1">
+                   <td class="formu"><a style="cursor:pointer;"><input type="text" id="nom_formu" class="formu" value="{$formulario->getNombre()}" hidden="">{$formulario->getNombre()|upper}</a></td>                 
                    </tr>
                    {/foreach}
 {/if}

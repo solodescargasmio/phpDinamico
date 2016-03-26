@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-17 21:50:30
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-26 20:11:16
          compiled from "vistas\cabeza.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1091256c797902625a7-76210626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '71161a5a317e197260dadd7216af4f389faab762' => 
     array (
       0 => 'vistas\\cabeza.tpl',
-      1 => 1458247819,
+      1 => 1459019462,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'operador' => 0,
+    'nick' => 0,
     'cedula' => 0,
     'apellido' => 0,
     'edad' => 0,
@@ -88,6 +89,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   
 }); 
    </script>
+  
    <style>
 .suggest-element{
     
@@ -117,7 +119,7 @@ overflow: auto;
         <div id="cuadrado" class="nav navbar-nav navbar-left">
     <font style="font-weight: bold;">        
         <font style="color: #fff;">
-        Usuario: <?php echo $_smarty_tpl->tpl_vars['operador']->value;?>
+        Usuario: <?php echo $_smarty_tpl->tpl_vars['nick']->value;?>
 </font><br>
     <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Cerrar sesion</a>
         </div>
@@ -127,9 +129,13 @@ overflow: auto;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso y registro</a>       
+        <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso</a>       
+       <?php if (isset($_smarty_tpl->tpl_vars['operador']->value)) {?>
         <a tabindex="-1" class="navbar-brand" href="ingresar.php">Pagina Principal</a> 
-        
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['operador']->value=="admin") {?>
+        <a tabindex="-1" class="navbar-brand" href="registrarUsuario.php">Registrar Usuario</a> 
+        <?php }?>
         
      <?php if (isset($_smarty_tpl->tpl_vars['cedula']->value)) {?>
            
@@ -164,7 +170,7 @@ overflow: auto;
        <ul class="nav navbar-nav">
             <?php if ($_smarty_tpl->tpl_vars['operador']->value=="comun"||$_smarty_tpl->tpl_vars['operador']->value=="admin") {?> 
               <li class="dropdown">
-            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ingresar Datos<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Formularios <b class="caret"></b></a>
            <ul class="dropdown-menu">
           <?php if ($_smarty_tpl->tpl_vars['formularios']->value) {?>
           <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
@@ -185,9 +191,9 @@ $_smarty_tpl->tpl_vars['value']->_loop = true;
            <a tabindex="-1" href="modificarPerfil.php">Modificar Datos Perfil</a>
             </li>
             
-            <li class="dropdown">    
-           <a tabindex="-1" href="paginado.php">Paginado</a>
-            </li>
+         <!--   <li class="dropdown">    
+           <a tabindex="-1" href="#">Paginado</a>
+            </li>-->
         <?php }?>
        <?php if ($_smarty_tpl->tpl_vars['operador']->value=="admin") {?>   
         <li class="dropdown">
@@ -205,10 +211,10 @@ $_smarty_tpl->tpl_vars['value']->_loop = true;
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ver Fichas<b class="caret"></b></a>
            <ul class="dropdown-menu">
          <li class="dropdown">   
-     <a tabindex="-1" href="exportarExcel.php">Como tablas en EXEL</a>
+     <a tabindex="-1" href="exportarExcel.php">Como tablas en EXCEL</a>
             </li>
              <li class="dropdown">    
-     <a tabindex="-1" href="exportarExcel1.php">Como hojas en EXEL</a>
+     <a tabindex="-1" href="exportarExcel1.php">Como hojas en EXCEL</a>
             </li>
            </ul>  
         </li>

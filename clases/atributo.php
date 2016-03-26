@@ -111,7 +111,7 @@ public function ingresarAtributo(){
  
  public function traerAtributosForm($id) {
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT atributo.id_attributo,atributo.nombre,atributo.tipo,atributo.calculado,form_attr.obligatorio FROM atributo,form_attr WHERE atributo.id_attributo=form_attr.id_attributo AND form_attr.id_form=".$id);   
+      $resultado=$conexion->query("SELECT atributo.id_attributo,atributo.nombre,atributo.tabla,atributo.tipo,atributo.calculado,form_attr.obligatorio FROM atributo,form_attr WHERE atributo.id_attributo=form_attr.id_attributo AND form_attr.id_form=".$id);   
           while ($fila=$resultado->fetch_object()) {
          $atr=new atributo();
          $atr->setId_attributo($fila->id_attributo);
@@ -119,6 +119,22 @@ public function ingresarAtributo(){
          $atr->setTipo($fila->tipo);
          $atr->setTabla($fila->tabla);
          $atr->setObligatorio($fila->obligatorio);
+            $atributos[]=$atr;          
+} mysqli_close($conexion);
+        return $atributos;
+ }
+ 
+ public function traerAtributosFormFile($id) {
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT atributo.id_attributo,atributo.nombre,atributo.tipo,atributo.calculado,form_attr.obligatorio FROM atributo,form_attr WHERE atributo.id_attributo=form_attr.id_attributo AND form_attr.id_form=".$id." AND atributo.tipo='file'");   
+          while ($fila=$resultado->fetch_object()) {
+         $atr=new atributo();
+         $atr->setId_attributo($fila->id_attributo);
+         $atr->setNombre($fila->nombre);
+         $atr->setTipo($fila->tipo);
+         $atr->setTabla($fila->tabla);
+         $atr->setObligatorio($fila->obligatorio);
+       
             $atributos[]=$atr;          
 } mysqli_close($conexion);
         return $atributos;

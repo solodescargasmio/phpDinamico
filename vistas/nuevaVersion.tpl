@@ -25,7 +25,6 @@ and open the template in the editor.
             <script>
              
 $(document).ready(function(){
-  
     $('#miform').hide();
   
 		$("#mostrar").on( "click", function() {
@@ -38,35 +37,22 @@ $(document).ready(function(){
                           $('#formversion').show(); //muestro mediante id 
 		});
   });
-    
-    function control(){
-        nomb_form=document.getElementById("nom_formulario").value;
-      datatypo='nom_formulario='+nomb_form;
-          $.ajax({
-         url: 'controlarAjax.php',//llamo a la pagina q hace el control
-         type:'POST',//metodo por el cual paso el dato
-         data:datatypo,
-             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
-                  $("#avizo").fadeIn(1000).html(data); //imprimo el mensaje en el div      
-                
-    }
-     });  
-    }
+ 
      
         </script>
                 <script>
-           $(function() {
-         $(function() {
+          $(function() {
             var $fieldset = $('<fieldset>');    
     var $form = $("#my-dynamic-form");
     $(' <div class="form-group">'+
                  '<label  class="col-sm-8 control-label">Nombre Formulario(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
-    $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" required="">').appendTo($fieldset);
-      $('</div></div>').appendTo($fieldset);
-        $fieldset.appendTo($form); 
-    $('<div class="form-group"><div class="col-lg-10"><br><input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
-      $('</div></div>').appendTo($fieldset);
+    $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" required="" readonly>').appendTo($fieldset);
+      $('</div></div><div id="poner"></div>').appendTo($fieldset); 
+         $(' <div class="form-group">'+
+    '<div class="col-lg-10">').appendTo($fieldset);
+    $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
+      $('</div></div>').appendTo($fieldset); 
         $fieldset.appendTo($form); 
     $('.campo1').click( function(){
             var $dato= $(".campo",this).val();
@@ -93,13 +79,32 @@ $(document).ready(function(){
            
     });
  
-});  
-$(function() {
+}); 
+$(function(){
     $('.version1').click( function(){
-            var $datove= $(".formu",this).val();
-        document.getElementById("nom_formulario").value=$datove;    
-        });
+            var $dato1= $(".formular",this).val();
+        document.getElementById("nom_formulario").value=$dato1; 
+     nomb_form=$dato1; //document.getElementById("nom_formulario").value;
+      datatypo='formulario='+nomb_form;
+         $.ajax({
+         url: 'controlarAjax.php',//llamo a la pagina q hace el control
+         type:'POST',//metodo por el cual paso el dato
+         data:datatypo,
+             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
+                  $("#poner").fadeIn(1000).html(data); //imprimo el mensaje en el div      
+                
+    }
+     });
     });
+    });
+    
+     function control(){
+
+     
+ }
+    
+    
+    
  function recorrerDom(valor) { 
     va=0;
     //recorro todos los label y si alguno tiene el mismo texto no le permito ingresar el atributo
@@ -118,14 +123,14 @@ function eliminarElementoDom($id_att) {
         $("#my-dynamic-form input").each(function (idx, el){
      if($(el).attr('name')==dat){
          va=$(el).attr('name');
-         alert($id_att);
          $("#my-dynamic-form input").remove("#"+va+"");
         $("#my-dynamic-form div").remove("#"+va+""); 
         $("#my-dynamic-form input").remove("#"+$id_att+"");
      };
      });
 // 
-    }     
+    }
+            
      )};
 //function ver_data_estado() 
 //{ 
@@ -143,7 +148,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
     <div class="container-fluid">
           <div id="menus">
                 <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
-   <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a> 
+   <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
        <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
            <br> <table class="table-responsive" border="1">  
                 <tr>
@@ -152,11 +157,11 @@ function capitalize(s)//convierte minusculas a Mayusculas
 {if isset($atributos)}
     {foreach from=$atributos item=valor}
                <tr class="agregar">
-               <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="{$valor->getNombre()}" hidden="">{$valor->getNombre()}
+                   <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="{$valor->getNombre()}" hidden="">{$valor->getNombre()}
                       &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="{$valor->getTipo()}" hidden="">{$valor->getTipo()}</a>
                    <input type="text" name="id_att" class="ids" value="{$valor->getId_attributo()}" hidden=""> 
-                   </td> 
-               </tr>
+                   </td>                 
+                   </tr>
                    {/foreach}
                    {else}
                        {$mensage}
@@ -172,8 +177,9 @@ function capitalize(s)//convierte minusculas a Mayusculas
                </tr>
 {if isset($formularios)}
     {foreach from=$formularios item=formulario}
-               <tr>
-                   <td><a style="cursor:pointer;">{$formulario->getNombre()|upper}</a></td>                 
+             <tr>
+                 <td class="version1"><a style="cursor:pointer;">           
+       <input type="text" id="formular" name="formular" class="formular" value="{$formulario->getNombre()}" hidden="">{$formulario->getNombre()|upper}</a></td>                 
                    </tr>
                    {/foreach}
 {/if}
@@ -186,9 +192,10 @@ function capitalize(s)//convierte minusculas a Mayusculas
       <div style="float: right;"><h6><font style="color: red;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
        <div id="avizo"></div>
       
-      <h3>Formulario</h3>
+       <h3>Formulario </h3>
       <form id="my-dynamic-form" method="POST"> 
-  </form>
+          
+      </form>
          
        </div> 
          

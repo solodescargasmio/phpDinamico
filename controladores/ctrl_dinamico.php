@@ -13,6 +13,8 @@ require_once ('./clases/form_attr.php');
 require_once ('./clases/template.php');
 require_once ('./clases/session.php');
 require_once ('./clases/tabla.php');
+require_once ('./multimedia/guardarMultimedia.php');
+require_once ('./multimedia/crearMKdir.php');
 require_once ('./clases/estudio_medico.php');
 require_once ('./clases/dependencia.php');
 require_once ('./clases/datosPrecargados.php');
@@ -22,6 +24,7 @@ function principal(){
  error_reporting(0);
     Session::init();
     $tipouser=  Session::get("usuario");
+    $nick=  Session::get("nick");
    if($_GET['idpaciente']){//trabajar con este paciente
       $id_user=$_GET['idpaciente'];
        $form=new formulario();
@@ -68,6 +71,7 @@ function principal(){
               //con esto aseguro q los formularios y atributos se generen una sola ves
               cargarDatosPaciente();}
        $datos=array(
+           "nick" => $nick,
            "operador" => $tipouser,
            "usuarios" => $estudios,
            "mensage" => $mensage,
@@ -84,6 +88,7 @@ function principal(){
 ///////////////////////////////////////////////////////////////////////
 function formularios(){
     Session::init();
+    $nick=Session::get("nick");
     $id_user=Session::get('cedula');
     $id_usuario=$id_user;
     $apell= Session::get('apellido');
@@ -139,8 +144,7 @@ if($_POST['modificar']){
              Session::set("cedula",$id_usuario);
              Session::set("apellido", $_POST['apellido']);
              Session::set("edad", $_POST['edad']);
-         }
-             
+         }    
                $datos=$_POST; 
              //  
             $ok=false;   
@@ -162,7 +166,11 @@ if($_POST['modificar']){
     
         if($_POST['nomformulario']){
             $nomf=$_POST['nomformulario'];
-            $id_usuario=$_POST['id_usuario'];
+            if(isset($_POST['id_usuario'])){
+              $id_usuario=$_POST['id_usuario'];  
+            }else{
+             $id_usuario=$id_user;   
+            }
              $estudio=new estudio_medico();
              $estudio->setId_usuario($id_usuario);
              $estudio->setId_form($idf);
@@ -172,13 +180,15 @@ if($_POST['modificar']){
              Session::set("edad", $_POST['edad']);
              crearDir($id_usuario);
              $id_estudio=$estudio->ingresarEstudio();
+             Session::set("estudio", $id_estudio);
          }
             
              $estudio->setId_estudio($id_estudio);
                $datos=$_POST;
+               
                $ok=false;
          foreach ($datos as $key => $value) {
-            if(strcmp($key, "nomformulario")!=0){
+            if(strcmp($key, "nomformulario")!=0){ 
              $id_attributo=$atr->devolverId($key);
              $estudio->setId_attributo($id_attributo);
              $estudio->setValor($value);
@@ -188,6 +198,11 @@ if($_POST['modificar']){
          }
         
         }
+        
+         if(isset($_FILES)){
+subirDatos($idf);
+            }
+        
       if($ok){//eliminar esto para que vuelva al mismo lugar
                     header("Location: ingresar.php");}
        } 
@@ -213,6 +228,7 @@ if($_POST['modificar']){
          $formularios[]=$value;
           }}
         $datos=array(
+            "nick" => $nick,
              "operador" => $tipouser,
             "estudios" => $estudios,
             "ok" => $ok,
@@ -237,6 +253,7 @@ if($_POST['modificar']){
                  
 function ingresarAtributo() {
      Session::init();
+     $nick=  Session::get("nick");
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
@@ -281,6 +298,7 @@ function ingresarAtributo() {
          $formularios[]=$value;
           }}
         $datos=array(
+            "nick" => $nick,
              "operador" => $tipouser,
             "atributos" => $resultado,
             "mensage" => $mensage
@@ -303,6 +321,7 @@ function ingresarAtributo() {
     'totalpaginas' => $total,
             'actual' => $actual,*/
          Session::init();
+         $nick=  Session::get("nick");
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
@@ -364,6 +383,7 @@ foreach ($dato as $key => $value){
           }}
        
         $datos=array(
+            "nick" => $nick,
             "totalpaginas" => $totalpag,
             "actual" => $actual,
             "limite" => $inicio,
@@ -385,6 +405,7 @@ foreach ($dato as $key => $value){
 
 function nuevaVersion(){
      Session::init();
+     $nick=  Session::get("nick");
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
@@ -435,6 +456,7 @@ function nuevaVersion(){
          $formularios[]=$value;
           }}
         $datos=array(
+            "nick" => $nick,
              "operador" => $tipouser,
             "atributos" => $resultado,
             "mensage" => $mensage
@@ -452,6 +474,7 @@ function nuevaVersion(){
 
 function dependenciasForm(){
      Session::init();
+     $nick=  Session::get("nick");
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
@@ -503,6 +526,7 @@ function dependenciasForm(){
         }
        // var_dump($dependen);exit();
         $datos=array(
+            "nick" => $nick,
              "operador" => $tipouser,
             "atributos" => $resultado,
             "mensage" => $mensage,
@@ -528,15 +552,18 @@ function guardarArchivos(){
 function cerrar() {
     Session::init();
     $tipo=Session::get("usuario");
+    $nick=Session::get("nick");
     Session::destroy();
     Session::init();
     Session::set("usuario", $tipo);
+    Session::set("nick", $nick);
     principal();
 }
 
 function paginado(){
     error_reporting(0);
        Session::init();
+       $nick=  Session::get("nick");
     $id_user=Session::get('cedula');
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
@@ -567,6 +594,7 @@ function paginado(){
          $formularios[]=$value;
           }}
      $datos=array(
+         "nick" => $nick,
              "operador" => $tipouser,
             "atributos" => $resultado,
             "mensage" => $mensage,
@@ -579,5 +607,71 @@ function paginado(){
     
            $tpl->asignar("titulo", $titulo);
         $tpl->mostrar("paginado",$datos);   
+}
+
+function verFormularios(){
+Session::init();
+$nick=  Session::get("nick");
+    $id_user=Session::get('cedula');
+    $id_usuario=$id_user;
+    $apell= Session::get('apellido');
+    $edad=  Session::get('edad');
+    $id_estudio= Session::get("estudio"); 
+     $tipouser=  Session::get("usuario");
+     error_reporting(0);
+       $mensage="";
+    $tpl=new Template();
+    $titulo="Estudios Médicos"; 
+        $nombre=$_GET['nombre'];
+        
+        $atr=new atributo();
+        $tabla=new tabla();
+        $form=new formulario();
+        $idf=$form->traerId($nombre);
+      //  var_dump($id_estudio);exit();/////////////////////////////////////////////
+        if($id_estudio){
+        $estu=new estudio_medico();
+        $estudio=$estu->traerFormEstudioId($id_estudio, $idf);
+       // var_dump($estudio);exit();
+        foreach ($estudio as $key => $value){
+            if(strcmp($value->getTipo(),"file")==0){
+        
+   $exten=explode(".",$value->getValor());
+        $ex=end($exten);
+        $value->setExtencion($ex);
+          if(strcmp($ex,"avi")==0||strcmp($ex,"mp4")==0||strcmp($ex,"wmv")==0||strcmp($ex,"mkv")==0||strcmp($ex,"3gp")==0){
+        $princi=$exten[0];
+       $nuevo=$princi.".webm";
+       $value->setValor($nuevo);
+          }    
+            }
+           $estudios[]=$value;
+        }
+        }
+        
+        
+
+        $form=new formulario();
+          $resultados=$form->traerFormularios();
+          if($resultados!=null){
+          foreach ($resultados as $key => $value) {
+         $formularios[]=$value;
+          }}
+        $datos=array(
+            "nick" => $nick,
+             "operador" => $tipouser,
+            "estudios" => $estudios,
+            "nombreform" => $nombre,
+            "atributos" => $resultado,
+            "tablas" => $selectos,
+            "mensage" => $mensage
+        );
+           $tpl->asignar('edad', $edad);
+    $tpl->asignar('cedula', $id_user);
+    $tpl->asignar('apellido', $apell);
+   $tpl->asignar( "formularios", $formularios);
+        $tpl->asignar("titulo", $titulo);
+        $tpl->mostrar("verFormularios",$datos);
+        
 }
 

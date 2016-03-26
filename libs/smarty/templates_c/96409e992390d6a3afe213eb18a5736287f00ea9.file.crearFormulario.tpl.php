@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-18 20:53:13
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-19 19:03:17
          compiled from "vistas\crearFormulario.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:572156c79b761312d9-11621522%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '96409e992390d6a3afe213eb18a5736287f00ea9' => 
     array (
       0 => 'vistas\\crearFormulario.tpl',
-      1 => 1458330579,
+      1 => 1458379660,
       2 => 'file',
     ),
   ),
@@ -126,6 +126,7 @@ $(document).ready(function(){
 }); 
 $(function() {
     $('.version1').click( function(){
+        alert('dentro');
             var $datove= $(".formu",this).val();
         document.getElementById("nom_formulario").value=$datove;    
         });
@@ -220,8 +221,9 @@ $_smarty_tpl->tpl_vars['valor']->_loop = true;
 foreach ($_from as $_smarty_tpl->tpl_vars['formulario']->key => $_smarty_tpl->tpl_vars['formulario']->value) {
 $_smarty_tpl->tpl_vars['formulario']->_loop = true;
 ?>
-               <tr>
-                   <td><a style="cursor:pointer;"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formulario']->value->getNombre(), 'UTF-8');?>
+             <tr class="version1">
+                   <td class="formu"><a style="cursor:pointer;"><input type="text" id="nom_formu" class="formu" value="<?php echo $_smarty_tpl->tpl_vars['formulario']->value->getNombre();?>
+" hidden=""><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['formulario']->value->getNombre(), 'UTF-8');?>
 </a></td>                 
                    </tr>
                    <?php } ?>

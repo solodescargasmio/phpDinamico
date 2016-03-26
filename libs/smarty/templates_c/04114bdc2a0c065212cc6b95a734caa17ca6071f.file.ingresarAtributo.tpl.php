@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-10 02:37:47
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-25 18:11:10
          compiled from "vistas\ingresarAtributo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:562656c8bb70d1cef1-56969332%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04114bdc2a0c065212cc6b95a734caa17ca6071f' => 
     array (
       0 => 'vistas\\ingresarAtributo.tpl',
-      1 => 1457573836,
+      1 => 1458925867,
       2 => 'file',
     ),
   ),
@@ -67,7 +67,7 @@ and open the template in the editor.
     <body>
         <?php echo $_smarty_tpl->getSubTemplate ("cabeza.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-    <div class="container-fluid" style="position: absolute;top: 120px;">
+    <div class="container-fluid" style="position: absolute;top: 25%;">
         <?php if (isset($_smarty_tpl->tpl_vars['mensage']->value)) {?><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
 <?php }?>
             <a href="#" onclick="mostrarDiv()" id="att"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Atributo Simple</button></a>

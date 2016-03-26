@@ -21,10 +21,19 @@ class estudio_medico {
     private $nom_attributo;
     private $tipo;
     private $valor;
+    private $extencion;
     function __construct() {
         
     }
-    public function getTipo() {
+    public function getExtencion() {
+        return $this->extencion;
+    }
+
+    public function setExtencion($extencion) {
+        $this->extencion = $extencion;
+    }
+
+        public function getTipo() {
         return $this->tipo;
     }
 
