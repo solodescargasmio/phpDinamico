@@ -95,7 +95,7 @@ $(document).ready(function(){
 }); 
 $(function() {
     $('.version1').click( function(){
-        alert('dentro');
+
             var $datove= $(".formu",this).val();
         document.getElementById("nom_formulario").value=$datove;    
         });
@@ -118,7 +118,6 @@ function eliminarElementoDom($id_att) {
         $("#my-dynamic-form input").each(function (idx, el){
      if($(el).attr('name')==dat){
          va=$(el).attr('name');
-         alert($id_att);
          $("#my-dynamic-form input").remove("#"+va+"");
         $("#my-dynamic-form div").remove("#"+va+""); 
         $("#my-dynamic-form input").remove("#"+$id_att+"");
