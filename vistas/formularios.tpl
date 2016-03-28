@@ -206,7 +206,12 @@ return edad;
     <div class="col-lg-10">
           
       {if $atributo->getTipo()=="double" || $atributo->getTipo()=="float"}
-         <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}"> 
+          {if $atributo->getObligatorio()=="0"}
+              <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required=""> 
+      {else}
+           <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}"> 
+          {/if}
+        
         {elseif $atributo->getTipo()=="text"}
            {if $atributo->getTabla()=="1"}
           
@@ -219,23 +224,40 @@ return edad;
                   {/foreach}
                
             </select>
-               {else}   
+               {elseif $atributo->getObligatorio()=="0"}
+                   <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">              
+                   {else}    
                   <input type="text" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}"> 
             {/if} 
             {elseif $atributo->getTipo()=="date"}
+                {if $atributo->getObligatorio()=="0"}
           <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker" required="">
-          {elseif  $atributo->getTipo()=="int"}
+          {else}
+              <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker">
+          {/if}
+                {elseif  $atributo->getTipo()=="int"}
               {if $atributo->getNombre()=="id_usuario" && $nombreform!="paciente"}
                   <input type="number" class="form-control" value="{$cedula}" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" readonly="">
+              {elseif $atributo->getObligatorio()=="0"}
+                  <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
               {else}
                   <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">
               {/if}
               
         {elseif $atributo->getTipo()=="file"}
-            <input type="{$atributo->getTipo()}" class="form-control" name="archivo[]" id="{$atributo->getNombre()}">
-        {else}
-           <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">  
-        {/if}
+            {if  $atributo->getObligatorio()=="0"}
+                <input type="{$atributo->getTipo()}" class="form-control" name="archivo[]" id="{$atributo->getNombre()}" required="">
+            {else}
+                <input type="{$atributo->getTipo()}" class="form-control" name="archivo[]" id="{$atributo->getNombre()}">
+            {/if}
+            
+            {else}
+             {if  $atributo->getObligatorio()=="0"}   
+                 <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">  
+            {else}
+                <input type="{$atributo->getTipo()}" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}">  
+                {/if}
+             {/if}
     </div>
   </div>
             {/foreach}

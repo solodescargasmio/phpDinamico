@@ -64,7 +64,7 @@ return $res;
  while ($fila=$resultado->fetch_object()) {
          $form_att=new form_attr();
          $form_att->setId_atributo($fila->id_atributo);
-            $form_attis[]=$form_att;          
+         $form_attis[]=$form_att;          
 } mysqli_close($conexion);
         return $form_attis;
  }

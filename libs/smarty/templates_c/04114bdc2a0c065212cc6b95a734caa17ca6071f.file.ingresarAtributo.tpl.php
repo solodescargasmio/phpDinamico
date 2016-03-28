@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-27 20:40:14
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-28 17:54:24
          compiled from "vistas\ingresarAtributo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:562656c8bb70d1cef1-56969332%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04114bdc2a0c065212cc6b95a734caa17ca6071f' => 
     array (
       0 => 'vistas\\ingresarAtributo.tpl',
-      1 => 1459104011,
+      1 => 1459180458,
       2 => 'file',
     ),
   ),
@@ -59,10 +59,24 @@ and open the template in the editor.
                 $("#ocultar").show();
                 $("#myform1").show();
                 $("#mostrar").hide();     
+    });       
+ 
     });
-      
-           
-    });
+    
+  function vacio(e){
+       ok=true;
+       patron =/\w/;
+       k=e.which;
+       if (k==8 || k==0) return true;
+       n = String.fromCharCode(k);
+return patron.test(n);
+ /*if((k < 97 || k > 122) && (k < 65 || k > 90) && (k !== 16||k !== 8||k !== 242)){
+       alert("No agrege espacios en blanco ni caracteres raros \n si quiere escribir varias palabras unalas con guión bajo '_'");
+ok=false; 
+        }
+return ok;*/
+    }  
+    
     </script>
     </head>
     <body>
@@ -80,7 +94,7 @@ and open the template in the editor.
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre del atributo</label>
                     <div class="col-sm-8">
-  <input type="" name="nombre" id="nombre" placeholder="Ej: direccion (Sin espacios o caracteres raros)" class="success" size ="50">
+                        <input type="text" onkeypress="return vacio(event);" name="nombre" id="nombre" placeholder="Ej: direccion (Sin espacios o caracteres raros)" class="success" size ="50">
                    </div> 
                 </div> 
       
@@ -106,7 +120,7 @@ and open the template in the editor.
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre de la tabla</label>
                     <div class="col-sm-8">
-  <input type="" name="nombre" id="nombre" placeholder="Ej: sexo (Sin espacios o caracteres raros)" class="success" size ="50">
+  <input type="text" onkeypress="return vacio(event);" name="nombre" id="nombre" placeholder="Ej: sexo (Sin espacios o caracteres raros)" class="success" size ="50">
                    </div> 
                 </div> 
       

@@ -37,16 +37,18 @@ function subirDatos($id){
                      if(strcmp($_FILES["archivo"]["name"][$i],"")!=0){
  
     $directorio = dirname(__FILE__).'/'.$id_user;
+    
 
 if (!file_exists($directorio)) {
     crearDir($id_user);
 }
 
-$serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
+$serv =dirname(__FILE__).'/'.$id_user.'/';
+
   $exten=explode(".",$_FILES['archivo']['name'][$i]);
         $ex=end($exten);
         $var=$value->getNombre().'.'.$ex;
-  $ruta=$serv.$_FILES['archivo']['name'][$i];
+  //$ruta=$serv.$_FILES['archivo']['name'][$i];
       
   	// Primero creamos un ID de conexión a nuestro servidor
 	$cid = ftp_connect(FTP_HOST);
@@ -61,29 +63,32 @@ $serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
 	ftp_pasv ($cid, true) ;
 	// Nos cambiamos al directorio, donde queremos subir los archivos, si se van a subir a la raíz
 	// esta por demás decir que este paso no es necesario. 
-	ftp_chdir($cid, $$id_user);
+	ftp_chdir($cid, $id_user);
 	// Tomamos el nombre del archivo a transmitir, pero en lugar de usar $_POST, usamos $_FILES que le indica a PHP
 	// Que estamos transmitiendo un archivo, esto es en realidad un matriz, el segundo argumento de la matriz, indica
 	// el nombre del archivo
 	$local =$var;
+        
 	// Este es el nombre temporal del archivo mientras dura la transmisión
 	$remoto = $_FILES["archivo"]["tmp_name"][$i];
+        
 	// Juntamos la ruta del servidor con el nombre real del archivo
 	$ruta = $serv.$local;
+        
 		// Verificamos si ya se subio el archivo temporal
 		if (is_uploaded_file($remoto)){
                        //guardamos nombre en base de datos        
                   if(strcasecmp($ex, "jpeg")==0){
-             $newpng =$value->getNombre().'.png'; 
+            $newpng =$value->getNombre().'.png'; 
              $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name'][$i]), $newpng);
-             $ruta = $serv.$png;
+             $ruta = $serv.$newpng;
              copy($remoto, $ruta);
              $ex="png";
                   }else
                     if(strcasecmp($ex, "jpg")==0){
-             $newpng =$value->getNombre().'.png'; 
+               $newpng =$value->getNombre().'.png'; 
              $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name'][$i]), $newpng);
-             $ruta = $serv.$png;
+             $ruta = $serv.$newpng;
              copy($remoto, $ruta);
              $ex="png";
                   }else
@@ -101,7 +106,7 @@ $serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
              copy($remoto, $ruta);
              $ex="png";           
                          }else
-                            if(strcmp($ex,"avi")==0||strcmp($ex,"mp4")==0||strcmp($ex,"wmv")==0||strcmp($ex,"mkv")==0||strcmp($ex,"3gp")==0){
+      if(strcmp($ex,"avi")==0||strcmp($ex,"mp4")==0||strcmp($ex,"wmv")==0||strcmp($ex,"mkv")==0||strcmp($ex,"3gp")==0){
              $newpng=$value->getNombre().".".$ex;
                                 copy($remoto, $ruta);  
          $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ./multimedia/$id_user/".$value->getNombre().".webm");
@@ -149,10 +154,11 @@ $serv = $ruta=dirname(__FILE__).'/'.$id_user.'/';
      
       $conta ++;   }//fin foreach ($attribu as $key => $value)
      
-}//for($i=0;$i<count($_FILES["archivo"]["name"]);$i++)
-                }//fin if ($_FILES["archivo"]["name"])  
+           }//for($i=0;$i<count($_FILES["archivo"]["name"]);$i++)
+  
+        }//fin if ($_FILES["archivo"]["name"])  
 //$archivos=$archivo->listarArchivos($id_user);
 //$imagen=$archivo->mostrarArchivo($id_user,$_POST['cursos']);
                  //}
-            
+                
                 } 

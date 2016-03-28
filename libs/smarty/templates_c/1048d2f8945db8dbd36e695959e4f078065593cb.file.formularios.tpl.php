@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-25 17:52:40
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-28 20:14:52
          compiled from "vistas\formularios.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2749356c8a84b9c6719-18344112%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1048d2f8945db8dbd36e695959e4f078065593cb' => 
     array (
       0 => 'vistas\\formularios.tpl',
-      1 => 1458924755,
+      1 => 1459188556,
       2 => 'file',
     ),
   ),
@@ -251,9 +251,16 @@ $_smarty_tpl->tpl_vars['atributo']->_loop = true;
     <div class="col-lg-10">
           
       <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="double"||$_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="float") {?>
-         <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+          <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()=="0") {?>
+              <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" required=""> 
+      <?php } else { ?>
+           <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 "> 
+          <?php }?>
+        
         <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="text") {?>
            <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getTabla()=="1") {?>
           
@@ -273,20 +280,33 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
                   <?php } ?>
                
             </select>
-               <?php } else { ?>   
+               <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()=="0") {?>
+                   <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" required="">              
+                   <?php } else { ?>    
                   <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 "> 
             <?php }?> 
             <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="date") {?>
+                <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()=="0") {?>
           <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="datepicker" required="">
-          <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="int") {?>
+          <?php } else { ?>
+              <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="datepicker">
+          <?php }?>
+                <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="int") {?>
               <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getNombre()=="id_usuario"&&$_smarty_tpl->tpl_vars['nombreform']->value!="paciente") {?>
                   <input type="number" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['cedula']->value;?>
 " name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " readonly="">
+              <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()=="0") {?>
+                  <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" required="">
               <?php } else { ?>
                   <input type="number" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
@@ -294,15 +314,29 @@ $_smarty_tpl->tpl_vars['opcion']->_loop = true;
               <?php }?>
               
         <?php } elseif ($_smarty_tpl->tpl_vars['atributo']->value->getTipo()=="file") {?>
-            <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
+            <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()=="0") {?>
+                <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
+" class="form-control" name="archivo[]" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" required="">
+            <?php } else { ?>
+                <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
 " class="form-control" name="archivo[]" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 ">
-        <?php } else { ?>
-           <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
+            <?php }?>
+            
+            <?php } else { ?>
+             <?php if ($_smarty_tpl->tpl_vars['atributo']->value->getObligatorio()=="0") {?>   
+                 <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
+" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
+" required="">  
+            <?php } else { ?>
+                <input type="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getTipo();?>
 " class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 " id="<?php echo $_smarty_tpl->tpl_vars['atributo']->value->getNombre();?>
 ">  
-        <?php }?>
+                <?php }?>
+             <?php }?>
     </div>
   </div>
             <?php } ?>

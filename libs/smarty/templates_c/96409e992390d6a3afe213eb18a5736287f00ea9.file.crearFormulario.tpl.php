@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-27 20:48:46
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-28 17:55:56
          compiled from "vistas\crearFormulario.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:572156c79b761312d9-11621522%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '96409e992390d6a3afe213eb18a5736287f00ea9' => 
     array (
       0 => 'vistas\\crearFormulario.tpl',
-      1 => 1459092726,
+      1 => 1459180389,
       2 => 'file',
     ),
   ),
@@ -68,7 +68,24 @@ $(document).ready(function(){
                          $('#miform').hide();
                           $('#formversion').show(); //muestro mediante id 
 		});
+                
+                
   });
+    
+   function vacio(e){
+       ok=true;
+       patron =/\w/;
+       k=e.which;
+       if (k==8 || k==0) return true;
+       n = String.fromCharCode(k);
+return patron.test(n);
+ /*if((k < 97 || k > 122) && (k < 65 || k > 90) && (k !== 16||k !== 8||k !== 242)){
+       alert("No agrege espacios en blanco ni caracteres raros \n si quiere escribir varias palabras unalas con guión bajo '_'");
+ok=false; 
+        }
+return ok;*/
+    } 
+    
     
     function control(){
         nomb_form=document.getElementById("nom_formulario").value;
@@ -92,7 +109,7 @@ $(document).ready(function(){
     $(' <div class="form-group">'+
                  '<label  class="col-sm-8 control-label">Nombre Formulario(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
-    $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" required="">').appendTo($fieldset);
+    $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" onkeypress="return vacio(event);" required="">').appendTo($fieldset);
       $('</div></div>').appendTo($fieldset);
         $fieldset.appendTo($form); 
     $('<div class="form-group"><div class="col-lg-10"><br><input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
@@ -166,7 +183,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
 {
     return s.toUpperCase();
 }
-     
+   
         
         </script>     
 <body>

@@ -6,6 +6,7 @@
  * and open the template in the editor.
  * 
  */
+
 require_once ('./vendor/smarty/smarty/libs/Smarty.class.php');
 require_once ('./clases/atributo.php');
 require_once ('./clases/formulario.php');
@@ -335,7 +336,9 @@ function ingresarAtributo() {
 $cant=  count($dato);
 $id=0;
 $con=0;
-$nombre=$_POST['nom_formulario'];
+$va=$_POST['nom_formulario'];
+$nombr=trim($va);
+$nombre=str_replace(' ','_',$nombr); 
         $form=new formulario();
         $con=$form->traerCantidad($nombre);
         foreach ($con as $value) {
@@ -355,6 +358,7 @@ foreach ($dato as $key => $value){
  if((strcmp($key, 'nom_formulario')==0)){ }
  else if(is_numeric($key)){
      $fo_att->setId_atributo($key);
+     $fo_att->insertarFormulario();
      $fo_att->obligatorio();
  }
  else{ 
