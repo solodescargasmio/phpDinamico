@@ -10,6 +10,7 @@ and open the template in the editor.
         <title>Nuevo Atributo</title>
        <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/dateFechamio.css" rel="stylesheet">
+     <link href="./css/dashboard.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
@@ -46,8 +47,8 @@ and open the template in the editor.
             <a href="#" onclick="mostrarDiv()" id="att"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Atributo Simple</button></a>
    <a href="#" onclick="mostrarDiv()" id="att1"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Atributo Compuesto </button></a>
    
-        <form id="myform1" method="post" enctype="multipart/form-data" class="form-horizontal">                            
-          <fieldset>  <label  class="col-sm-4 control-label">Atributo</label></fieldset>
+        <form style="width: 500px;" id="myform1" method="post" enctype="multipart/form-data" class="form-horizontal">                            
+          <fieldset>  <label  class="col-sm-4 control-label">Atributo Simple</label></fieldset>
     
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre del atributo</label>
@@ -72,8 +73,8 @@ and open the template in the editor.
       <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>
     
-        <form id="myform2" method="post" enctype="multipart/form-data" class="form-horizontal">                            
-          <fieldset>  <label  class="col-sm-4 control-label">Tabla Selector</label></fieldset>
+        <form style="width: 600px;" id="myform2" method="post" enctype="multipart/form-data" class="form-horizontal">                            
+          <fieldset>  <label  class="col-sm-4 control-label">Atributo Compuesto</label></fieldset>
     
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre de la tabla</label>

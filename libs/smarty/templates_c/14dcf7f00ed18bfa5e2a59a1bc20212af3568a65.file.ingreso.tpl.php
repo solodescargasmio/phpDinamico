@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-24 18:29:03
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-28 03:24:33
          compiled from "vistas\ingreso.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1001556d5d884ec82e4-26066348%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '14dcf7f00ed18bfa5e2a59a1bc20212af3568a65' => 
     array (
       0 => 'vistas\\ingreso.tpl',
-      1 => 1458839873,
+      1 => 1459128157,
       2 => 'file',
     ),
   ),
@@ -83,8 +83,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             
        <?php if (isset($_smarty_tpl->tpl_vars['mensage']->value)) {?> <font style="color: red;font-weight: bold;"><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
 </font><?php }?>
-        </div><div class="muestro"><button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Ingresar</button>
-   </div>   
+        </div><div class="muestro"><button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Ingresar</button> 
+        </div>   
     
         <div class="modal fade" id="formulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:200px;">
           <div class="modal-dialog">
@@ -123,7 +123,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               </div>
           </div>   
        </div><br>
-
+   
        <?php if (isset($_smarty_tpl->tpl_vars['mensage']->value)) {?><font style="color: red;font-weight: bold;"><?php echo $_smarty_tpl->tpl_vars['mensage']->value;?>
 <?php }?></font>  
     </div>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-19 19:03:17
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-27 20:48:46
          compiled from "vistas\crearFormulario.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:572156c79b761312d9-11621522%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '96409e992390d6a3afe213eb18a5736287f00ea9' => 
     array (
       0 => 'vistas\\crearFormulario.tpl',
-      1 => 1458379660,
+      1 => 1459092726,
       2 => 'file',
     ),
   ),
@@ -126,7 +126,7 @@ $(document).ready(function(){
 }); 
 $(function() {
     $('.version1').click( function(){
-        alert('dentro');
+
             var $datove= $(".formu",this).val();
         document.getElementById("nom_formulario").value=$datove;    
         });
@@ -149,7 +149,6 @@ function eliminarElementoDom($id_att) {
         $("#my-dynamic-form input").each(function (idx, el){
      if($(el).attr('name')==dat){
          va=$(el).attr('name');
-         alert($id_att);
          $("#my-dynamic-form input").remove("#"+va+"");
         $("#my-dynamic-form div").remove("#"+va+""); 
         $("#my-dynamic-form input").remove("#"+$id_att+"");

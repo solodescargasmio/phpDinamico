@@ -30,3 +30,14 @@ if (is_file($ruta))
 //header("Content-type: application/pdf");
 //readfile("Hipercubo.pdf");
 }
+
+if($_GET['pdf']){
+    $pdf=$_GET['pdf'];
+  $ruta ='./imagenes/'.$pdf; 
+   header('Content-Type: application/force-download');
+   header('Content-Disposition: attachment; filename='.$pdf);
+   header('Content-Transfer-Encoding: binary');
+   header('Content-Length: '.filesize($ruta));
+
+   readfile($ruta);
+}

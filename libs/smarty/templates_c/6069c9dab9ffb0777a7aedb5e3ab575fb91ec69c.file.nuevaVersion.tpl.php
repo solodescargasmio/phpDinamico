@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-20 02:25:49
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-27 23:09:27
          compiled from "vistas\nuevaVersion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2102256c79b7c0f4248-01145316%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6069c9dab9ffb0777a7aedb5e3ab575fb91ec69c' => 
     array (
       0 => 'vistas\\nuevaVersion.tpl',
-      1 => 1458437146,
+      1 => 1459112963,
       2 => 'file',
     ),
   ),
@@ -59,15 +59,19 @@ $(document).ready(function(){
     $('#miform').hide();
   
 		$("#mostrar").on( "click", function() {
+                    dat=document.getElementById("nom_formulario").value;
+    if(dat==""){
+        alert("POr favor elija un formulario de la tabla");
+        }else {
 			$('#miform').show(); //muestro mediante id 
                         $('#formversion').hide(); //oculto mediante id 
      
-		 });
+		} });
 		$("#ocultar").on( "click", function() {
                          $('#miform').hide();
                           $('#formversion').show(); //muestro mediante id 
 		});
-  });
+    });
  
      
         </script>

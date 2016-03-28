@@ -28,15 +28,19 @@ $(document).ready(function(){
     $('#miform').hide();
   
 		$("#mostrar").on( "click", function() {
+                    dat=document.getElementById("nom_formulario").value;
+    if(dat==""){
+        alert("POr favor elija un formulario de la tabla");
+        }else {
 			$('#miform').show(); //muestro mediante id 
                         $('#formversion').hide(); //oculto mediante id 
      
-		 });
+		} });
 		$("#ocultar").on( "click", function() {
                          $('#miform').hide();
                           $('#formversion').show(); //muestro mediante id 
 		});
-  });
+    });
  
      
         </script>

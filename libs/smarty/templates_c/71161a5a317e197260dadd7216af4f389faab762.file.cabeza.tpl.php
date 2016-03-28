@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-26 20:11:16
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-28 03:28:24
          compiled from "vistas\cabeza.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1091256c797902625a7-76210626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '71161a5a317e197260dadd7216af4f389faab762' => 
     array (
       0 => 'vistas\\cabeza.tpl',
-      1 => 1459019462,
+      1 => 1459128501,
       2 => 'file',
     ),
   ),
@@ -129,6 +129,10 @@ overflow: auto;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <?php if (!isset($_smarty_tpl->tpl_vars['operador']->value)) {?>
+      <a tabindex="-1" class="navbar-brand" href="manual.php">Manual del sitio</a>
+      <?php }?>
+       
         <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso</a>       
        <?php if (isset($_smarty_tpl->tpl_vars['operador']->value)) {?>
         <a tabindex="-1" class="navbar-brand" href="ingresar.php">Pagina Principal</a> 

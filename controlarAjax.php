@@ -10,6 +10,7 @@ require_once ('./clases/atributo.php');
 require_once ('./clases/admin.php');
 require_once ('./clases/estudio_medico.php');
 require_once ('./clases/dependencia.php');
+require_once ('./clases/session.php');
 error_reporting(0);
 if($_POST['nom_formulario']){
 $nomb=$_POST['nom_formulario'];
@@ -65,7 +66,15 @@ $form=$formula->traerFormularioId();
        if($estudios!=null){
           foreach ($resul as $key => $value){
              if($estudio->ok($id_usuario, $value->getId_form())){
-   echo '<td><a href="verFormulario.php?nombre='.$value->getNombre().'"><img src="./imagenes/si.png"/></a></td>';
+                  Session::init();
+                 $cedu=Session::get('cedula');
+                
+                 if($cedu!=null){
+              echo '<td><a href="verFormulario.php?nombre='.$value->getNombre().'"><img src="./imagenes/si.png"/></a></td>';        
+                 }else{
+                     echo '<td><img src="./imagenes/si.png"/></td>';
+                 }
+   
              }else{  
                    echo '<td><img src="./imagenes/no.png" /></td>';
        }
@@ -74,9 +83,10 @@ $form=$formula->traerFormularioId();
      echo '<tr>';
    
          echo '</tr>'; 
-         echo '</table>';
+         echo '</table>';             
+                 if($cedu!=null){}else{
          echo '<input type="submit" value="<<Trabajar con este paciente>>" class="form-control btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_usuario.'">';   
-       }else
+                 } }else
             if($_POST['admin']){
                 $id_usuario=$_POST['admin'];
                 $admin=new admin();

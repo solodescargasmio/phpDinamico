@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2016-03-25 18:11:10
+<?php /* Smarty version Smarty-3.1.20, created on 2016-03-27 20:40:14
          compiled from "vistas\ingresarAtributo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:562656c8bb70d1cef1-56969332%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04114bdc2a0c065212cc6b95a734caa17ca6071f' => 
     array (
       0 => 'vistas\\ingresarAtributo.tpl',
-      1 => 1458925867,
+      1 => 1459104011,
       2 => 'file',
     ),
   ),
@@ -35,6 +35,7 @@ and open the template in the editor.
         <title>Nuevo Atributo</title>
        <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/dateFechamio.css" rel="stylesheet">
+     <link href="./css/dashboard.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
@@ -73,8 +74,8 @@ and open the template in the editor.
             <a href="#" onclick="mostrarDiv()" id="att"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Atributo Simple</button></a>
    <a href="#" onclick="mostrarDiv()" id="att1"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Atributo Compuesto </button></a>
    
-        <form id="myform1" method="post" enctype="multipart/form-data" class="form-horizontal">                            
-          <fieldset>  <label  class="col-sm-4 control-label">Atributo</label></fieldset>
+        <form style="width: 500px;" id="myform1" method="post" enctype="multipart/form-data" class="form-horizontal">                            
+          <fieldset>  <label  class="col-sm-4 control-label">Atributo Simple</label></fieldset>
     
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre del atributo</label>
@@ -99,8 +100,8 @@ and open the template in the editor.
       <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>
     
-        <form id="myform2" method="post" enctype="multipart/form-data" class="form-horizontal">                            
-          <fieldset>  <label  class="col-sm-4 control-label">Tabla Selector</label></fieldset>
+        <form style="width: 600px;" id="myform2" method="post" enctype="multipart/form-data" class="form-horizontal">                            
+          <fieldset>  <label  class="col-sm-4 control-label">Atributo Compuesto</label></fieldset>
     
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre de la tabla</label>

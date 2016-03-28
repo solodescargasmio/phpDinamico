@@ -54,8 +54,8 @@
             <img class="imgprincipal" src="./imagenes/header.jpg" alt="Imagen de la universidad">
             
        {if isset($mensage)} <font style="color: red;font-weight: bold;">{$mensage}</font>{/if}
-        </div><div class="muestro"><button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Ingresar</button>
-   </div>   
+        </div><div class="muestro"><button id="mostrar"  class="btn btn-primary btn-group-sm" data-toggle="modal" data-target="#formulario">Ingresar</button> 
+        </div>   
     
         <div class="modal fade" id="formulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:200px;">
           <div class="modal-dialog">
@@ -94,7 +94,7 @@
               </div>
           </div>   
        </div><br>
-
+   
        {if isset($mensage)}<font style="color: red;font-weight: bold;">{$mensage}{/if}</font>  
     </div>
  

@@ -175,3 +175,19 @@ function registrar(){
     
     
 }
+
+function manual(){
+  error_reporting(0);
+  $mensage="";
+    $tpl=new Template();
+    $titulo="Estudios Médicos";
+    if($_GET['mensage']){
+      $mensage=$_GET['mensage'];  
+    }
+    
+      $datos=array(
+           "mensage" => $mensage,
+       );   
+    $tpl->asignar("titulo", $titulo);
+    $tpl->mostrar("manual", $datos);
+} 

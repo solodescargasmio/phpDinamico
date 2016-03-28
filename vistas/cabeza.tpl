@@ -97,6 +97,10 @@ overflow: auto;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      {if !isset($operador)}
+      <a tabindex="-1" class="navbar-brand" href="manual.php">Manual del sitio</a>
+      {/if}
+       
         <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso</a>       
        {if isset($operador)}
         <a tabindex="-1" class="navbar-brand" href="ingresar.php">Pagina Principal</a> 
