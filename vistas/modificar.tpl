@@ -51,11 +51,11 @@
        $(document).ready(function(){
            var form=document.getElementById("nomformulario").value;
            if(form=="paciente"){
-          $('input[name=id_usuario]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
+          $('input[name=id_paciente]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
        
                $(function(){
 	//Aqui se coge el elemento y con la propiedad .on que requiere dos  parametros : change (cuando el valor de ese id cambie, que es cuando se elige otra opcion en la desplegable)y ejecutar la siguiente funcion cuando se haga change
-	$("#id_usuario").on('blur', function(){
+	$("#id_paciente").on('blur', function(){
             var id=$(this).val();
      datatypo='user='+id;//genero un array con indice
              $.ajax({

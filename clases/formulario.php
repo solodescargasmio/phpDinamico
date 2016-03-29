@@ -77,6 +77,7 @@ class formulario {
  }
 
   public function traerFormularios() { 
+      
      $conexion=conectar::realizarConexion();
       $resultado=$conexion->query("SELECT DISTINCT * FROM form group by nombre");   
  while ($fila=$resultado->fetch_object()) {

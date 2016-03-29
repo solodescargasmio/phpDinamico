@@ -41,21 +41,23 @@ $form=$formula->traerFormularioId();
         }
         }else
             if($_POST['user']){
-                $id_usuario=$_POST['user'];
+                $id_paciente=$_POST['user'];
                 $estudio=new estudio_medico();
-                $estudio=$estudio->traerEstudioId($id_usuario);
+                $estudio=$estudio->traerEstudioId($id_paciente);
             if(isset($estudio)){
  echo '<h4><font style="color:red;font-weight: bold;">Ya existe el paciente en base de datos<br> Verifique la cedula </font></h4>';     
         }     
             }
             else
             if($_POST['idtraer']){
-                $id_usuario=$_POST['idtraer'];
+                
+                $id_paciente=$_POST['idtraer'];
+                
                  $attr=new atributo();
                  $formula=new formulario();
                  $resul=$formula->traerFormularios();
                  $estudio=new estudio_medico();
-                $estudios=$estudio->traerFormEchos($id_usuario);
+                $estudios=$estudio->traerFormEchos($id_paciente);
                 $tam=count($resul);
           echo '<table class="table table-condensed" border="1"><tr class="success">';
           foreach ($resul as $key => $value) {
@@ -65,7 +67,7 @@ $form=$formula->traerFormularioId();
                 echo '<tr>';
        if($estudios!=null){
           foreach ($resul as $key => $value){
-             if($estudio->ok($id_usuario, $value->getId_form())){
+             if($estudio->ok($id_paciente, $value->getId_form())){
                   Session::init();
                  $cedu=Session::get('cedula');
                 
@@ -85,12 +87,12 @@ $form=$formula->traerFormularioId();
          echo '</tr>'; 
          echo '</table>';             
                  if($cedu!=null){}else{
-         echo '<input type="submit" value="<<Trabajar con este paciente>>" class="form-control btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_usuario.'">';   
+         echo '<input type="submit" value="<<Trabajar con este paciente>>" class="form-control btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_paciente.'">';   
                  } }else
             if($_POST['admin']){
-                $id_usuario=$_POST['admin'];
+                $id_paciente=$_POST['admin'];
                 $admin=new admin();
-                $admin->setNick($id_usuario);
+                $admin->setNick($id_paciente);
                 $admin=$admin->traerAdmin();       
            if($admin==null){
  echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> Error en usuario, el sistema reconoce mayusculas y minusculas. Verifique</font>';     
@@ -98,9 +100,9 @@ $form=$formula->traerFormularioId();
             echo '<img src="./imagenes/si.png"/>';}     
             } else
             if($_POST['nick']){
-                $id_usuario=$_POST['nick'];
+                $id_paciente=$_POST['nick'];
                 $admin=new admin();
-                $admin->setNick($id_usuario);
+                $admin->setNick($id_paciente);
                 $admin=$admin->traerAdmin();
             if($admin!=null){
  echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> El usuario ya existe en el sistema</font>';     

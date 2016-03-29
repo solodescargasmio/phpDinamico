@@ -52,7 +52,7 @@
            $("#fechatpl").hide();
   var form=document.getElementById("nomformulario").value;
            if(form=="paciente"){
-           $("#id_usuario").keyup(function(){  
+           $("#id_paciente").keyup(function(){  
                con=0;
             var id=$(this).val();
             if(id=="."||id==","||id==""){
@@ -61,11 +61,11 @@
         }     
     });      
                
-          $('input[name=id_usuario]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
+          $('input[name=id_paciente]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
        
                $(function(){
 	//Aqui se coge el elemento y con la propiedad .on que requiere dos  parametros : change (cuando el valor de ese id cambie, que es cuando se elige otra opcion en la desplegable)y ejecutar la siguiente funcion cuando se haga change
-	$("#id_usuario").on('blur', function(){
+	$("#id_paciente").on('blur', function(){
             var id=$(this).val();
      datatypo='user='+id;//genero un array con indice
              $.ajax({
@@ -84,7 +84,7 @@
     });        
         
         }else{
-        $('input[name=id_usuario]').attr('readonly','readonly');
+        $('input[name=id_paciente]').attr('readonly','readonly');
         }
            
             if($('input[name=altura]').length > 0){  //compruebo que el elemento existe       
@@ -236,7 +236,7 @@ return edad;
               <input type="text" class="form-control" name="{$atributo->getNombre()}" id="datepicker">
           {/if}
                 {elseif  $atributo->getTipo()=="int"}
-              {if $atributo->getNombre()=="id_usuario" && $nombreform!="paciente"}
+              {if $atributo->getNombre()=="id_paciente" && $nombreform!="paciente"}
                   <input type="number" class="form-control" value="{$cedula}" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" readonly="">
               {elseif $atributo->getObligatorio()=="0"}
                   <input type="number" class="form-control" name="{$atributo->getNombre()}" id="{$atributo->getNombre()}" required="">
@@ -279,7 +279,7 @@ return edad;
            <div class="form-group" style="border-width: 10px; background: #C8C0C0;">
                 <label for="nombre" class="col-lg-2 control-label">{$estudio->getNom_attributo()|upper}</label>
     <div class="col-lg-offset-2 col-lg-10">
-        {if $estudio->getNom_attributo()=="fecha_nacimiento" || $estudio->getNom_attributo()=="id_usuario" || $estudio->getNom_attributo()=="fecha_estudio" || $estudio->getNom_attributo()=="edad"}
+        {if $estudio->getNom_attributo()=="fecha_nacimiento" || $estudio->getNom_attributo()=="id_paciente" || $estudio->getNom_attributo()=="fecha_estudio" || $estudio->getNom_attributo()=="edad"}
             <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" readonly="">
         {elseif $estudio->getTipo()=="float" || $estudio->getTipo()=="double" || $estudio->getTipo()=="int"} 
            <input type="text" value="{$estudio->getValor()}" name="{$estudio->getNom_attributo()}" id="{$estudio->getNom_attributo()}">   

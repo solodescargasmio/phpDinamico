@@ -37,7 +37,7 @@ function principal(){
            Session::set("estudio", $ides); 
            $attr1=new atributo();
            $nombat=$attr1->devolverNombre($value->getId_attributo());
-           if(strcmp($nombat, "id_usuario")==0){
+           if(strcmp($nombat, "id_paciente")==0){
             Session::set("cedula", $value->getValor());  
            }else if(strcmp($nombat, "apellido")==0){
             Session::set("apellido", $value->getValor());  
@@ -91,7 +91,7 @@ function formularios(){
     Session::init();
     $nick=Session::get("nick");
     $id_user=Session::get('cedula');
-    $id_usuario=$id_user;
+    $id_paciente=$id_user;
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
     $id_estudio= Session::get("estudio"); 
@@ -142,7 +142,7 @@ if($_POST['modificar']){
              $estudio->setId_form($idf);
              $estudio->setId_estudio($id_estudio);
          if(strcmp($nomf, "paciente")==0){
-             Session::set("cedula",$id_usuario);
+             Session::set("cedula",$id_paciente);
              Session::set("apellido", $_POST['apellido']);
              Session::set("edad", $_POST['edad']);
          }    
@@ -167,19 +167,19 @@ if($_POST['modificar']){
     
         if($_POST['nomformulario']){
             $nomf=$_POST['nomformulario'];
-            if(isset($_POST['id_usuario'])){
-              $id_usuario=$_POST['id_usuario'];  
+            if(isset($_POST['id_paciente'])){
+              $id_paciente=$_POST['id_paciente'];  
             }else{
-             $id_usuario=$id_user;   
+             $id_paciente=$id_user;   
             }
              $estudio=new estudio_medico();
-             $estudio->setId_usuario($id_usuario);
+             $estudio->setId_usuario($id_paciente);
              $estudio->setId_form($idf);
          if(strcmp($nomf, "paciente")==0){
-             Session::set("cedula",$id_usuario);
+             Session::set("cedula",$id_paciente);
              Session::set("apellido", $_POST['apellido']);
              Session::set("edad", $_POST['edad']);
-             crearDir($id_usuario);
+             crearDir($id_paciente);
              $id_estudio=$estudio->ingresarEstudio();
              Session::set("estudio", $id_estudio);
          }
@@ -617,7 +617,7 @@ function verFormularios(){
 Session::init();
 $nick=  Session::get("nick");
     $id_user=Session::get('cedula');
-    $id_usuario=$id_user;
+    $id_paciente=$id_user;
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
     $id_estudio= Session::get("estudio"); 

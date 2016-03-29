@@ -16,15 +16,15 @@ require_once ('./clases/dependencia.php');
 require_once ('./clases/datosPrecargados.php');
 require_once ('./PHPExel/PHPExcel.php');
 Session::init();
-$id_usuario=  Session::get("cedula");
+$id_paciente=  Session::get("cedula");
 
   $objXLS = new PHPExcel();
   $form=new formulario();
 $estudio=new estudio_medico();
 $attr=new atributo();
-$id_usuario=  Session::get("cedula");
-$id_estudio=$estudio->traerId($id_usuario);
-$formularios=$estudio->traerFormEchos($id_usuario);
+$id_paciente=  Session::get("cedula");
+$id_estudio=$estudio->traerId($id_paciente);
+$formularios=$estudio->traerFormEchos($id_paciente);
 //var_dump($formularios);exit();
 foreach ($formularios as $value){
    $estudios=$estudio->traerFormEstudioId($id_estudio, $value);
@@ -44,12 +44,12 @@ $objSheet->setCellValue('B'.$numero,$value->getValor());
 
 }
 header('Content-type: application/vnd.ms-excel');
-header("Content-Disposition: attachment; filename=Datos".$id_usuario.".xls");
+header("Content-Disposition: attachment; filename=Datos".$id_paciente.".xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 $objWriter = PHPExcel_IOFactory::createWriter($objXLS, 'Excel5');
 $objWriter->save('php://output');
-//$objWriter->save("E:\\Escritorio\Paciente".$id_usuario.".xls");
+//$objWriter->save("E:\\Escritorio\Paciente".$id_paciente.".xls");
 header("Location: ingresar.php");
  
 
